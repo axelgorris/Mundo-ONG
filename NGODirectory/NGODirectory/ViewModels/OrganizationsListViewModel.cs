@@ -91,7 +91,7 @@ namespace NGODirectory.ViewModels
                 IsBusy = false;
             }
         }
-
+        
         async Task RefreshList()
         {
             await ExecuteRefreshCommand();

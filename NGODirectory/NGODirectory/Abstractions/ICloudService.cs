@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using NGODirectory.Models;
+using System.Threading.Tasks;
 
 namespace NGODirectory.Abstractions
 {
@@ -6,6 +8,10 @@ namespace NGODirectory.Abstractions
     {
         ICloudTable<T> GetTable<T>() where T : TableData;
 
-        Task LoginAsync();
+        Task<MobileServiceUser> LoginAsync();
+
+        Task LogoutAsync();
+
+        Task<AppServiceIdentity> GetIdentityAsync();
     }
 }

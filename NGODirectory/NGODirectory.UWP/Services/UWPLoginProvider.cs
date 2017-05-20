@@ -7,49 +7,73 @@ using NGODirectory.Helpers;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using Windows.Security.Credentials;
+using System.Diagnostics;
 
 [assembly: Xamarin.Forms.Dependency(typeof(UWPLoginProvider))]
 namespace NGODirectory.UWP.Services
 {
     public class UWPLoginProvider : ILoginProvider
     {
-        /// <summary>
-        /// Login via ADAL
-        /// </summary>
-        /// <returns>(async) token from the ADAL process</returns>
-        public async Task<string> LoginADALAsync()
-        {
-            Uri returnUri = new Uri(Locations.AadRedirectUri);
-            var authContext = new AuthenticationContext(Locations.AadAuthority);
+        public PasswordVault PasswordVault { get; private set; }
 
-            if (authContext.TokenCache.ReadItems().Count() > 0)
+        public UWPLoginProvider()
+        {
+            PasswordVault = new PasswordVault();
+        }
+
+        #region ILoginProvider Interface
+        public MobileServiceUser RetrieveTokenFromSecureStore()
+        {
+            try
             {
-                authContext = new AuthenticationContext(authContext.TokenCache.ReadItems().First().Authority);
+                // Check if the token is available within the password vault
+                var accounts = PasswordVault.FindAllByResource("NGODirectory");
+                if (accounts != null)
+                {
+                    foreach (var account in accounts)
+                    {
+                        var token = PasswordVault.Retrieve("NGODirectory", account.UserName).Password;
+                        if (token != null && token.Length > 0)
+                        {
+                            return new MobileServiceUser(account.UserName)
+                            {
+                                MobileServiceAuthenticationToken = token
+                            };
+                        }
+                    }
+                }
             }
-
-            var authResult = await authContext.AcquireTokenAsync(
-                    Locations.AppServiceUrl, /* The resource we want to access  */
-                    Locations.AadClientId,   /* The Client ID of the Native App */
-                    returnUri,               /* The Return URI we configured    */
-                    new PlatformParameters(PromptBehavior.Auto, false));
-
-            return authResult.AccessToken;
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error retrieving existing token: {ex.Message}");
+            }
+            return null;
         }
 
-        public async Task LoginAsync(MobileServiceClient client)
+        public void StoreTokenInSecureStore(MobileServiceUser user)
         {
-            // Client Flow
-            //var accessToken = await LoginADALAsync();
-
-            //var zumoPayload = new JObject()
-            //{
-            //    ["access_token"] = accessToken
-            //};
-
-            //await client.LoginAsync("aad", zumoPayload);
-
-            // Server-Flow Version
-            await client.LoginAsync("aad");
+            PasswordVault.Add(new PasswordCredential("NGODirectory", user.UserId, user.MobileServiceAuthenticationToken));
         }
+
+        public void RemoveTokenFromSecureStore()
+        {
+            var accounts = PasswordVault.FindAllByResource("NGODirectory");
+
+            if (accounts != null)
+            {
+                foreach (var account in accounts)
+                {
+                    PasswordVault.Remove(account);
+                }
+            }
+        }
+
+        public async Task<MobileServiceUser> LoginAsync(MobileServiceClient client)
+        {
+            // Server-Flow Version
+            return await client.LoginAsync("aad");
+        }
+        #endregion
     }
 }

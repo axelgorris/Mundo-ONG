@@ -19,7 +19,7 @@ namespace NGODirectory.Backend
             HttpConfiguration config = new HttpConfiguration();
 
             new MobileAppConfiguration()
-                .AddTablesWithEntityFramework()
+                .UseDefaultConfiguration()
                 .ApplyTo(config);
 
             // Use Entity Framework Code First to create database tables based on your DbContext

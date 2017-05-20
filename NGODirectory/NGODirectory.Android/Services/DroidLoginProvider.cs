@@ -8,51 +8,72 @@ using NGODirectory.Droid.Services;
 using NGODirectory.Helpers;
 using System;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Auth;
 
 [assembly: Xamarin.Forms.Dependency(typeof(DroidLoginProvider))]
 namespace NGODirectory.Droid.Services
 {
     public class DroidLoginProvider : ILoginProvider
     {
-        Context context;
+        public Context Context { get; private set; }
+
+        public AccountStore AccountStore { get; private set; }
 
         public void Init(Context context)
         {
-            this.context = context;
+            Context = context;
+            AccountStore = AccountStore.Create(context);
         }
 
-        /// <summary>
-        /// Login via ADAL
-        /// </summary>
-        /// <returns>(async) token from the ADAL process</returns>
-        public async Task<string> LoginADALAsync()
+        #region ILoginProvider Interface
+        public MobileServiceUser RetrieveTokenFromSecureStore()
         {
-            Uri returnUri = new Uri(Locations.AadRedirectUri);
+            string token;
+            var accounts = AccountStore.FindAccountsForService("NGODirectory");
 
-            var authContext = new AuthenticationContext(Locations.AadAuthority);
-            if (authContext.TokenCache.ReadItems().Count() > 0)
+            if (accounts != null)
             {
-                authContext = new AuthenticationContext(authContext.TokenCache.ReadItems().First().Authority);
+                foreach (var account in accounts)
+                {
+                    if (account.Properties.TryGetValue("token", out token))
+                    {
+                        return new MobileServiceUser(account.Username)
+                        {
+                            MobileServiceAuthenticationToken = token
+                        };
+                    }
+                }
             }
-            var authResult = await authContext.AcquireTokenAsync(
-                Locations.AppServiceUrl, /* The resource we want to access  */
-                Locations.AadClientId,   /* The Client ID of the Native App */
-                returnUri,               /* The Return URI we configured    */
-                new PlatformParameters((Activity)context));
-            return authResult.AccessToken;
+
+            return null;
         }
 
-        public async Task LoginAsync(MobileServiceClient client)
+        public void StoreTokenInSecureStore(MobileServiceUser user)
         {
-            // Client Flow
-            //var accessToken = await LoginADALAsync();
-            //var zumoPayload = new JObject();
-            //zumoPayload["access_token"] = accessToken;
-            //await client.LoginAsync("aad", zumoPayload);
-
-            // Server-Flow Version
-            await client.LoginAsync(context, "aad");
+            var account = new Account(user.UserId);
+            account.Properties.Add("token", user.MobileServiceAuthenticationToken);
+            AccountStore.Save(account, "NGODirectory");
         }
+
+        public void RemoveTokenFromSecureStore()
+        {
+            var accounts = AccountStore.FindAccountsForService("tasklist");
+            if (accounts != null)
+            {
+                foreach (var acct in accounts)
+                {
+                    AccountStore.Delete(acct, "tasklist");
+                }
+            }
+        }
+
+        public async Task<MobileServiceUser> LoginAsync(MobileServiceClient client)
+        {
+            // Server Flow
+            return await client.LoginAsync(Context, "aad");
+        }
+        #endregion
     }
 }

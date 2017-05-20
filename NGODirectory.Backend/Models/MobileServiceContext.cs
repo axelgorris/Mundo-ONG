@@ -27,7 +27,7 @@ namespace NGODirectory.Backend.Models
         }
 
         public DbSet<Organization> Organizations { get; set; }
-        public DbSet<Announcement> Announcements { get; set; }
+        //public DbSet<Announcement> Announcements { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

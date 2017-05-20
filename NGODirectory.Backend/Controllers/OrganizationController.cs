@@ -6,6 +6,8 @@ using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
 using NGODirectory.Backend.DataObjects;
 using NGODirectory.Backend.Models;
+using NGODirectory.Backend.Helpers;
+using NGODirectory.Backend.Attributes;
 
 namespace NGODirectory.Backend.Controllers
 {
@@ -15,7 +17,7 @@ namespace NGODirectory.Backend.Controllers
         {
             base.Initialize(controllerContext);
             MobileServiceContext context = new MobileServiceContext();
-            DomainManager = new EntityDomainManager<Organization>(context, Request);
+            DomainManager = new EntityDomainManager<Organization>(context, Request, enableSoftDelete:true);
         }
 
         public IQueryable<Organization> GetAllOrganizations()
@@ -27,13 +29,15 @@ namespace NGODirectory.Backend.Controllers
         {
             return Lookup(id);
         }
-
+        
+        //[AuthorizeClaims("groups", Locations.OrganizationOwnersGroupId)]
         [Authorize]
         public Task<Organization> PatchOrganization(string id, Delta<Organization> patch)
         {
             return UpdateAsync(id, patch);
         }
 
+        //[AuthorizeClaims("groups", Locations.OrganizationOwnersGroupId)]
         [Authorize]
         public async Task<IHttpActionResult> PostOrganization(Organization item)
         {
@@ -41,10 +45,11 @@ namespace NGODirectory.Backend.Controllers
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
+        //[AuthorizeClaims("groups", Locations.OrganizationOwnersGroupId)]
         [Authorize]
         public Task DeleteOrganization(string id)
         {
             return DeleteAsync(id);
-        }
+        }        
     }
 }

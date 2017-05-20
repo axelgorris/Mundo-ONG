@@ -17,6 +17,6 @@ namespace NGODirectory.Backend.DataObjects
         public string LogoUrl { get; set; }
         public string Category { get; set; }
 
-        public virtual ICollection<Announcement> Announcements { get; set; }
+        //public virtual ICollection<Announcement> Announcements { get; set; }
     }
 }

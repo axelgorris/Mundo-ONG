@@ -5,6 +5,12 @@ namespace NGODirectory.Abstractions
 {
     public interface ILoginProvider
     {
-        Task LoginAsync(MobileServiceClient client);
+        MobileServiceUser RetrieveTokenFromSecureStore();
+
+        void StoreTokenInSecureStore(MobileServiceUser user);
+
+        void RemoveTokenFromSecureStore();
+
+        Task<MobileServiceUser> LoginAsync(MobileServiceClient client);
     }
 }

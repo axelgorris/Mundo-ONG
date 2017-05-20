@@ -43,10 +43,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AuthenticationDelegatingHandler.cs" />
     <Compile Include="Helpers\Locations.cs" />
     <Compile Include="Helpers\ServiceLocator.cs" />
     <Compile Include="Models\Announcement.cs" />
+    <Compile Include="Models\AppServiceIdentity.cs" />
     <Compile Include="Models\Organization.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\EntryView.xaml.cs">
       <DependentUpon>EntryView.xaml</DependentUpon>
     </Compile>

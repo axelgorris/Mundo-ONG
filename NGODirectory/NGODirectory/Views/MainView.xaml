@@ -6,8 +6,11 @@
              Title="{Binding Title}">
 
     <TabbedPage.ToolbarItems>
-        <!--<ToolbarItem Text="SUBMIT CHALLENGE" Order="Primary" Clicked="ViewSubmitChallengeClicked" />
-        <ToolbarItem Text="FORECAST" Order="Primary" Icon="forecast.png" Clicked="ViewForecastClicked" />-->
+        <ToolbarItem Name="Logout"
+                     Command="{Binding LogoutCommand}"
+                     Icon="logout.png"
+                     Order="Primary"
+                     Priority="0" />
     </TabbedPage.ToolbarItems>
     <TabbedPage.Children>
         <pages:AnnouncementsListView Title="Announcements"/>

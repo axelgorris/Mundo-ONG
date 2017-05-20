@@ -4,6 +4,14 @@
              x:Class="NGODirectory.Views.OrganizationsListView"
              Title="{Binding Title}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Refresh"
+                     Command="{Binding RefreshCommand}"
+                     Icon="refresh.png"
+                     Order="Primary"
+                     Priority="0" />        
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout>
             <ListView

@@ -15,7 +15,7 @@ namespace NGODirectory.Backend.Controllers
         {
             base.Initialize(controllerContext);
             MobileServiceContext context = new MobileServiceContext();
-            DomainManager = new EntityDomainManager<Announcement>(context, Request);
+            DomainManager = new EntityDomainManager<Announcement>(context, Request, enableSoftDelete: true);
         }
 
         public IQueryable<Announcement> GetAllAnnouncements()

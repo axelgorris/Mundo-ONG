@@ -8,45 +8,70 @@ using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.iOS.Services;
 using UIKit;
+using Xamarin.Auth;
+using System.Text;
 
 [assembly: Xamarin.Forms.Dependency(typeof(iOSLoginProvider))]
 namespace NGODirectory.iOS.Services
 {
     public class iOSLoginProvider : ILoginProvider
     {
-        /// <summary>
-        /// Login via ADAL
-        /// </summary>
-        /// <returns>(async) token from the ADAL process</returns>
-        public async Task<string> LoginADALAsync(UIViewController view)
-        {
-            Uri returnUri = new Uri(Locations.AadRedirectUri);
+        public UIViewController RootView => UIApplication.SharedApplication.KeyWindow.RootViewController;
 
-            var authContext = new AuthenticationContext(Locations.AadAuthority);
-            if (authContext.TokenCache.ReadItems().Count() > 0)
-            {
-                authContext = new AuthenticationContext(authContext.TokenCache.ReadItems().First().Authority);
-            }
-            var authResult = await authContext.AcquireTokenAsync(
-                Locations.AppServiceUrl, /* The resource we want to access  */
-                Locations.AadClientId,   /* The Client ID of the Native App */
-                returnUri,               /* The Return URI we configured    */
-                new PlatformParameters(view));
-            return authResult.AccessToken;
+        //public AccountStore AccountStore { get; private set; }
+
+        //public iOSLoginProvider()
+        //{
+        //    AccountStore = AccountStore.Create();
+        //}
+
+        #region ILoginProvider Interface
+        public MobileServiceUser RetrieveTokenFromSecureStore()
+        {
+            //string token;
+            //var accounts = AccountStore.FindAccountsForService("NGODirectory");
+
+            //if (accounts != null)
+            //{
+            //    foreach (var account in accounts)
+            //    {
+            //        if (account.Properties.TryGetValue("token", out token))
+            //        {
+            //            return new MobileServiceUser(account.Username)
+            //            {
+            //                MobileServiceAuthenticationToken = token
+            //            };
+            //        }
+            //    }
+            //}
+
+            return null;
         }
 
-        public async Task LoginAsync(MobileServiceClient client)
+        public void StoreTokenInSecureStore(MobileServiceUser user)
         {
-            var rootView = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            //var account = new Account(user.UserId);
+            //account.Properties.Add("token", user.MobileServiceAuthenticationToken);
+            //AccountStore.Save(account, "NGODirectory");
+        }
 
-            // Client Flow
-            //var accessToken = await LoginADALAsync(rootView);
-            //var zumoPayload = new JObject();
-            //zumoPayload["access_token"] = accessToken;
-            //await client.LoginAsync("aad", zumoPayload);
+        public void RemoveTokenFromSecureStore()
+        {
+            //var accounts = AccountStore.FindAccountsForService("tasklist");
+            //if (accounts != null)
+            //{
+            //    foreach (var acct in accounts)
+            //    {
+            //        AccountStore.Delete(acct, "tasklist");
+            //    }
+            //}
+        }
 
+        public async Task<MobileServiceUser> LoginAsync(MobileServiceClient client)
+        {
             // Server Flow
-            await client.LoginAsync(rootView, "aad");
+            return await client.LoginAsync(RootView, "aad");
         }
+        #endregion
     }
 }

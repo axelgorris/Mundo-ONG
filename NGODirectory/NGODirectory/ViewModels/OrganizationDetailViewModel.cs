@@ -54,7 +54,7 @@ namespace NGODirectory.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[TaskDetail] Save error: {ex.Message}");
+                Debug.WriteLine($"[OrganizationDetail] Save error: {ex.Message}");
             }
             finally
             {
@@ -84,7 +84,7 @@ namespace NGODirectory.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[TaskDetail] Save error: {ex.Message}");
+                Debug.WriteLine($"[OrganizationDetail] Save error: {ex.Message}");
             }
             finally
             {
