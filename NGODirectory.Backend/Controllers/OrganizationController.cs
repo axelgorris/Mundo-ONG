@@ -11,6 +11,7 @@ using NGODirectory.Backend.Attributes;
 
 namespace NGODirectory.Backend.Controllers
 {
+    [EnableQuery(PageSize = 5)]
     public class OrganizationController : TableController<Organization>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
