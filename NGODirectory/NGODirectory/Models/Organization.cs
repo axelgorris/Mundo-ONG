@@ -5,6 +5,7 @@ namespace NGODirectory.Models
 {
     public class Organization : TableData
     {
+        public string AdminUser { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Web { get; set; }

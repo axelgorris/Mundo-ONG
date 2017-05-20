@@ -24,10 +24,16 @@ namespace NGODirectory.Backend.Models
 
         public MobileServiceContext() : base(connectionStringName)
         {
+            Database.Log = s => WriteLog(s);
+        }
+
+        public void WriteLog(string msg)
+        {
+            System.Diagnostics.Debug.WriteLine(msg);
         }
 
         public DbSet<Organization> Organizations { get; set; }
-        //public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
