@@ -166,7 +166,7 @@
     <Compile Include="DataObjects\Announcement.cs" />
     <Compile Include="DataObjects\Organization.cs" />
     <Compile Include="Extensions\OrganizationExtensions.cs" />
-    <Compile Include="Helpers\Locations.cs" />
+    <Compile Include="Helpers\ClaimsHelper.cs" />
     <Compile Include="Migrations\201705201701497_InitialMigration.cs" />
     <Compile Include="Migrations\201705201701497_InitialMigration.Designer.cs">
       <DependentUpon>201705201701497_InitialMigration.cs</DependentUpon>

@@ -1,31 +1,22 @@
-﻿using System.Linq;
+﻿using Microsoft.Azure.Mobile.Server;
+using NGODirectory.Backend.DataObjects;
+using NGODirectory.Backend.Extensions;
+using NGODirectory.Backend.Models;
+using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
-using Microsoft.Azure.Mobile.Server;
-using NGODirectory.Backend.DataObjects;
-using NGODirectory.Backend.Models;
-using NGODirectory.Backend.Helpers;
-using NGODirectory.Backend.Attributes;
-using System.Security.Claims;
-using NGODirectory.Backend.Extensions;
-using System.Net;
 
 namespace NGODirectory.Backend.Controllers
 {
-    [EnableQuery(PageSize = 5)]
+    [EnableQuery(PageSize = 10)]
     public class OrganizationController : TableController<Organization>
     {
-        public string UserId
-        {
-            get
-            {
-                var principal = this.User as ClaimsPrincipal;
-                return principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            }
-        }
-
+        public string UserId => ((ClaimsPrincipal)User).FindFirst(ClaimTypes.NameIdentifier).Value;
+        
         public void ValidateOrganizationAdmin(string id)
         {
             var result = Lookup(id).Queryable.IsOrgzanitionAdminFilter(UserId).FirstOrDefault();
@@ -52,7 +43,6 @@ namespace NGODirectory.Backend.Controllers
             return Lookup(id);
         }
 
-        //[AuthorizeClaims("groups", Locations.OrganizationOwnersGroupId)]
         [Authorize]
         public Task<Organization> PatchOrganization(string id, Delta<Organization> patch)
         {
@@ -61,7 +51,6 @@ namespace NGODirectory.Backend.Controllers
             return UpdateAsync(id, patch);
         }
 
-        //[AuthorizeClaims("groups", Locations.OrganizationOwnersGroupId)]
         [Authorize]
         public async Task<IHttpActionResult> PostOrganization(Organization item)
         {
@@ -69,8 +58,7 @@ namespace NGODirectory.Backend.Controllers
             Organization current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
-
-        //[AuthorizeClaims("groups", Locations.OrganizationOwnersGroupId)]
+        
         [Authorize]
         public Task DeleteOrganization(string id)
         {

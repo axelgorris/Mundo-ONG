@@ -28,20 +28,20 @@ namespace NGODirectory.Backend.Controllers
             return Lookup(id);
         }
 
-        //[Authorize]
+        [Authorize]
         public Task<Announcement> PatchAnnouncement(string id, Delta<Announcement> patch)
         {
             return UpdateAsync(id, patch);
         }
 
-        //[Authorize]
+        [Authorize]
         public async Task<IHttpActionResult> PostAnnouncement(Announcement item)
         {
             Announcement current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
-        //[Authorize]
+        [Authorize]
         public Task DeleteAnnouncement(string id)
         {
             return DeleteAsync(id);

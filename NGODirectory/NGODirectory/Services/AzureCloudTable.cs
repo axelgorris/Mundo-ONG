@@ -7,12 +7,10 @@ namespace NGODirectory.Services
 {
     public class AzureCloudTable<T> : ICloudTable<T> where T : TableData
     {
-        MobileServiceClient client;
         IMobileServiceTable<T> table;
 
         public AzureCloudTable(MobileServiceClient client)
         {
-            this.client = client;
             this.table = client.GetTable<T>();
         }
 
@@ -31,6 +29,11 @@ namespace NGODirectory.Services
         public async Task<ICollection<T>> ReadAllItemsAsync()
         {
             return await table.ToListAsync();
+        }
+
+        public async Task<ICollection<T>> ReadItemsAsync(int start, int count)
+        {
+            return await table.Skip(start).Take(count).ToListAsync();
         }
 
         public async Task<T> ReadItemAsync(string id)

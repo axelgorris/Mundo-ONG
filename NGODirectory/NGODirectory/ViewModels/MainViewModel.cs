@@ -1,9 +1,6 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,11 +11,13 @@ namespace NGODirectory.ViewModels
         public MainViewModel()
         {
             Title = "NGO Directory";
+            
+            LogoutCommand = new Command(async () => await Logout());
         }
 
-        Command logoutCmd;
-        public Command LogoutCommand => logoutCmd ?? (logoutCmd = new Command(async () => await ExecuteLogoutCommand()));
-        async Task ExecuteLogoutCommand()
+        public Command LogoutCommand { get; }
+
+        async Task Logout()
         {
             if (IsBusy)
                 return;

@@ -2,7 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NGODirectory.Views.OrganizationsListView"
+             xmlns:behaviors="clr-namespace:NGODirectory.Behaviors;assembly=NGODirectory"
+             xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"
              Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ItemVisivilityConverter x:Key="ItemVisibilityConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Refresh"
@@ -22,6 +30,13 @@
                 RefreshCommand="{Binding RefreshCommand}"
                 RowHeight="50"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior Command="{Binding LoadMoreCommand}"
+                                                Converter="{StaticResource ItemVisibilityConverter}"
+                                                EventName="ItemAppearing" />
+                </ListView.Behaviors>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

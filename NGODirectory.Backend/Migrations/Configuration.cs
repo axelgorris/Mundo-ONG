@@ -116,14 +116,14 @@ namespace NGODirectory.Backend.Migrations
             base.Seed(context);
         }
 
-        private void AddOrUpdatePreservingCreatedAt<T>(DbSet<T> set, T item) where T : EntityData
+        private void AddOrUpdatePreservingCreatedAt<T>(DbSet<T> set, T item) where T : Organization
         {
-            var existing = set.Where(i => i.Id == item.Id).FirstOrDefault();
+            var existing = set.Where(i => i.Name == item.Name).FirstOrDefault();
             if (existing != null)
             {
                 item.CreatedAt = existing.CreatedAt;
             }
-            set.AddOrUpdate(i => i.Id, item);
+            set.AddOrUpdate(i => i.Name, item);
         }
     }
 }

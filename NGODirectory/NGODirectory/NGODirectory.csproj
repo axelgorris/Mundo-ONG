@@ -43,8 +43,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\BehaviorBase.cs" />
+    <Compile Include="Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Converters\ItemVisivilityConverter.cs" />
     <Compile Include="Helpers\AuthenticationDelegatingHandler.cs" />
     <Compile Include="Helpers\Locations.cs" />
+    <Compile Include="Helpers\ObservableRangeCollection.cs" />
     <Compile Include="Helpers\ServiceLocator.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AppServiceIdentity.cs" />
