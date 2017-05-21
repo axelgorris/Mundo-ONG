@@ -10,10 +10,11 @@ namespace NGODirectory.ViewModels
 {
     public class OrganizationDetailViewModel : BaseViewModel
     {
-        ICloudTable<Organization> table = ServiceLocator.Instance.Resolve<ICloudService>().GetTable<Organization>();
-
         public OrganizationDetailViewModel(Organization item = null)
         {
+            SaveCommand = new Command(async () => await Save());
+            DeleteCommand = new Command(async () => await Delete());
+
             if (item != null)
             {
                 Item = item;
@@ -26,12 +27,12 @@ namespace NGODirectory.ViewModels
             }
         }
 
+        public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
+
         public Organization Item { get; set; }
 
-        Command cmdSave;
-        public Command SaveCommand => cmdSave ?? (cmdSave = new Command(async () => await ExecuteSaveCommand()));
-
-        async Task ExecuteSaveCommand()
+        public Command SaveCommand { get; }
+        async Task Save()
         {
             if (IsBusy)
                 return;
@@ -40,8 +41,10 @@ namespace NGODirectory.ViewModels
 
             try
             {
+                var table = await CloudService.GetTableAsync<Organization>();
+
                 if (Item.Id == null)
-                {
+                {                    
                     await table.CreateItemAsync(Item);
                 }
                 else
@@ -49,6 +52,7 @@ namespace NGODirectory.ViewModels
                     await table.UpdateItemAsync(Item);
                 }
 
+                await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
                 MessagingCenter.Send<OrganizationDetailViewModel>(this, "ItemsChanged");
                 await Application.Current.MainPage.Navigation.PopAsync();
             }
@@ -62,10 +66,8 @@ namespace NGODirectory.ViewModels
             }
         }
 
-        Command cmdDelete;
-        public Command DeleteCommand => cmdDelete ?? (cmdDelete = new Command(async () => await ExecuteDeleteCommand()));
-
-        async Task ExecuteDeleteCommand()
+        public Command DeleteCommand { get; }
+        async Task Delete()
         {
             if (IsBusy)
                 return;
@@ -76,10 +78,12 @@ namespace NGODirectory.ViewModels
             {
                 if (Item.Id != null)
                 {
+                    var table = await CloudService.GetTableAsync<Organization>();
                     await table.DeleteItemAsync(Item);
+                    await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
+                    MessagingCenter.Send<OrganizationDetailViewModel>(this, "ItemsChanged");                    
                 }
 
-                MessagingCenter.Send<OrganizationDetailViewModel>(this, "ItemsChanged");
                 await Application.Current.MainPage.Navigation.PopAsync();
             }
             catch (Exception ex)

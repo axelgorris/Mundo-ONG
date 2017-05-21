@@ -12,16 +12,13 @@ namespace NGODirectory.ViewModels
 {
     public class OrganizationsListViewModel : BaseViewModel
     {
-        public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
-        public ICloudTable<Organization> CloudTable; 
+        public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>(); 
         bool hasMoreItems = true;
 
         public OrganizationsListViewModel()
         {
             Title = "Organizations list";
-
-            CloudTable = CloudService.GetTable<Organization>();
-
+            
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
             LoadMoreCommand = new Command<Organization>(async (Organization item) => await LoadMore(item));
@@ -36,11 +33,7 @@ namespace NGODirectory.ViewModels
             // Execute the refresh command
             RefreshCommand.Execute(null);
         }
-
-        public Command RefreshCommand { get; }
-        public Command AddNewItemCommand { get; }
-        public Command LoadMoreCommand { get; }
-        
+                
         ObservableRangeCollection<Organization> items = new ObservableRangeCollection<Organization>();
         public ObservableRangeCollection<Organization> Items
         {
@@ -62,7 +55,8 @@ namespace NGODirectory.ViewModels
                 }
             }
         }
-        
+
+        public Command RefreshCommand { get; }
         async Task Refresh()
         {
             if (IsBusy)
@@ -72,7 +66,9 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                var list = await CloudTable.ReadItemsAsync(0, 10);
+                await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
+                var table = await CloudService.GetTableAsync<Organization>();
+                var list = await table.ReadItemsAsync(0, 10, o => o.Name);
                 Items.ReplaceRange(list);
                 hasMoreItems = true;
             }
@@ -84,8 +80,9 @@ namespace NGODirectory.ViewModels
             {
                 IsBusy = false;
             }
-        }        
-
+        }
+        
+        public Command AddNewItemCommand { get; }
         async Task AddNewItem()
         {
             if (IsBusy)
@@ -105,7 +102,8 @@ namespace NGODirectory.ViewModels
                 IsBusy = false;
             }
         }
-        
+
+        public Command LoadMoreCommand { get; }
         async Task LoadMore(Organization item)
         {
             if (IsBusy)
@@ -131,7 +129,8 @@ namespace NGODirectory.ViewModels
             IsBusy = true;
             try
             {
-                var list = await CloudTable.ReadItemsAsync(Items.Count, 20);
+                var table = await CloudService.GetTableAsync<Organization>();
+                var list = await table.ReadItemsAsync(Items.Count, 10, o => o.Name);
                 if (list.Count > 0)
                 {
                     Debug.WriteLine($"LoadMore: got {list.Count} more items");

@@ -1,8 +1,11 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 using Newtonsoft.Json.Linq;
 using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Models;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,31 +18,116 @@ namespace NGODirectory.Services
 {
     public class AzureCloudService : ICloudService
     {
-        MobileServiceClient client;
+        MobileServiceClient Client;
         List<AppServiceIdentity> identities = null;
 
         public AzureCloudService()
         {
-            client = new MobileServiceClient(Locations.AppServiceUrl, new AuthenticationDelegatingHandler());
-
+            Client = new MobileServiceClient(Locations.AppServiceUrl, new AuthenticationDelegatingHandler());
             if (Locations.AlternateLoginHost != null)
-                client.AlternateLoginHost = new Uri(Locations.AlternateLoginHost);
+                Client.AlternateLoginHost = new Uri(Locations.AlternateLoginHost);
         }
 
-        public ICloudTable<T> GetTable<T>() where T : TableData => new AzureCloudTable<T>(client);
+        #region Offline Sync Initialization
+        async Task InitializeAsync()
+        {
+            // Short circuit - local database is already initialized
+            if (Client.SyncContext.IsInitialized)
+                return;
+
+            // Create a reference to the local sqlite store
+            var store = new MobileServiceSQLiteStore("offlinecache.db");
+
+            // Define the database schema
+            store.DefineTable<Organization>();
+            store.DefineTable<Announcement>();
+
+            // Actually create the store and update the schema
+            await Client.SyncContext.InitializeAsync(store);
+        }
+
+        public async Task SyncOfflineCacheAsync<T>(bool overrideServerChanges) where T : TableData
+        {
+            Debug.WriteLine("SyncOfflineCacheAsync: Initializing...");
+            await InitializeAsync();
+
+            if (!(await CrossConnectivity.Current.IsRemoteReachable(Client.MobileAppUri.Host, 443)))
+            {
+                Debug.WriteLine($"Cannot connect to {Client.MobileAppUri} right now - offline");
+                return;
+            }
+
+            // Push the Operations Queue to the mobile backend
+            Debug.WriteLine("SyncOfflineCacheAsync: Pushing Changes");
+
+            try
+            {
+                await Client.SyncContext.PushAsync();
+            }
+            catch (MobileServicePushFailedException ex)
+            {
+                if (ex.PushResult != null)
+                {
+                    foreach (var error in ex.PushResult.Errors)
+                    {
+                        await ResolveConflictAsync<T>(error, overrideServerChanges);
+                    }
+                }
+            }
+
+            // Pull each sync table
+            Debug.WriteLine("SyncOfflineCacheAsync: Pulling organization table");
+            var organizationTable = await GetTableAsync<Organization>(); await organizationTable.PullAsync();
+            Debug.WriteLine("SyncOfflineCacheAsync: Pulling announcements table");
+            var announcementTable = await GetTableAsync<Announcement>(); await announcementTable.PullAsync();
+        }
+
+        async Task ResolveConflictAsync<T>(MobileServiceTableOperationError error, bool overrideServerChanges) where T : TableData
+        {
+            var serverItem = error.Result.ToObject<T>();
+            var localItem = error.Item.ToObject<T>();
+
+            // Note that you need to implement the public override Equals(T) method in the Model for this to work
+            //if (serverItem.Equals(localItem))
+            //{
+            //    // Items are the same, so ignore the conflict
+            //    await error.CancelAndDiscardItemAsync();
+            //    return;
+            //}
+
+            if (overrideServerChanges)
+            {
+                // Client wins
+                localItem.Version = serverItem.Version;
+                await error.UpdateOperationAsync(JObject.FromObject(localItem));
+            }
+            else
+            {
+                // Server wins
+                await error.CancelAndDiscardItemAsync();
+            }
+        }
+        #endregion
+
+        public async Task<ICloudTable<T>> GetTableAsync<T>() where T : TableData
+        {
+            await InitializeAsync();
+
+            return new AzureCloudTable<T>(Client);
+        }
 
         public async Task<MobileServiceUser> LoginAsync()
         {
             var loginProvider = DependencyService.Get<ILoginProvider>();
 
-            client.CurrentUser = loginProvider.RetrieveTokenFromSecureStore();
+            Client.CurrentUser = loginProvider.RetrieveTokenFromSecureStore();
 
-            if (client.CurrentUser != null)
+            if (Client.CurrentUser != null)
             {
                 // User has previously been authenticated - try to Refresh the token
                 try
                 {
-                    var refreshedUSer = await client.RefreshUserAsync();
+                    var refreshedUSer = await Client.RefreshUserAsync();
                     if (refreshedUSer != null)
                     {
                         loginProvider.StoreTokenInSecureStore(refreshedUSer);
@@ -53,35 +141,35 @@ namespace NGODirectory.Services
                 }
             }
 
-            if (client.CurrentUser != null && !IsTokenExpired(client.CurrentUser.MobileServiceAuthenticationToken))
+            if (Client.CurrentUser != null && !IsTokenExpired(Client.CurrentUser.MobileServiceAuthenticationToken))
             {
                 // User has previously been authenticated, no refresh is required
-                return client.CurrentUser;
+                return Client.CurrentUser;
             }
 
             // We need to ask for credentials at this point
-            await loginProvider.LoginAsync(client);
-            if (client.CurrentUser != null)
+            await loginProvider.LoginAsync(Client);
+            if (Client.CurrentUser != null)
             {
                 // We were able to successfully log in
-                loginProvider.StoreTokenInSecureStore(client.CurrentUser);
+                loginProvider.StoreTokenInSecureStore(Client.CurrentUser);
             }
 
-            return client.CurrentUser;
+            return Client.CurrentUser;
         }
         
         public async Task LogoutAsync()
         {
-            if (client.CurrentUser == null || client.CurrentUser.MobileServiceAuthenticationToken == null)
+            if (Client.CurrentUser == null || Client.CurrentUser.MobileServiceAuthenticationToken == null)
                 return;
 
             // Log out of the identity provider (if required)
 
             // Invalidate the token on the mobile backend
-            var authUri = new Uri($"{client.MobileAppUri}/.auth/logout");
+            var authUri = new Uri($"{Client.MobileAppUri}/.auth/logout");
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Add("X-ZUMO-AUTH", client.CurrentUser.MobileServiceAuthenticationToken);
+                httpClient.DefaultRequestHeaders.Add("X-ZUMO-AUTH", Client.CurrentUser.MobileServiceAuthenticationToken);
                 await httpClient.GetAsync(authUri);
             }
 
@@ -89,7 +177,7 @@ namespace NGODirectory.Services
             DependencyService.Get<ILoginProvider>().RemoveTokenFromSecureStore();
 
             // Remove the token from the MobileServiceClient
-            await client.LogoutAsync();
+            await Client.LogoutAsync();
         }
 
         bool IsTokenExpired(string token)
@@ -126,14 +214,14 @@ namespace NGODirectory.Services
 
         public async Task<AppServiceIdentity> GetIdentityAsync()
         {
-            if (client.CurrentUser == null || client.CurrentUser?.MobileServiceAuthenticationToken == null)
+            if (Client.CurrentUser == null || Client.CurrentUser?.MobileServiceAuthenticationToken == null)
             {
                 throw new InvalidOperationException("Not Authenticated");
             }
 
             if (identities == null)
             {
-                identities = await client.InvokeApiAsync<List<AppServiceIdentity>>("/.auth/me");
+                identities = await Client.InvokeApiAsync<List<AppServiceIdentity>>("/.auth/me");
             }
 
             if (identities.Count > 0)
