@@ -2,10 +2,95 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NGODirectory.Views.AnnouncementsListView"
+             xmlns:behaviors="clr-namespace:NGODirectory.Behaviors;assembly=NGODirectory"
+             xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"          
+             xmlns:templates="clr-namespace:NGODirectory.Views.Templates;assembly=NGODirectory"
              Title="{Binding Title}">
-  <StackLayout>
-    <Label Text="This is a Tabbed, you can tap on the Tabs to go to the other pages. You can specify an icon that will show up on iOS and Android with the Icon property of each page." Margin="5" />
-    <Label Text="Red" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5" />
-    <BoxView Color="Red" VerticalOptions="FillAndExpand" />
-  </StackLayout>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ItemVisivilityConverter x:Key="ItemVisibilityConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!--<ToolbarItem Name="Refresh"
+                     Command="{Binding RefreshCommand}"
+                     Order="Primary"
+                     Priority="0" >
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="refresh_icon"
+                    iOS="refresh_icon"
+                    WinPhone="Assets/refresh_icon.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>-->
+    
+    <ContentPage.ToolbarItems>
+        
+        <ToolbarItem 
+            Text="Delete"   
+            Command="{Binding SettingsCommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="settings_icon"
+                    iOS="settings_icon"    
+                    WinPhone="Assets/settings_icon.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        
+        <ToolbarItem 
+            Text="Delete"   
+            Command="{Binding OrganizationsCommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="world_icon"
+                    iOS="world_icon"    
+                    WinPhone="Assets/world_icon.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        
+        <ToolbarItem 
+            Text="Edit"   
+            Command="{Binding AddNewItemCommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="add_icon"
+                    iOS="add_icon"    
+                    WinPhone="Assets/add_icon.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <ListView
+            CachingStrategy="RecycleElement"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+            ItemsSource="{Binding Items}"
+            RefreshCommand="{Binding RefreshCommand}"
+            RowHeight="50"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior Command="{Binding LoadMoreCommand}"
+                                                Converter="{StaticResource ItemVisibilityConverter}"
+                                                EventName="ItemAppearing" />
+            </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <templates:AnnouncementTemplate />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+
+
 </ContentPage>

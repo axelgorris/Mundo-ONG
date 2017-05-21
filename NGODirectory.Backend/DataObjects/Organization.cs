@@ -16,8 +16,6 @@ namespace NGODirectory.Backend.DataObjects
         public string Twitter { get; set; }
         public string Instagram { get; set; }
         public string LogoUrl { get; set; }
-        public string Category { get; set; }
-
-        //public virtual ICollection<Announcement> Announcements { get; set; }
+        public string Category { get; set; }        
     }
 }

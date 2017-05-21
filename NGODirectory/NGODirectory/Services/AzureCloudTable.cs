@@ -29,22 +29,33 @@ namespace NGODirectory.Services
             await table.DeleteAsync(item);
         }
 
-        public async Task<ICollection<T>> ReadAllItemsAsync<TKey>(Expression<Func<T, TKey>> orderby = null)
+        public async Task<ICollection<T>> ReadAllItemsAsync()
         {
-            if (orderby != null)
-                return await table.OrderBy(orderby).ToListAsync();
-            else
-                return await table.ToListAsync();
+            return await table.ToListAsync();
         }
 
-        public async Task<ICollection<T>> ReadItemsAsync<TKey>(int start, int count, Expression<Func<T, TKey>> orderby = null)
+        public async Task<ICollection<T>> ReadItemsAsync(int start, int count)
         {
-            if (orderby != null)
-                return await table.OrderBy(orderby).Skip(start).Take(count).ToListAsync();
-            else
-                return await table.Skip(start).Take(count).ToListAsync();
+            return await table.Skip(start).Take(count).ToListAsync();
         }
-        
+
+        public async Task<ICollection<T>> ReadAllItemsOrderedAsync<TKey>(Expression<Func<T, TKey>> orderby = null, bool descending = false)
+        {
+            if (descending)
+                return await table.OrderByDescending(orderby).ToListAsync();
+            else
+                return await table.OrderBy(orderby).ToListAsync();
+
+        }
+
+        public async Task<ICollection<T>> ReadItemsOrderedAsync<TKey>(int start, int count, Expression<Func<T, TKey>> orderby = null, bool descending = false)
+        {
+            if (descending)
+                return await table.OrderByDescending(orderby).Skip(start).Take(count).ToListAsync();
+            else
+                return await table.OrderBy(orderby).Skip(start).Take(count).ToListAsync();
+        }
+
         public async Task<T> ReadItemAsync(string id)
         {
             return await table.LookupAsync(id);

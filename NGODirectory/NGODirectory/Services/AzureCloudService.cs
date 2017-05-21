@@ -20,7 +20,7 @@ namespace NGODirectory.Services
     {
         MobileServiceClient Client;
         List<AppServiceIdentity> identities = null;
-
+        
         public AzureCloudService()
         {
             Client = new MobileServiceClient(Locations.AppServiceUrl, new AuthenticationDelegatingHandler());
@@ -43,7 +43,7 @@ namespace NGODirectory.Services
             store.DefineTable<Announcement>();
 
             // Actually create the store and update the schema
-            await Client.SyncContext.InitializeAsync(store);
+            Task.Run(async () => await Client.SyncContext.InitializeAsync(store)).Wait();
         }
 
         public async Task SyncOfflineCacheAsync<T>(bool overrideServerChanges) where T : TableData

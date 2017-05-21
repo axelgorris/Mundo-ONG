@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NGODirectory.Views.OrganizationsListView"
              xmlns:behaviors="clr-namespace:NGODirectory.Behaviors;assembly=NGODirectory"
-             xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"
+             xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"             
              Title="{Binding Title}">
 
     <ContentPage.Resources>
@@ -13,54 +13,71 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Refresh"
-                     Command="{Binding RefreshCommand}"
-                     Icon="refresh.png"
-                     Order="Primary"
-                     Priority="0" />        
-    </ContentPage.ToolbarItems>
-    
-    <ContentPage.Content>
-        <StackLayout>
-            <ListView
-                CachingStrategy="RecycleElement"
-                IsPullToRefreshEnabled="True"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                ItemsSource="{Binding Items}"
-                RefreshCommand="{Binding RefreshCommand}"
-                RowHeight="50"
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 
-                <ListView.Behaviors>
-                    <behaviors:EventToCommandBehavior Command="{Binding LoadMoreCommand}"
+        <ToolbarItem 
+            Text="Delete"   
+            Command="{Binding SettingsCommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="settings_icon"
+                    iOS="settings_icon"    
+                    WinPhone="Assets/settings_icon.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+
+        <ToolbarItem 
+            Text="Delete"   
+            Command="{Binding AnnouncementsCommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="announcement_icon"
+                    iOS="announcement_icon"    
+                    WinPhone="Assets/announcement_icon.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+
+        <ToolbarItem 
+            Text="Edit"   
+            Command="{Binding AddNewItemCommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="add_icon"
+                    iOS="add_icon"    
+                    WinPhone="Assets/add_icon.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <ListView
+            CachingStrategy="RecycleElement"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+            ItemsSource="{Binding Items}"
+            RefreshCommand="{Binding RefreshCommand}"
+            RowHeight="50"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior Command="{Binding LoadMoreCommand}"
                                                 Converter="{StaticResource ItemVisibilityConverter}"
                                                 EventName="ItemAppearing" />
-                </ListView.Behaviors>
+            </ListView.Behaviors>
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout HorizontalOptions="FillAndExpand"
-                                         Orientation="Horizontal"
-                                         Padding="10"
-                                         VerticalOptions="CenterAndExpand">
-                                <Label HorizontalOptions="FillAndExpand"
-                                       Text="{Binding Name}"
-                                       TextColor="#272832" />                                
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <StackLayout HorizontalOptions="Center"
-                   Orientation="Horizontal">
-                <Button BackgroundColor="Teal"
-                Command="{Binding AddNewItemCommand}"
-                Text="Add New Item"
-                TextColor="White" />
-            </StackLayout>
-        </StackLayout>
-    </ContentPage.Content>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell 
+                        Text="{Binding Name}"
+                        Detail="{Binding Description}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+                
+        </ListView>
+    </Grid>
 
 
 </ContentPage>

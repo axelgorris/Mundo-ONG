@@ -171,6 +171,10 @@
     <Compile Include="Migrations\201705201701497_InitialMigration.Designer.cs">
       <DependentUpon>201705201701497_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705210910349_AddedAnnouncementOrganizationField.cs" />
+    <Compile Include="Migrations\201705210910349_AddedAnnouncementOrganizationField.Designer.cs">
+      <DependentUpon>201705210910349_AddedAnnouncementOrganizationField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -197,6 +201,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705201701497_InitialMigration.resx">
       <DependentUpon>201705201701497_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705210910349_AddedAnnouncementOrganizationField.resx">
+      <DependentUpon>201705210910349_AddedAnnouncementOrganizationField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

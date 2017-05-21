@@ -1,6 +1,7 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Services;
+using NGODirectory.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace NGODirectory
             InitializeComponent();
 
             ServiceLocator.Instance.Add<ICloudService, AzureCloudService>();
-            MainPage = new NavigationPage(new Views.EntryView());
+            MainPage = new CustomNavigationPage(new AnnouncementsListView());
         }
 
         protected override void OnStart()

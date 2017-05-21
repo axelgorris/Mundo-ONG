@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NGODirectory.Views.OrganizationEditView"
+             Title="{Binding Title}">
+    
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem Name="Refresh"
+                     Command="{Binding SaveCommand}"
+                     Order="Primary"
+                     Priority="0" >
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="save_icon"
+                    iOS="save_icon"
+                    WinPhone="Assets/save_icon.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+
+        <ToolbarItem Name="New item"
+                     Command="{Binding DeleteCommand}"
+                     Order="Primary"
+                     Priority="0" >
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="delete_icon"
+                    iOS="delete_icon"
+                    WinPhone="Assets/delete_icon.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="10">
+            <Label Text="Name"/>
+            <Entry Text="{Binding Item.Name}"/>
+            <Label Text="Description"/>
+            <Entry Text="{Binding Item.Description}"/>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

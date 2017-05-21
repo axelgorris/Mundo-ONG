@@ -17,15 +17,16 @@ namespace NGODirectory.ViewModels
 
         public OrganizationsListViewModel()
         {
-            Title = "Organizations list";
+            Title = "Organizations";
             
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
             LoadMoreCommand = new Command<Organization>(async (Organization item) => await LoadMore(item));
-
+            SettingsCommand = new Command(async () => await GoToSettings());
+            AnnouncementsCommand = new Command(async () => await GoToAnnouncements());
 
             // Subscribe to events from the Task Detail Page
-            MessagingCenter.Subscribe<OrganizationDetailViewModel>(this, "ItemsChanged", async (sender) =>
+            MessagingCenter.Subscribe<OrganizationEditViewModel>(this, "ItemsChanged", async (sender) =>
             {
                 await Refresh();
             });
@@ -50,7 +51,7 @@ namespace NGODirectory.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    Application.Current.MainPage.Navigation.PushAsync(new Views.OrganizationDetailView(selectedItem));
+                    Application.Current.MainPage.Navigation.PushAsync(new Views.OrganizationEditView(selectedItem));
                     SelectedItem = null;
                 }
             }
@@ -68,8 +69,9 @@ namespace NGODirectory.ViewModels
             {
                 await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
                 var table = await CloudService.GetTableAsync<Organization>();
-                var list = await table.ReadItemsAsync(0, 10, o => o.Name);
-                Items.ReplaceRange(list);
+                var list = await table.ReadItemsOrderedAsync(0, 10, o => o.Name);
+                Items = new ObservableRangeCollection<Organization>(list);
+
                 hasMoreItems = true;
             }
             catch (Exception ex)
@@ -91,7 +93,7 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.OrganizationDetailView());
+                await Application.Current.MainPage.Navigation.PushAsync(new Views.OrganizationEditView());
             }
             catch (Exception ex)
             {
@@ -106,23 +108,26 @@ namespace NGODirectory.ViewModels
         public Command LoadMoreCommand { get; }
         async Task LoadMore(Organization item)
         {
+            if (item == null)
+                return;
+
             if (IsBusy)
             {
-                Debug.WriteLine($"LoadMore: bailing because IsBusy = true");
+                Debug.WriteLine($"[OrganizationsList] LoadMore: bailing because IsBusy = true");
                 return;
             }
 
             // If we are not displaying the last one in the list, then return.
             if (!Items.Last().Id.Equals(item.Id))
             {
-                Debug.WriteLine($"LoadMore: bailing because this id is not the last id in the list");
+                Debug.WriteLine($"[OrganizationsList] LoadMore: bailing because this id is not the last id in the list");
                 return;
             }
 
             // If we don't have more items, return
             if (!hasMoreItems)
             {
-                Debug.WriteLine($"LoadMore: bailing because we don't have any more items");
+                Debug.WriteLine($"[OrganizationsList] LoadMore: bailing because we don't have any more items");
                 return;
             }
 
@@ -130,26 +135,68 @@ namespace NGODirectory.ViewModels
             try
             {
                 var table = await CloudService.GetTableAsync<Organization>();
-                var list = await table.ReadItemsAsync(Items.Count, 10, o => o.Name);
+                var list = await table.ReadItemsOrderedAsync(Items.Count, 10, o => o.Name);
                 if (list.Count > 0)
                 {
-                    Debug.WriteLine($"LoadMore: got {list.Count} more items");
+                    Debug.WriteLine($"[OrganizationsList] LoadMore: got {list.Count} more items");
                     Items.AddRange(list);
                 }
                 else
                 {
-                    Debug.WriteLine($"LoadMore: no more items: setting hasMoreItems= false");
+                    Debug.WriteLine($"[OrganizationsList] LoadMore: no more items: setting hasMoreItems= false");
                     hasMoreItems = false;
                 }
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("LoadMore Failed", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert("[OrganizationsList] LoadMore Failed", ex.Message, "OK");
             }
             finally
             {
                 IsBusy = false;
             }
-        }        
+        }
+
+        public Command SettingsCommand { get; }
+        async Task GoToSettings()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+
+            try
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new Views.SettingsView());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[TaskList] Error in GoToSettings: {ex.Message}");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        public Command AnnouncementsCommand { get; }
+        async Task GoToAnnouncements()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+
+            try
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new Views.AnnouncementsListView());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[TaskList] Error in GoToAnnouncements: {ex.Message}");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
     }
 }
