@@ -18,7 +18,7 @@ namespace NGODirectory
             InitializeComponent();
 
             ServiceLocator.Instance.Add<ICloudService, AzureCloudService>();
-            MainPage = new CustomNavigationPage(new AnnouncementsListView());
+            MainPage = new CustomNavigationPage(new MainView());
         }
 
         protected override void OnStart()

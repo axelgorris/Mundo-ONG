@@ -1,0 +1,52 @@
+﻿using NGODirectory.Abstractions;
+using NGODirectory.Helpers;
+using NGODirectory.Models;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace NGODirectory.ViewModels
+{
+    public class AnnouncementDisplayViewModel : BaseViewModel
+    {
+        public AnnouncementDisplayViewModel(Announcement item)
+        {
+            EditCommand = new Command(async () => await Edit());
+
+            Item = item;
+            Title = item.Title;
+        }
+
+        public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
+
+        public Announcement Item { get; set; }
+
+        public Command EditCommand { get; }
+        async Task Edit()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
+            try
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new Views.AnnouncementEditView(Item));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[AnnouncementEdit] Save error: {ex.Message}");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        public bool IsUserLoggedIn
+        {
+            get { return CloudService.IsUserLoggedIn(); }
+        }
+    }
+}

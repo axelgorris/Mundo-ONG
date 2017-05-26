@@ -10,7 +10,7 @@ namespace NGODirectory.Views
         public SettingsView()
         {
             InitializeComponent();
-            BindingContext = new SettingsPageViewModel();
+            BindingContext = new SettingsViewModel();
         }
     }
 }

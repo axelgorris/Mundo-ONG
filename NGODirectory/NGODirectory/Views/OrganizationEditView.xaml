@@ -2,8 +2,31 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NGODirectory.Views.OrganizationEditView"
+             xmlns:behaviors="clr-namespace:NGODirectory.Behaviors;assembly=NGODirectory"
              Title="{Binding Title}">
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="ItemImageStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="200" />
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+
+            <Style x:Key="CameraImageStyle" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="ItemHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="Margin" Value="12, 0" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
 
         <ToolbarItem Name="Refresh"
@@ -34,13 +57,73 @@
 
     </ContentPage.ToolbarItems>
 
-    <ContentPage.Content>
-        <StackLayout Padding="10" Spacing="10">
-            <Label Text="Name"/>
-            <Entry Text="{Binding Item.Name}"/>
-            <Label Text="Description"/>
-            <Entry Text="{Binding Item.Description}"/>
-        </StackLayout>
-    </ContentPage.Content>
+    <StackLayout Padding="10" Spacing="10">
+        <Label Text="Name"/>
+        <Entry Text="{Binding Item.Name}"/>
+        <Label Text="Description"/>
+        <Entry Text="{Binding Item.Description}"/>
+    </StackLayout>
+
+
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid
+                Grid.Row="0"
+                BackgroundColor="{StaticResource GrayColor}">
+                <Image
+                    Source="{Binding LogoUrl}"
+                    Style="{StaticResource ItemImageStyle}"/>
+                <Image
+                    Style="{StaticResource CameraImageStyle}">
+                    <Image.Source>
+                        <OnPlatform                       
+                            x:TypeArguments="ImageSource"
+                            iOS="camera_icon"
+                            Android="camera_icon"
+                            WinPhone="Assets/camera_icon.png"/>
+                    </Image.Source>
+                </Image>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding PickPhotoCommand}"
+                        NumberOfTapsRequired="1" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <StackLayout
+                Grid.Row="1">
+                <Label 
+                    Text="Name"
+                    Style="{StaticResource ItemHeaderStyle}"/>
+                <Entry 
+                    Placeholder="Insert name"
+                    Text="{Binding Item.Name, Mode=TwoWay}">
+                    <Entry.Behaviors>
+                        <behaviors:MaxLengthValidatorBehavior MaxLength="40"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+            <StackLayout
+                Grid.Row="2">
+                <Label 
+                    Text="Description"
+                    Style="{StaticResource ItemHeaderStyle}"/>
+                <Entry        
+                    Placeholder="Insert description"
+                    Text="{Binding Item.Description, Mode=TwoWay}">
+                    <Entry.Behaviors>
+                        <behaviors:MaxLengthValidatorBehavior MaxLength="150"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+
+
 
 </ContentPage>

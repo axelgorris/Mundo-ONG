@@ -12,18 +12,17 @@ namespace NGODirectory.ViewModels
 {
     public class OrganizationsListViewModel : BaseViewModel
     {
-        public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>(); 
+        public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
         bool hasMoreItems = true;
 
         public OrganizationsListViewModel()
         {
             Title = "Organizations";
-            
+
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
             LoadMoreCommand = new Command<Organization>(async (Organization item) => await LoadMore(item));
             SettingsCommand = new Command(async () => await GoToSettings());
-            AnnouncementsCommand = new Command(async () => await GoToAnnouncements());
 
             // Subscribe to events from the Task Detail Page
             MessagingCenter.Subscribe<OrganizationEditViewModel>(this, "ItemsChanged", async (sender) =>
@@ -34,7 +33,7 @@ namespace NGODirectory.ViewModels
             // Execute the refresh command
             RefreshCommand.Execute(null);
         }
-                
+
         ObservableRangeCollection<Organization> items = new ObservableRangeCollection<Organization>();
         public ObservableRangeCollection<Organization> Items
         {
@@ -51,7 +50,7 @@ namespace NGODirectory.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    Application.Current.MainPage.Navigation.PushAsync(new Views.OrganizationEditView(selectedItem));
+                    Application.Current.MainPage.Navigation.PushAsync(new Views.OrganizationDisplayView(selectedItem));
                     SelectedItem = null;
                 }
             }
@@ -83,7 +82,7 @@ namespace NGODirectory.ViewModels
                 IsBusy = false;
             }
         }
-        
+
         public Command AddNewItemCommand { get; }
         async Task AddNewItem()
         {
@@ -97,7 +96,7 @@ namespace NGODirectory.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[TaskList] Error in AddNewItem: {ex.Message}");
+                Debug.WriteLine($"[OrganizationsList] Error in AddNewItem: {ex.Message}");
             }
             finally
             {
@@ -170,7 +169,7 @@ namespace NGODirectory.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[TaskList] Error in GoToSettings: {ex.Message}");
+                Debug.WriteLine($"[OrganizationsList] Error in GoToSettings: {ex.Message}");
             }
             finally
             {
@@ -178,25 +177,9 @@ namespace NGODirectory.ViewModels
             }
         }
 
-        public Command AnnouncementsCommand { get; }
-        async Task GoToAnnouncements()
+        public bool IsUserLoggedIn
         {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-
-            try
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.AnnouncementsListView());
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[TaskList] Error in GoToAnnouncements: {ex.Message}");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            get { return CloudService.IsUserLoggedIn(); }
         }
     }
 }

@@ -11,5 +11,6 @@ namespace NGODirectory.Abstractions
         Task LogoutAsync();
         Task<AppServiceIdentity> GetIdentityAsync();
         Task SyncOfflineCacheAsync<T>(bool overrideServerChanges) where T : TableData;
+        bool IsUserLoggedIn();
     }
 }

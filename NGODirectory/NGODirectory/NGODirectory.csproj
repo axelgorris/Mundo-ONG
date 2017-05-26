@@ -45,7 +45,10 @@
     </Compile>
     <Compile Include="Behaviors\BehaviorBase.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Behaviors\MaxLengthValidatorBehavior.cs" />
+    <Compile Include="Controls\BindableToolbarItem.cs" />
     <Compile Include="Converters\ItemVisivilityConverter.cs" />
+    <Compile Include="Converters\NegateBooleanConverter.cs" />
     <Compile Include="Helpers\AuthenticationDelegatingHandler.cs" />
     <Compile Include="Helpers\Locations.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
@@ -53,13 +56,26 @@
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AppServiceIdentity.cs" />
     <Compile Include="Models\Organization.cs" />
+    <Compile Include="Services\PhotoService.cs" />
+    <Compile Include="ViewModels\AnnouncementDisplayViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementEditViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />
+    <Compile Include="ViewModels\OrganizationDisplayViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Views\AnnouncementDisplayView.xaml.cs">
+      <DependentUpon>AnnouncementDisplayView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AnnouncementEditView.xaml.cs">
       <DependentUpon>AnnouncementEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomNavigationPage.xaml.cs">
       <DependentUpon>CustomNavigationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrganizationDisplayView.xaml.cs">
+      <DependentUpon>OrganizationDisplayView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -76,7 +92,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AzureCloudService.cs" />
     <Compile Include="Services\AzureCloudTable.cs" />
-    <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\OrganizationEditViewModel.cs" />
     <Compile Include="ViewModels\OrganizationsListViewModel.cs" />
     <Compile Include="Views\Templates\AnnouncementTemplate.xaml.cs">
@@ -113,6 +128,12 @@
     </Reference>
     <Reference Include="Plugin.Connectivity.Abstractions, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.3.0\lib\portable-net45+wp80+win8+wpa81\Plugin.Connectivity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.56.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SkiaSharp.1.56.1\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
@@ -190,6 +211,23 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AnnouncementDisplayView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OrganizationDisplayView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MainView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

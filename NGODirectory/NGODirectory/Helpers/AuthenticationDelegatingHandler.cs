@@ -19,8 +19,7 @@ namespace NGODirectory.Helpers
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                // The request resulted in a 401 Unauthorized.  We need to do a LoginAsync,
-                // which will do the Refresh if appropriate, or ask for credentials if not.
+                // The request resulted in a 401 Unauthorized.  We need to do a LoginAsync, which will do the Refresh if appropriate, or ask for credentials if not.
                 var user = await ServiceLocator.Instance.Resolve<ICloudService>().LoginAsync();
 
                 // Now, retry the request with the cloned request.  The only thing we have

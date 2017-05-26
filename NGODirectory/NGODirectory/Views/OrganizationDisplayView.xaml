@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NGODirectory.Views.OrganizationDisplayView"
+             xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
+             x:Name="this"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        
+        <control:BindableToolbarItem
+            Text="Edit" 
+            Command="{Binding EditCommand}"
+            IsVisible="{Binding IsVisible}">
+            <control:BindableToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="edit_icon"
+                    iOS="edit_icon"    
+                    WinPhone="Assets/edit_icon.png"/>
+            </control:BindableToolbarItem.Icon>
+        </control:BindableToolbarItem>
+
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="10">
+            <Label Text="Name"/>
+            <Label Text="{Binding Item.Name}"/>
+            <Label Text="Description"/>
+            <Label Text="{Binding Item.Description}"/>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

@@ -1,6 +1,8 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Models;
+using NGODirectory.Services;
+using Plugin.Media.Abstractions;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -12,8 +14,9 @@ namespace NGODirectory.ViewModels
     {
         public OrganizationEditViewModel(Organization item = null)
         {
-            SaveCommand = new Command(async () => await Save());
-            DeleteCommand = new Command(async () => await Delete());
+            SaveCommand = new Command(async () => await SaveAsync());
+            DeleteCommand = new Command(async () => await DeleteAsync());
+            PickPhotoCommand = new Command(async () => await PickPhotoAsync());
 
             if (item != null)
             {
@@ -32,7 +35,7 @@ namespace NGODirectory.ViewModels
         public Organization Item { get; set; }
 
         public Command SaveCommand { get; }
-        async Task Save()
+        async Task SaveAsync()
         {
             if (IsBusy)
                 return;
@@ -44,7 +47,7 @@ namespace NGODirectory.ViewModels
                 var table = await CloudService.GetTableAsync<Organization>();
 
                 if (Item.Id == null)
-                {                    
+                {
                     await table.CreateItemAsync(Item);
                 }
                 else
@@ -67,7 +70,7 @@ namespace NGODirectory.ViewModels
         }
 
         public Command DeleteCommand { get; }
-        async Task Delete()
+        async Task DeleteAsync()
         {
             if (IsBusy)
                 return;
@@ -81,7 +84,7 @@ namespace NGODirectory.ViewModels
                     var table = await CloudService.GetTableAsync<Organization>();
                     await table.DeleteItemAsync(Item);
                     await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
-                    MessagingCenter.Send(this, "ItemsChanged");                    
+                    MessagingCenter.Send(this, "ItemsChanged");
                 }
 
                 await Application.Current.MainPage.Navigation.PopAsync();
@@ -93,6 +96,32 @@ namespace NGODirectory.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+        
+        private string _logoUrl;
+        public string LogoUrl
+        {
+            get { return _logoUrl; }
+            set { SetProperty(ref _logoUrl, value, "LogoUrl"); }
+        }
+
+        private MediaFile _image;
+        public MediaFile Image
+        {
+            get { return _image; }
+            set { SetProperty(ref _image, value, "Image"); }
+        }
+
+        public Command PickPhotoCommand { get; }
+        private async Task PickPhotoAsync()
+        {
+            var result = await PhotoService.Instance.PickPhotoAsync();
+
+            if (result != null)
+            {
+                Image = result;
+                LogoUrl = result.Path;
             }
         }
     }

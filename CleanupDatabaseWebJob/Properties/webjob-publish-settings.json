@@ -3,7 +3,5 @@
   "webJobName": "CleanupDatabaseWebJob",
   "startTime": "2017-05-23T03:00:00-08:00",
   "endTime": "2017-05-23T04:00:00-08:00",
-  "jobRecurrenceFrequency": "Day",
-  "interval": 1,
-  "runMode": "Scheduled"
+  "runMode": "OnDemand"
 }

@@ -5,6 +5,7 @@
              xmlns:behaviors="clr-namespace:NGODirectory.Behaviors;assembly=NGODirectory"
              xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"          
              xmlns:templates="clr-namespace:NGODirectory.Views.Templates;assembly=NGODirectory"
+             xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
              Title="{Binding Title}">
     
     <ContentPage.Resources>
@@ -29,7 +30,7 @@
     <ContentPage.ToolbarItems>
         
         <ToolbarItem 
-            Text="Delete"   
+            Text="Settings"
             Command="{Binding SettingsCommand}">
             <ToolbarItem.Icon>
                 <OnPlatform 
@@ -40,7 +41,7 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
         
-        <ToolbarItem 
+        <!--<ToolbarItem 
             Text="Delete"   
             Command="{Binding OrganizationsCommand}">
             <ToolbarItem.Icon>
@@ -50,19 +51,20 @@
                     iOS="world_icon"    
                     WinPhone="Assets/world_icon.png"/>
             </ToolbarItem.Icon>
-        </ToolbarItem>
-        
-        <ToolbarItem 
-            Text="Edit"   
-            Command="{Binding AddNewItemCommand}">
-            <ToolbarItem.Icon>
+        </ToolbarItem>-->
+
+        <control:BindableToolbarItem
+            Text="Add" 
+            Command="{Binding AddNewItemCommand}"
+            IsVisible="{Binding IsVisible}">
+            <control:BindableToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
                     Android="add_icon"
                     iOS="add_icon"    
                     WinPhone="Assets/add_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
+            </control:BindableToolbarItem.Icon>
+        </control:BindableToolbarItem>
         
     </ContentPage.ToolbarItems>
 

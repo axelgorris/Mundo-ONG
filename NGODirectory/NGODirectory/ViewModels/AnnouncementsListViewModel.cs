@@ -2,10 +2,8 @@
 using NGODirectory.Helpers;
 using NGODirectory.Models;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -24,9 +22,8 @@ namespace NGODirectory.ViewModels
             AddNewItemCommand = new Command(async () => await AddNewItem());
             LoadMoreCommand = new Command<Announcement>(async (Announcement item) => await LoadMore(item));
             SettingsCommand = new Command(async () => await GoToSettings());
-            OrganizationsCommand = new Command(async () => await GoToOrganizations());
 
-            // Subscribe to events from the Task Detail Page
+            // Subscribe to events from the Detail Page
             MessagingCenter.Subscribe<AnnouncementEditViewModel>(this, "ItemsChanged", async (sender) =>
             {
                 await Refresh();
@@ -52,7 +49,7 @@ namespace NGODirectory.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    Application.Current.MainPage.Navigation.PushAsync(new Views.AnnouncementEditView(selectedItem));
+                    Application.Current.MainPage.Navigation.PushAsync(new Views.AnnouncementDisplayView(selectedItem));
                     SelectedItem = null;
                 }
             }
@@ -97,7 +94,7 @@ namespace NGODirectory.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[TaskList] Error in AddNewItem: {ex.Message}");
+                Debug.WriteLine($"[AnnouncementsList] Error in AddNewItem: {ex.Message}");
             }
             finally
             {
@@ -167,33 +164,17 @@ namespace NGODirectory.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[TaskList] Error in GoToSettings: {ex.Message}");
+                Debug.WriteLine($"[AnnouncementsList] Error in GoToSettings: {ex.Message}");
             }
             finally
             {
                 IsBusy = false;
             }
         }
-
-        public Command OrganizationsCommand { get; }
-        async Task GoToOrganizations()
+                
+        public bool IsUserLoggedIn
         {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-
-            try
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.OrganizationsListView());
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[TaskList] Error in GoToOrganizations: {ex.Message}");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            get { return CloudService.IsUserLoggedIn(); }
         }
     }
 }

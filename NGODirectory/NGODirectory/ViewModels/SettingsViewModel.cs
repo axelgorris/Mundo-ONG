@@ -1,24 +1,32 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
-using NGODirectory.Views;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace NGODirectory.ViewModels
 {
-    public class SettingsPageViewModel : BaseViewModel
+    public class SettingsViewModel : BaseViewModel
     {
-        public SettingsPageViewModel()
+        public SettingsViewModel()
         {
-            Title = "NGO Directory";
-            
-            LoginCommand = new Command(async () => await Login().ConfigureAwait(false));
-            LogoutCommand = new Command(async () => await Logout());
+            Title = "Settings";
         }
 
-        public Command LoginCommand;
+        ICloudService _cloudService => ServiceLocator.Instance.Resolve<ICloudService>();
+        public ICloudService CloudService
+        {
+            get { return _cloudService; }
+        }
+
+        public bool IsUserLoggedIn
+        {
+            get { return CloudService.IsUserLoggedIn(); }
+        }
+
+        public ICommand LoginCommand => new Command(async () => await Login());
         async Task Login()
         {
             if (IsBusy)
@@ -27,8 +35,7 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                var cloudService = ServiceLocator.Instance.Resolve<ICloudService>();
-                await cloudService.LoginAsync();
+                await CloudService.LoginAsync();
 
                 await Application.Current.MainPage.Navigation.PopAsync();
             }
@@ -42,7 +49,7 @@ namespace NGODirectory.ViewModels
             }
         }
 
-        public Command LogoutCommand { get; }
+        public ICommand LogoutCommand => new Command(async () => await Logout());
         async Task Logout()
         {
             if (IsBusy)
@@ -51,9 +58,9 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                var cloudService = ServiceLocator.Instance.Resolve<ICloudService>();
-                await cloudService.LogoutAsync();
-                Application.Current.MainPage = new NavigationPage(new Views.SettingsView());
+                await CloudService.LogoutAsync();
+
+                await Application.Current.MainPage.Navigation.PopAsync();
             }
             catch (Exception ex)
             {

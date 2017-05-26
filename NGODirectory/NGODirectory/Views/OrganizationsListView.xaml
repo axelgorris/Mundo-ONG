@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NGODirectory.Views.OrganizationsListView"
              xmlns:behaviors="clr-namespace:NGODirectory.Behaviors;assembly=NGODirectory"
-             xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"             
+             xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"
+             xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
@@ -15,7 +16,7 @@
     <ContentPage.ToolbarItems>
 
         <ToolbarItem 
-            Text="Delete"   
+            Text="Settings"   
             Command="{Binding SettingsCommand}">
             <ToolbarItem.Icon>
                 <OnPlatform 
@@ -26,7 +27,7 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
 
-        <ToolbarItem 
+        <!--<ToolbarItem 
             Text="Delete"   
             Command="{Binding AnnouncementsCommand}">
             <ToolbarItem.Icon>
@@ -36,20 +37,21 @@
                     iOS="announcement_icon"    
                     WinPhone="Assets/announcement_icon.png"/>
             </ToolbarItem.Icon>
-        </ToolbarItem>
+        </ToolbarItem>-->
 
-        <ToolbarItem 
-            Text="Edit"   
-            Command="{Binding AddNewItemCommand}">
-            <ToolbarItem.Icon>
+        <control:BindableToolbarItem
+            Text="Add" 
+            Command="{Binding AddNewItemCommand}"
+            IsVisible="{Binding IsVisible}">
+            <control:BindableToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
                     Android="add_icon"
                     iOS="add_icon"    
                     WinPhone="Assets/add_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
-
+            </control:BindableToolbarItem.Icon>
+        </control:BindableToolbarItem>
+        
     </ContentPage.ToolbarItems>
 
     <Grid>

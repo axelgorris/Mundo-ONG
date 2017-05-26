@@ -90,6 +90,21 @@
     <Reference Include="Plugin.Connectivity.Abstractions, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.3.0\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.CurrentActivity, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Plugin.CurrentActivity.1.0.1\lib\MonoAndroid10\Plugin.CurrentActivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugin.Media.2.6.2\lib\MonoAndroid10\Plugin.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugin.Media.2.6.2\lib\MonoAndroid10\Plugin.Media.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Permissions, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Plugin.Permissions.1.2.1\lib\MonoAndroid10\Plugin.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Permissions.Abstractions, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Plugin.Permissions.1.2.1\lib\MonoAndroid10\Plugin.Permissions.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
     </Reference>

@@ -20,7 +20,7 @@ namespace NGODirectory.Services
     {
         MobileServiceClient Client;
         List<AppServiceIdentity> identities = null;
-        
+
         public AzureCloudService()
         {
             Client = new MobileServiceClient(Locations.AppServiceUrl, new AuthenticationDelegatingHandler());
@@ -43,6 +43,7 @@ namespace NGODirectory.Services
             store.DefineTable<Announcement>();
 
             // Actually create the store and update the schema
+            // Little hack to avoid initializing the SyncContext more than once: We wait for the task to finish
             Task.Run(async () => await Client.SyncContext.InitializeAsync(store)).Wait();
         }
 
@@ -157,7 +158,7 @@ namespace NGODirectory.Services
 
             return Client.CurrentUser;
         }
-        
+
         public async Task LogoutAsync()
         {
             if (Client.CurrentUser == null || Client.CurrentUser.MobileServiceAuthenticationToken == null)
@@ -228,5 +229,11 @@ namespace NGODirectory.Services
                 return identities[0];
             return null;
         }
+
+        public bool IsUserLoggedIn()
+        {
+            return (Client.CurrentUser != null && Client.CurrentUser?.MobileServiceAuthenticationToken != null);
+        }
+
     }
 }

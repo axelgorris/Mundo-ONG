@@ -2,16 +2,31 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NGODirectory.Views.SettingsView"
+             xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"
              Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:NegateBooleanConverter x:Key="booleanInverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center"
                      Orientation="Vertical"
                      VerticalOptions="Center">
-            <Button BackgroundColor="Teal"
-                    BorderRadius="10"
+
+            <Button BackgroundColor="{StaticResource AccentColor}"
                     Command="{Binding LoginCommand}"
+                    IsVisible="{Binding IsUserLoggedIn, Converter={StaticResource booleanInverter}"
                     Text="Login"
-                    TextColor="White" />
+                    TextColor="{StaticResource WhiteColor}" />
+            <Button BackgroundColor="{StaticResource AccentColor}"
+                    Command="{Binding LogoutCommand}"                    
+                    IsVisible="{Binding IsUserLoggedIn}"
+                    Text="Logout"
+                    TextColor="{StaticResource WhiteColor}" />
         </StackLayout>
     </ContentPage.Content>
+
 </ContentPage>
