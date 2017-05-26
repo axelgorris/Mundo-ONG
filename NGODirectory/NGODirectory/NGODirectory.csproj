@@ -46,7 +46,7 @@
     <Compile Include="Behaviors\BehaviorBase.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Behaviors\MaxLengthValidatorBehavior.cs" />
-    <Compile Include="Controls\BindableToolbarItem.cs" />
+    <Compile Include="Controls\ConditionalToolbarItem.cs" />
     <Compile Include="Converters\ItemVisivilityConverter.cs" />
     <Compile Include="Converters\NegateBooleanConverter.cs" />
     <Compile Include="Helpers\AuthenticationDelegatingHandler.cs" />

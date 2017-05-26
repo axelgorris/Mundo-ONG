@@ -10,7 +10,7 @@ namespace NGODirectory.Views
         public AnnouncementsListView()
         {
             InitializeComponent();
-            BindingContext = new AnnouncementsListViewModel();  
+            BindingContext = new AnnouncementsListViewModel();
         }
     }
 }

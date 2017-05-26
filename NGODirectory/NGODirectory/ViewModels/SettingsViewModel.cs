@@ -1,5 +1,6 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
+using NGODirectory.Views;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -37,11 +38,11 @@ namespace NGODirectory.ViewModels
             {
                 await CloudService.LoginAsync();
 
-                await Application.Current.MainPage.Navigation.PopAsync();
+                await Application.Current.MainPage.Navigation.PushAsync(new MainView());
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[Login] Error = {ex.Message}");
+                await Application.Current.MainPage.DisplayAlert("Login failed", ex.Message, "OK");
             }
             finally
             {
@@ -60,11 +61,11 @@ namespace NGODirectory.ViewModels
             {
                 await CloudService.LogoutAsync();
 
-                await Application.Current.MainPage.Navigation.PopAsync();
+                await Application.Current.MainPage.Navigation.PushAsync(new MainView());
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Logout Failed", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert("Logout failed", ex.Message, "OK");
             }
             finally
             {

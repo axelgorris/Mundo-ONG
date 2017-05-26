@@ -40,32 +40,20 @@
                     WinPhone="Assets/settings_icon.png"/>
             </ToolbarItem.Icon>
         </ToolbarItem>
-        
-        <!--<ToolbarItem 
-            Text="Delete"   
-            Command="{Binding OrganizationsCommand}">
-            <ToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="world_icon"
-                    iOS="world_icon"    
-                    WinPhone="Assets/world_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>-->
 
-        <control:BindableToolbarItem
+        <control:ConditionalToolbarItem
             Text="Add" 
             Command="{Binding AddNewItemCommand}"
-            IsVisible="{Binding IsVisible}">
-            <control:BindableToolbarItem.Icon>
+            IsVisible="{Binding IsUserLoggedIn}">
+            <control:ConditionalToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
                     Android="add_icon"
                     iOS="add_icon"    
                     WinPhone="Assets/add_icon.png"/>
-            </control:BindableToolbarItem.Icon>
-        </control:BindableToolbarItem>
-        
+            </control:ConditionalToolbarItem.Icon>
+        </control:ConditionalToolbarItem>
+
     </ContentPage.ToolbarItems>
 
     <Grid>

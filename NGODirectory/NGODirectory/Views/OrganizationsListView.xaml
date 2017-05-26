@@ -15,6 +15,19 @@
 
     <ContentPage.ToolbarItems>
 
+        <!--<ToolbarItem Name="Refresh"
+                     Command="{Binding RefreshCommand}"
+                     Order="Primary"
+                     Priority="0" >
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="refresh_icon"
+                    iOS="refresh_icon"
+                    WinPhone="Assets/refresh_icon.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>-->
+
         <ToolbarItem 
             Text="Settings"   
             Command="{Binding SettingsCommand}">
@@ -27,30 +40,18 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
 
-        <!--<ToolbarItem 
-            Text="Delete"   
-            Command="{Binding AnnouncementsCommand}">
-            <ToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="announcement_icon"
-                    iOS="announcement_icon"    
-                    WinPhone="Assets/announcement_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>-->
-
-        <control:BindableToolbarItem
+        <control:ConditionalToolbarItem
             Text="Add" 
             Command="{Binding AddNewItemCommand}"
-            IsVisible="{Binding IsVisible}">
-            <control:BindableToolbarItem.Icon>
+            IsVisible="{Binding IsUserLoggedIn}">
+            <control:ConditionalToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
                     Android="add_icon"
                     iOS="add_icon"    
                     WinPhone="Assets/add_icon.png"/>
-            </control:BindableToolbarItem.Icon>
-        </control:BindableToolbarItem>
+            </control:ConditionalToolbarItem.Icon>
+        </control:ConditionalToolbarItem>
         
     </ContentPage.ToolbarItems>
 
