@@ -10,7 +10,7 @@
         <control:ConditionalToolbarItem
             Text="Edit" 
             Command="{Binding EditCommand}"
-            IsVisible="{Binding IsUserLoggedIn}">
+            IsVisible="{Binding IsOrganizationAdmin}">
             <control:ConditionalToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"

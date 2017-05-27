@@ -91,7 +91,7 @@
                 </Image>
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer
-                        Command="{Binding PickPhotoCommand}"
+                        Command="{Binding PickImageCommand}"
                         NumberOfTapsRequired="1" />
                 </Grid.GestureRecognizers>
             </Grid>

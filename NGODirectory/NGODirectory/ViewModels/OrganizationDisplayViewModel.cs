@@ -18,6 +18,11 @@ namespace NGODirectory.ViewModels
             Title = item.Name;
         }
 
+        public override void OnAppearing(object navigationContext)
+        {
+            IsOrganizationAdmin = CloudService.IsUserLoggedIn() && CloudService.GetCurrentUser().UserId.Equals(Item.AdminUser);
+        }
+
         public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
 
         public Organization Item { get; set; }
@@ -44,9 +49,11 @@ namespace NGODirectory.ViewModels
             }
         }
 
-        public bool IsUserLoggedIn
+        private bool isOrganizationAdmin;
+        public bool IsOrganizationAdmin
         {
-            get { return CloudService.IsUserLoggedIn(); }
+            get { return isOrganizationAdmin; }
+            private set { SetProperty(ref isOrganizationAdmin, value, "IsOrganizationAdmin"); }
         }
     }
 }

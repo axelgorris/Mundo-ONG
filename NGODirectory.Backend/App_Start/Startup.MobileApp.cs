@@ -22,6 +22,7 @@ namespace NGODirectory.Backend
 
             mobileConfig
                 .AddTablesWithEntityFramework()
+                .MapApiControllers()
                 .ApplyTo(httpConfig);
 
             //httpConfig.MapHttpAttributeRoutes();

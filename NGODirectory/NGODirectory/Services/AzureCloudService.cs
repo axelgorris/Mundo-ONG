@@ -9,6 +9,7 @@ using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -118,8 +119,33 @@ namespace NGODirectory.Services
 
             return new AzureCloudTable<T>(Client);
         }
-        
+
         public async Task<MobileServiceUser> LoginAsync()
+        {
+            AccountStore store = AccountStore.Create();
+            var accounts = store.FindAccountsForService("NGODirectoryAccount");
+            var account = accounts?.FirstOrDefault();
+
+            // Try to login with stored credentials
+            var storedUser = await StoredLoginAsync();
+            if (storedUser != null)
+                return storedUser;
+            
+            // We need to ask for credentials at this point
+            var authService = DependencyService.Get<IAuthService>();
+            await authService.LoginAsync(Client, MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
+
+            if (Client.CurrentUser != null)
+            {
+                account = new Account() { Username = Client.CurrentUser.UserId };
+                account.Properties.Add("token", Client.CurrentUser.MobileServiceAuthenticationToken);
+                store.Save(account, "NGODirectoryAccount");
+            }
+
+            return Client.CurrentUser;
+        }
+
+        public async Task<MobileServiceUser> StoredLoginAsync()
         {
             AccountStore store = AccountStore.Create();
             var accounts = store.FindAccountsForService("NGODirectoryAccount");
@@ -143,7 +169,7 @@ namespace NGODirectory.Services
                     if (refreshedUSer != null)
                     {
                         account.Username = refreshedUSer.UserId;
-                        account.Properties.Add("token", refreshedUSer.MobileServiceAuthenticationToken);                        
+                        account.Properties.Add("token", refreshedUSer.MobileServiceAuthenticationToken);
                         store.Save(account, "NGODirectoryAccount");
 
                         return refreshedUSer;
@@ -154,25 +180,14 @@ namespace NGODirectory.Services
                     Debug.WriteLine($"Could not refresh token: {refreshException.Message}");
                 }
             }
-            
+
             if (Client.CurrentUser != null && !IsTokenExpired(Client.CurrentUser.MobileServiceAuthenticationToken))
             {
                 // User has previously been authenticated and token is not expired
                 return Client.CurrentUser;
             }
-            
-            // We need to ask for credentials at this point
-            var authService = DependencyService.Get<IAuthService>();
-            await authService.LoginAsync(Client, MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
 
-            if (Client.CurrentUser != null)
-            {
-                account = new Account() { Username = Client.CurrentUser.UserId };
-                account.Properties.Add("token", Client.CurrentUser.MobileServiceAuthenticationToken);
-                store.Save(account, "NGODirectoryAccount");
-            }
-
-            return Client.CurrentUser;
+            return null;
         }
 
         public async Task LogoutAsync()
@@ -180,7 +195,7 @@ namespace NGODirectory.Services
             if (Client.CurrentUser == null || Client.CurrentUser.MobileServiceAuthenticationToken == null)
                 return;
 
-            
+
             // Log out of the identity provider (if required)
 
             // Invalidate the token on the mobile backend
@@ -195,7 +210,7 @@ namespace NGODirectory.Services
             AccountStore store = AccountStore.Create();
             var accounts = store.FindAccountsForService("NGODirectoryAccount");
             var account = accounts?.FirstOrDefault();
-            
+
             if (account != null)
                 await store.DeleteAsync(account, "NGODirectoryAccount");
 
@@ -251,11 +266,20 @@ namespace NGODirectory.Services
                 return identities[0];
             return null;
         }
+        
+        public async Task<string> UploadStreamAsync(string directoryName, Stream image)
+        {
+            return await StorageService.Instance.UploadStreamAsync(Client, directoryName, image);
+        }
 
         public bool IsUserLoggedIn()
         {
             return (Client.CurrentUser != null && Client.CurrentUser?.MobileServiceAuthenticationToken != null);
         }
 
+        public MobileServiceUser GetCurrentUser()
+        {
+            return Client.CurrentUser;
+        }
     }
 }

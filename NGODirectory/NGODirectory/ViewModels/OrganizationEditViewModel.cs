@@ -16,7 +16,7 @@ namespace NGODirectory.ViewModels
         {
             SaveCommand = new Command(async () => await SaveAsync());
             DeleteCommand = new Command(async () => await DeleteAsync());
-            PickPhotoCommand = new Command(async () => await PickPhotoAsync());
+            PickImageCommand = new Command(async () => await PickImageAsync());
 
             if (item != null)
             {
@@ -44,6 +44,13 @@ namespace NGODirectory.ViewModels
 
             try
             {
+                if (Image != null)
+                {
+                    LogoUrl = await CloudService.UploadStreamAsync(Item.Id, Image.GetStream());
+
+                    Item.LogoUrl = LogoUrl;
+                }
+
                 var table = await CloudService.GetTableAsync<Organization>();
 
                 if (Item.Id == null)
@@ -113,8 +120,8 @@ namespace NGODirectory.ViewModels
             set { SetProperty(ref _image, value, "Image"); }
         }
 
-        public Command PickPhotoCommand { get; }
-        private async Task PickPhotoAsync()
+        public Command PickImageCommand { get; }
+        private async Task PickImageAsync()
         {
             var result = await PhotoService.Instance.PickPhotoAsync();
 

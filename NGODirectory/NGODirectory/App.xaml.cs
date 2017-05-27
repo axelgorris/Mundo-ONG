@@ -18,6 +18,10 @@ namespace NGODirectory
             InitializeComponent();
 
             ServiceLocator.Instance.Add<ICloudService, AzureCloudService>();
+
+            var CloudService = ServiceLocator.Instance.Resolve<ICloudService>();
+            CloudService.StoredLoginAsync();
+
             MainPage = new CustomNavigationPage(new MainView());
         }
 

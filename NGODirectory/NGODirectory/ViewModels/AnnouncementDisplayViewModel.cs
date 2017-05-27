@@ -18,6 +18,11 @@ namespace NGODirectory.ViewModels
             Title = item.Title;
         }
 
+        public override void OnAppearing(object navigationContext)
+        {
+            IsAuthor = CloudService.IsUserLoggedIn() && CloudService.GetCurrentUser().UserId.Equals(Item.Author);
+        }
+
         public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
 
         public Announcement Item { get; set; }
@@ -44,9 +49,11 @@ namespace NGODirectory.ViewModels
             }
         }
 
-        public bool IsUserLoggedIn
+        private bool isAuthor;
+        public bool IsAuthor
         {
-            get { return CloudService.IsUserLoggedIn(); }
+            get { return isAuthor; }
+            private set { SetProperty(ref isAuthor, value, "IsAuthor"); }
         }
     }
 }

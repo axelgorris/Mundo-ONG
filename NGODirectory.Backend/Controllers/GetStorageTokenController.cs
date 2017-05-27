@@ -30,20 +30,17 @@ namespace NGODirectory.Backend.Controllers
         private const string containerName = "userdata";
 
         [HttpGet]
-        public async Task<StorageTokenViewModel> GetAsync()
+        public async Task<StorageTokenViewModel> GetAsync(string directoryName)
         {
             // The userId is the SID without the sid: prefix
             var claimsPrincipal = User as ClaimsPrincipal;
-            var userId = claimsPrincipal
-                .FindFirst(ClaimTypes.NameIdentifier)
-                .Value.Substring(4);
 
             // Errors creating the storage container result in a 500 Internal Server Error
             var container = BlobClient.GetContainerReference(containerName);
             await container.CreateIfNotExistsAsync();
 
             // Get the user directory within the container
-            var directory = container.GetDirectoryReference(userId);
+            var directory = container.GetDirectoryReference(directoryName);
             var blobName = Guid.NewGuid().ToString("N");
             var blob = directory.GetBlockBlobReference(blobName);
 
