@@ -33,6 +33,11 @@ namespace NGODirectory.ViewModels
             RefreshCommand.Execute(null);
         }
 
+        public override void OnAppearing(object navigationContext)
+        {
+            IsUserLoggedIn = CloudService.IsUserLoggedIn();
+        }
+
         ObservableRangeCollection<Announcement> items = new ObservableRangeCollection<Announcement>();
         public ObservableRangeCollection<Announcement> Items
         {
@@ -171,10 +176,12 @@ namespace NGODirectory.ViewModels
                 IsBusy = false;
             }
         }
-                
+
+        private bool isUserLoggedIn;
         public bool IsUserLoggedIn
         {
-            get { return CloudService.IsUserLoggedIn(); }
+            get { return isUserLoggedIn; }
+            private set { SetProperty(ref isUserLoggedIn, value, "IsUserLoggedIn"); }
         }
     }
 }

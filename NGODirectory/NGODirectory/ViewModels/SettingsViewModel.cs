@@ -38,7 +38,7 @@ namespace NGODirectory.ViewModels
             {
                 await CloudService.LoginAsync();
 
-                await Application.Current.MainPage.Navigation.PushAsync(new MainView());
+                await Application.Current.MainPage.Navigation.PopToRootAsync();
             }
             catch (Exception ex)
             {
@@ -61,7 +61,7 @@ namespace NGODirectory.ViewModels
             {
                 await CloudService.LogoutAsync();
 
-                await Application.Current.MainPage.Navigation.PushAsync(new MainView());
+                await Application.Current.MainPage.Navigation.PopToRootAsync();
             }
             catch (Exception ex)
             {

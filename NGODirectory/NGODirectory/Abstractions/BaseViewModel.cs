@@ -39,5 +39,13 @@ namespace NGODirectory.Abstractions
                 return;
             PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
+        
+        public virtual void OnAppearing(object navigationContext)
+        {
+        }
+
+        public virtual void OnDisappearing()
+        {
+        }
     }
 }

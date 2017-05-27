@@ -23,7 +23,7 @@ namespace NGODirectory.ViewModels
             AddNewItemCommand = new Command(async () => await AddNewItem());
             LoadMoreCommand = new Command<Organization>(async (Organization item) => await LoadMore(item));
             SettingsCommand = new Command(async () => await GoToSettings());
-
+            
             // Subscribe to events from the Task Detail Page
             MessagingCenter.Subscribe<OrganizationEditViewModel>(this, "ItemsChanged", async (sender) =>
             {
@@ -32,6 +32,11 @@ namespace NGODirectory.ViewModels
 
             // Execute the refresh command
             RefreshCommand.Execute(null);
+        }
+
+        public override void OnAppearing(object navigationContext)
+        {
+            IsUserLoggedIn = CloudService.IsUserLoggedIn();
         }
 
         ObservableRangeCollection<Organization> items = new ObservableRangeCollection<Organization>();
@@ -177,9 +182,11 @@ namespace NGODirectory.ViewModels
             }
         }
 
+        private bool isUserLoggedIn;
         public bool IsUserLoggedIn
         {
-            get { return CloudService.IsUserLoggedIn(); }
+            get { return isUserLoggedIn; }
+            private set { SetProperty(ref isUserLoggedIn, value, "IsUserLoggedIn"); }
         }
     }
 }

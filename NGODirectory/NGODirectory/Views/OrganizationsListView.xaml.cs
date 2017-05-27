@@ -12,5 +12,13 @@ namespace NGODirectory.Views
             InitializeComponent();
             BindingContext = new OrganizationsListViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var viewModel = BindingContext as OrganizationsListViewModel;
+            if (viewModel != null) viewModel.OnAppearing(null);
+        }
     }
 }
