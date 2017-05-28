@@ -1,13 +1,9 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
-//using NGODirectory.Droid.Services;
-using Xamarin.Forms;
 using NGODirectory.Abstractions;
+using NGODirectory.Droid.Services;
+using Xamarin.Forms;
 
 namespace NGODirectory.Droid
 {
@@ -24,7 +20,7 @@ namespace NGODirectory.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-            //((DroidLoginProvider)DependencyService.Get<ILoginProvider>()).Init(this);
+            ((DroidLoginProvider)DependencyService.Get<ILoginProvider>()).Init(this);
 
             LoadApplication(new App());
         }

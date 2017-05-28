@@ -57,14 +57,6 @@
 
     </ContentPage.ToolbarItems>
 
-    <StackLayout Padding="10" Spacing="10">
-        <Label Text="Name"/>
-        <Entry Text="{Binding Item.Name}"/>
-        <Label Text="Description"/>
-        <Entry Text="{Binding Item.Description}"/>
-    </StackLayout>
-
-
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>

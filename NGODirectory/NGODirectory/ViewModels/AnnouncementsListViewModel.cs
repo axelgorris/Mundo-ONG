@@ -183,5 +183,13 @@ namespace NGODirectory.ViewModels
             get { return isUserLoggedIn; }
             private set { SetProperty(ref isUserLoggedIn, value, "IsUserLoggedIn"); }
         }
+
+        public bool IsUWPDevice
+        {
+            get
+            {
+                return Device.RuntimePlatform.Equals(Device.Windows);
+            }
+        }
     }
 }

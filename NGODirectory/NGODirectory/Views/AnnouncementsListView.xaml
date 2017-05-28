@@ -14,21 +14,21 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <!--<ToolbarItem Name="Refresh"
-                     Command="{Binding RefreshCommand}"
-                     Order="Primary"
-                     Priority="0" >
-            <ToolbarItem.Icon>
+    <ContentPage.ToolbarItems>
+
+        <control:ConditionalToolbarItem
+            Name="Refresh"
+            Command="{Binding RefreshCommand}"
+            IsVisible="{Binding IsUWPDevice}">
+            <control:ConditionalToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
                     Android="refresh_icon"
                     iOS="refresh_icon"
                     WinPhone="Assets/refresh_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>-->
-    
-    <ContentPage.ToolbarItems>
-        
+            </control:ConditionalToolbarItem.Icon>
+        </control:ConditionalToolbarItem>
+
         <ToolbarItem 
             Text="Settings"
             Command="{Binding SettingsCommand}">

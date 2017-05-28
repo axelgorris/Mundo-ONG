@@ -7,26 +7,20 @@
              xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
              Title="{Binding Title}">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:ItemVisivilityConverter x:Key="ItemVisibilityConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ContentPage.ToolbarItems>
 
-        <!--<ToolbarItem Name="Refresh"
-                     Command="{Binding RefreshCommand}"
-                     Order="Primary"
-                     Priority="0" >
-            <ToolbarItem.Icon>
+        <control:ConditionalToolbarItem
+            Name="Refresh"
+            Command="{Binding RefreshCommand}"
+            IsVisible="{Binding IsUWPDevice}">
+            <control:ConditionalToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
                     Android="refresh_icon"
                     iOS="refresh_icon"
                     WinPhone="Assets/refresh_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>-->
+            </control:ConditionalToolbarItem.Icon>
+        </control:ConditionalToolbarItem>
 
         <ToolbarItem 
             Text="Settings"   
@@ -64,23 +58,14 @@
             RefreshCommand="{Binding RefreshCommand}"
             RowHeight="50"
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-
-            <ListView.Behaviors>
-                <behaviors:EventToCommandBehavior Command="{Binding LoadMoreCommand}"
-                                                Converter="{StaticResource ItemVisibilityConverter}"
-                                                EventName="ItemAppearing" />
-            </ListView.Behaviors>
-
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell 
                         Text="{Binding Name}"
                         Detail="{Binding Description}" />
                 </DataTemplate>
-            </ListView.ItemTemplate>
-                
+            </ListView.ItemTemplate>                
         </ListView>
     </Grid>
-
 
 </ContentPage>

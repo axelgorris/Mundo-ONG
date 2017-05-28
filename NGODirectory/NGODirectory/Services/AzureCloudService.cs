@@ -10,11 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Auth;
 using Xamarin.Forms;
 
 namespace NGODirectory.Services
@@ -122,79 +120,27 @@ namespace NGODirectory.Services
 
         public async Task<MobileServiceUser> LoginAsync()
         {
-            AccountStore store = AccountStore.Create();
-            var accounts = store.FindAccountsForService("NGODirectoryAccount");
-            var account = accounts?.FirstOrDefault();
-
             // Try to login with stored credentials
             var storedUser = await StoredLoginAsync();
             if (storedUser != null)
                 return storedUser;
-            
-            // We need to ask for credentials at this point
-            var authService = DependencyService.Get<IAuthService>();
-            await authService.LoginAsync(Client, MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
 
+            var loginProvider = DependencyService.Get<ILoginProvider>();
+            // We need to ask for credentials at this point
+            await loginProvider.LoginAsync(Client);
             if (Client.CurrentUser != null)
             {
-                account = new Account() { Username = Client.CurrentUser.UserId };
-                account.Properties.Add("token", Client.CurrentUser.MobileServiceAuthenticationToken);
-                store.Save(account, "NGODirectoryAccount");
+                // We were able to successfully log in
+                loginProvider.StoreTokenInSecureStore(Client.CurrentUser);
             }
 
             return Client.CurrentUser;
-        }
-
-        public async Task<MobileServiceUser> StoredLoginAsync()
-        {
-            AccountStore store = AccountStore.Create();
-            var accounts = store.FindAccountsForService("NGODirectoryAccount");
-            var account = accounts?.FirstOrDefault();
-
-            if (account != null)
-            {
-                string token;
-                if (account.Properties.TryGetValue("token", out token))
-                {
-                    Client.CurrentUser = new MobileServiceUser(account.Username)
-                    {
-                        MobileServiceAuthenticationToken = token
-                    };
-                }
-
-                // User has previously been authenticated - try to Refresh the token
-                try
-                {
-                    var refreshedUSer = await Client.RefreshUserAsync();
-                    if (refreshedUSer != null)
-                    {
-                        account.Username = refreshedUSer.UserId;
-                        account.Properties.Add("token", refreshedUSer.MobileServiceAuthenticationToken);
-                        store.Save(account, "NGODirectoryAccount");
-
-                        return refreshedUSer;
-                    }
-                }
-                catch (Exception refreshException)
-                {
-                    Debug.WriteLine($"Could not refresh token: {refreshException.Message}");
-                }
-            }
-
-            if (Client.CurrentUser != null && !IsTokenExpired(Client.CurrentUser.MobileServiceAuthenticationToken))
-            {
-                // User has previously been authenticated and token is not expired
-                return Client.CurrentUser;
-            }
-
-            return null;
         }
 
         public async Task LogoutAsync()
         {
             if (Client.CurrentUser == null || Client.CurrentUser.MobileServiceAuthenticationToken == null)
                 return;
-
 
             // Log out of the identity provider (if required)
 
@@ -207,15 +153,44 @@ namespace NGODirectory.Services
             }
 
             // Remove the token from the cache
-            AccountStore store = AccountStore.Create();
-            var accounts = store.FindAccountsForService("NGODirectoryAccount");
-            var account = accounts?.FirstOrDefault();
-
-            if (account != null)
-                await store.DeleteAsync(account, "NGODirectoryAccount");
+            DependencyService.Get<ILoginProvider>().RemoveTokenFromSecureStore();
 
             // Remove the token from the MobileServiceClient
             await Client.LogoutAsync();
+        }
+
+        public async Task<MobileServiceUser> StoredLoginAsync()
+        {
+            var loginProvider = DependencyService.Get<ILoginProvider>();
+
+            Client.CurrentUser = loginProvider.RetrieveTokenFromSecureStore();
+
+            if (Client.CurrentUser != null)
+            {
+                // User has previously been authenticated - try to Refresh the token
+                try
+                {
+                    var refreshedUSer = await Client.RefreshUserAsync();
+                    if (refreshedUSer != null)
+                    {
+                        loginProvider.StoreTokenInSecureStore(refreshedUSer);
+
+                        return refreshedUSer;
+                    }
+                }
+                catch (Exception refreshException)
+                {
+                    Debug.WriteLine($"Could not refresh token: {refreshException.Message}");
+                }
+            }
+
+            if (Client.CurrentUser != null && !IsTokenExpired(Client.CurrentUser.MobileServiceAuthenticationToken))
+            {
+                // User has previously been authenticated, no refresh is required
+                return Client.CurrentUser;
+            }
+
+            return null;
         }
 
         bool IsTokenExpired(string token)
@@ -266,7 +241,7 @@ namespace NGODirectory.Services
                 return identities[0];
             return null;
         }
-        
+
         public async Task<string> UploadStreamAsync(string directoryName, Stream image)
         {
             return await StorageService.Instance.UploadStreamAsync(Client, directoryName, image);

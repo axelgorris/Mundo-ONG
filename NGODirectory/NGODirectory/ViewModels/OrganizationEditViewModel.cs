@@ -22,6 +22,7 @@ namespace NGODirectory.ViewModels
             {
                 Item = item;
                 Title = item.Name;
+                LogoUrl = item.LogoUrl;
             }
             else
             {
@@ -47,7 +48,6 @@ namespace NGODirectory.ViewModels
                 if (Image != null)
                 {
                     LogoUrl = await CloudService.UploadStreamAsync(Item.Id, Image.GetStream());
-
                     Item.LogoUrl = LogoUrl;
                 }
 
@@ -106,18 +106,18 @@ namespace NGODirectory.ViewModels
             }
         }
         
-        private string _logoUrl;
+        private string logoUrl;
         public string LogoUrl
         {
-            get { return _logoUrl; }
-            set { SetProperty(ref _logoUrl, value, "LogoUrl"); }
+            get { return logoUrl; }
+            set { SetProperty(ref logoUrl, value, "LogoUrl"); }
         }
 
-        private MediaFile _image;
+        private MediaFile image;
         public MediaFile Image
         {
-            get { return _image; }
-            set { SetProperty(ref _image, value, "Image"); }
+            get { return image; }
+            set { SetProperty(ref image, value, "Image"); }
         }
 
         public Command PickImageCommand { get; }

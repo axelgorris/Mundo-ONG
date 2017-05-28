@@ -8,8 +8,22 @@
              BackgroundColor="Transparent">
 
     <TabbedPage.Children>
-        <views:AnnouncementsListView />
-        <views:OrganizationsListView />        
+        <views:AnnouncementsListView>
+            <views:AnnouncementsListView.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    iOS="announcement_icon"
+                    WinPhone="Assets/announcement_icon.png"/>
+            </views:AnnouncementsListView.Icon>
+        </views:AnnouncementsListView>
+        <views:OrganizationsListView>
+            <views:OrganizationsListView.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    iOS="world_icon"
+                    WinPhone="Assets/world_icon.png"/>
+            </views:OrganizationsListView.Icon>
+        </views:OrganizationsListView>
     </TabbedPage.Children>
 
 

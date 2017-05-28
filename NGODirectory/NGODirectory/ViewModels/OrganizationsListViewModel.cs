@@ -21,7 +21,7 @@ namespace NGODirectory.ViewModels
 
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
-            LoadMoreCommand = new Command<Organization>(async (Organization item) => await LoadMore(item));
+            //LoadMoreCommand = new Command<Organization>(async (Organization item) => await LoadMore(item));
             SettingsCommand = new Command(async () => await GoToSettings());
             
             // Subscribe to events from the Task Detail Page
@@ -73,7 +73,7 @@ namespace NGODirectory.ViewModels
             {
                 await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
                 var table = await CloudService.GetTableAsync<Organization>();
-                var list = await table.ReadItemsOrderedAsync(0, 10, o => o.Name);
+                var list = await table.ReadAllItemsOrderedAsync(o => o.Name);
                 Items = new ObservableRangeCollection<Organization>(list);
 
                 hasMoreItems = true;
@@ -108,59 +108,7 @@ namespace NGODirectory.ViewModels
                 IsBusy = false;
             }
         }
-
-        public Command LoadMoreCommand { get; }
-        async Task LoadMore(Organization item)
-        {
-            if (item == null)
-                return;
-
-            if (IsBusy)
-            {
-                Debug.WriteLine($"[OrganizationsList] LoadMore: bailing because IsBusy = true");
-                return;
-            }
-
-            // If we are not displaying the last one in the list, then return.
-            if (!Items.Last().Id.Equals(item.Id))
-            {
-                Debug.WriteLine($"[OrganizationsList] LoadMore: bailing because this id is not the last id in the list");
-                return;
-            }
-
-            // If we don't have more items, return
-            if (!hasMoreItems)
-            {
-                Debug.WriteLine($"[OrganizationsList] LoadMore: bailing because we don't have any more items");
-                return;
-            }
-
-            IsBusy = true;
-            try
-            {
-                var table = await CloudService.GetTableAsync<Organization>();
-                var list = await table.ReadItemsOrderedAsync(Items.Count, 10, o => o.Name);
-                if (list.Count > 0)
-                {
-                    Debug.WriteLine($"[OrganizationsList] LoadMore: got {list.Count} more items");
-                    Items.AddRange(list);
-                }
-                else
-                {
-                    Debug.WriteLine($"[OrganizationsList] LoadMore: no more items: setting hasMoreItems= false");
-                    hasMoreItems = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("[OrganizationsList] LoadMore Failed", ex.Message, "OK");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
+        
         public Command SettingsCommand { get; }
         async Task GoToSettings()
         {
@@ -187,6 +135,14 @@ namespace NGODirectory.ViewModels
         {
             get { return isUserLoggedIn; }
             private set { SetProperty(ref isUserLoggedIn, value, "IsUserLoggedIn"); }
+        }
+
+        public bool IsUWPDevice
+        {
+            get
+            {
+                return Device.RuntimePlatform.Equals(Device.Windows);
+            }
         }
     }
 }

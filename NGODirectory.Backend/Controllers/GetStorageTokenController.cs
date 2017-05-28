@@ -27,7 +27,7 @@ namespace NGODirectory.Backend.Controllers
 
         public CloudBlobClient BlobClient { get; }
 
-        private const string containerName = "userdata";
+        private const string containerName = "appdata";
 
         [HttpGet]
         public async Task<StorageTokenViewModel> GetAsync(string directoryName)
@@ -37,8 +37,8 @@ namespace NGODirectory.Backend.Controllers
 
             // Errors creating the storage container result in a 500 Internal Server Error
             var container = BlobClient.GetContainerReference(containerName);
-            await container.CreateIfNotExistsAsync();
-
+            await container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Blob, null, null);
+            
             // Get the user directory within the container
             var directory = container.GetDirectoryReference(directoryName);
             var blobName = Guid.NewGuid().ToString("N");
