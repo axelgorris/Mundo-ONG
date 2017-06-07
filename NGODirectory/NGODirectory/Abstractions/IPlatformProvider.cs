@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace NGODirectory.Abstractions
 {
-    public interface ILoginProvider
+    public interface IPlatformProvider
     {
         MobileServiceUser RetrieveTokenFromSecureStore();
 

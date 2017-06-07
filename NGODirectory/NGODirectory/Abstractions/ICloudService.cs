@@ -16,5 +16,7 @@ namespace NGODirectory.Abstractions
         Task<string> UploadStreamAsync(string directoryName, Stream image);
         bool IsUserLoggedIn();
         MobileServiceUser GetCurrentUser();
+        MobileServiceClient GetMobileServiceClient();
+        //Task RegisterForPushNotifications();
     }
 }

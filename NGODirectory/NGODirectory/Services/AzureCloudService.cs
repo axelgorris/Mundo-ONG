@@ -125,7 +125,7 @@ namespace NGODirectory.Services
             if (storedUser != null)
                 return storedUser;
 
-            var loginProvider = DependencyService.Get<ILoginProvider>();
+            var loginProvider = DependencyService.Get<IPlatformProvider>();
             // We need to ask for credentials at this point
             await loginProvider.LoginAsync(Client);
             if (Client.CurrentUser != null)
@@ -153,7 +153,7 @@ namespace NGODirectory.Services
             }
 
             // Remove the token from the cache
-            DependencyService.Get<ILoginProvider>().RemoveTokenFromSecureStore();
+            DependencyService.Get<IPlatformProvider>().RemoveTokenFromSecureStore();
 
             // Remove the token from the MobileServiceClient
             await Client.LogoutAsync();
@@ -161,7 +161,7 @@ namespace NGODirectory.Services
 
         public async Task<MobileServiceUser> StoredLoginAsync()
         {
-            var loginProvider = DependencyService.Get<ILoginProvider>();
+            var loginProvider = DependencyService.Get<IPlatformProvider>();
 
             Client.CurrentUser = loginProvider.RetrieveTokenFromSecureStore();
 
@@ -255,6 +255,11 @@ namespace NGODirectory.Services
         public MobileServiceUser GetCurrentUser()
         {
             return Client.CurrentUser;
+        }
+
+        public MobileServiceClient GetMobileServiceClient()
+        {
+            return Client;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Util;
+using Gcm.Client;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.WindowsAzure.MobileServices;
 using Newtonsoft.Json.Linq;
@@ -7,24 +9,26 @@ using NGODirectory.Abstractions;
 using NGODirectory.Droid.Services;
 using NGODirectory.Helpers;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Auth;
 
-[assembly: Xamarin.Forms.Dependency(typeof(DroidLoginProvider))]
+[assembly: Xamarin.Forms.Dependency(typeof(DroidPlatformProvider))]
 namespace NGODirectory.Droid.Services
 {
-    public class DroidLoginProvider : ILoginProvider
+    public class DroidPlatformProvider : IPlatformProvider
     {
-        public Context Context { get; private set; }
+        public Context RootView { get; private set; }
 
         public AccountStore AccountStore { get; private set; }
 
         public void Init(Context context)
         {
-            Context = context;
-            AccountStore = AccountStore.Create(context);
+            RootView = context;
+            AccountStore = AccountStore.Create(context);            
         }
 
         #region ILoginProvider Interface
@@ -72,8 +76,8 @@ namespace NGODirectory.Droid.Services
         public async Task<MobileServiceUser> LoginAsync(MobileServiceClient client)
         {
             // Server Flow
-            return await client.LoginAsync(Context, "aad");
-        }
+            return await client.LoginAsync(RootView, "aad");
+        }        
         #endregion
     }
 }

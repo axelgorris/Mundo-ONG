@@ -27,7 +27,7 @@ namespace NGODirectory.ViewModels
             else
             {
                 Item = new Organization();
-                Title = "New organization";
+                Title = "NewNueva organización";
             }
         }
 
@@ -94,7 +94,7 @@ namespace NGODirectory.ViewModels
                     MessagingCenter.Send(this, "ItemsChanged");
                 }
 
-                await Application.Current.MainPage.Navigation.PopAsync();
+                await Application.Current.MainPage.Navigation.PopToRootAsync();
             }
             catch (Exception ex)
             {

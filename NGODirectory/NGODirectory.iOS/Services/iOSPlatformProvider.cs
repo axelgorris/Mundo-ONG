@@ -3,11 +3,12 @@ using NGODirectory.Abstractions;
 using NGODirectory.iOS.Services;
 using System.Threading.Tasks;
 using UIKit;
+using System;
 
-[assembly: Xamarin.Forms.Dependency(typeof(iOSLoginProvider))]
+[assembly: Xamarin.Forms.Dependency(typeof(iOSPlatformProvider))]
 namespace NGODirectory.iOS.Services
 {
-    public class iOSLoginProvider : ILoginProvider
+    public class iOSPlatformProvider : IPlatformProvider
     {
         public UIViewController RootView => UIApplication.SharedApplication.KeyWindow.RootViewController;
 
@@ -65,6 +66,7 @@ namespace NGODirectory.iOS.Services
             // Server Flow
             return await client.LoginAsync(RootView, "aad");
         }
+        
         #endregion
     }
 }

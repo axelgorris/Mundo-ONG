@@ -26,6 +26,7 @@ namespace NGODirectory.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Gcm.Client.Resource.String.library_name = global::NGODirectory.Droid.Resource.String.library_name;
 			global::Microsoft.IdentityModel.Clients.ActiveDirectory.Resource.Id.agentWebView = global::NGODirectory.Droid.Resource.Id.agentWebView;
 			global::Microsoft.IdentityModel.Clients.ActiveDirectory.Resource.Layout.WebAuthenticationBroker = global::NGODirectory.Droid.Resource.Layout.WebAuthenticationBroker;
 			global::Microsoft.IdentityModel.Clients.ActiveDirectory.Resource.String.ApplicationName = global::NGODirectory.Droid.Resource.String.ApplicationName;
@@ -3759,6 +3760,9 @@ namespace NGODirectory.Droid
 			
 			// aapt resource value: 0x7f090038
 			public const int character_counter_pattern = 2131296312;
+			
+			// aapt resource value: 0x7f09003f
+			public const int library_name = 2131296319;
 			
 			// aapt resource value: 0x7f090000
 			public const int mr_button_content_description = 2131296256;

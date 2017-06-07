@@ -16,7 +16,7 @@ namespace NGODirectory.ViewModels
 
         public AnnouncementsListViewModel()
         {
-            Title = "Announcements";
+            Title = "Directorio ONG";
 
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());

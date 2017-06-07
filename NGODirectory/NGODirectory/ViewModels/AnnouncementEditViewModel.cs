@@ -87,7 +87,7 @@ namespace NGODirectory.ViewModels
                     MessagingCenter.Send(this, "ItemsChanged");
                 }
 
-                await Application.Current.MainPage.Navigation.PopAsync();
+                await Application.Current.MainPage.Navigation.PopToRootAsync();
             }
             catch (Exception ex)
             {

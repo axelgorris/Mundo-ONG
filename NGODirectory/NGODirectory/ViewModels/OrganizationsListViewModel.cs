@@ -13,11 +13,10 @@ namespace NGODirectory.ViewModels
     public class OrganizationsListViewModel : BaseViewModel
     {
         public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
-        bool hasMoreItems = true;
 
         public OrganizationsListViewModel()
         {
-            Title = "Organizations";
+            Title = "Directorio ONG";
 
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
@@ -75,8 +74,6 @@ namespace NGODirectory.ViewModels
                 var table = await CloudService.GetTableAsync<Organization>();
                 var list = await table.ReadAllItemsOrderedAsync(o => o.Name);
                 Items = new ObservableRangeCollection<Organization>(list);
-
-                hasMoreItems = true;
             }
             catch (Exception ex)
             {

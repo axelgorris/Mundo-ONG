@@ -2,11 +2,6 @@
 using NGODirectory.Helpers;
 using NGODirectory.Services;
 using NGODirectory.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Xamarin.Forms;
 
 namespace NGODirectory

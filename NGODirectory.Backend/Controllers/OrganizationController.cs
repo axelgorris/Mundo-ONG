@@ -1,6 +1,7 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 using NGODirectory.Backend.DataObjects;
 using NGODirectory.Backend.Extensions;
+using NGODirectory.Backend.Helpers;
 using NGODirectory.Backend.Models;
 using System.Linq;
 using System.Net;
@@ -47,7 +48,7 @@ namespace NGODirectory.Backend.Controllers
         public Task<Organization> PatchOrganization(string id, Delta<Organization> patch)
         {
             ValidateOrganizationAdmin(id);
-
+            
             return UpdateAsync(id, patch);
         }
 
@@ -56,6 +57,10 @@ namespace NGODirectory.Backend.Controllers
         {
             item.AdminUser = UserId;
             Organization current = await InsertAsync(item);
+
+            HubNotificationHelper hubNotification = new HubNotificationHelper(this.Configuration);
+            bool messageSent = await hubNotification.SendPushNotification(item.Name + " ha sido añadido.");
+
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
         

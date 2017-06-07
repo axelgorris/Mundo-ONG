@@ -1,12 +1,18 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using Newtonsoft.Json.Linq;
+using NGODirectory.Abstractions;
+using NGODirectory.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.PushNotifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -37,7 +43,7 @@ namespace NGODirectory.UWP
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 
 #if DEBUG
@@ -78,6 +84,8 @@ namespace NGODirectory.UWP
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
+            await InitNotificationsAsync();
         }
 
         /// <summary>
@@ -102,6 +110,29 @@ namespace NGODirectory.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private async Task InitNotificationsAsync()
+        {
+            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+
+            const string templateBodyWNS =
+            "<toast><visual><binding template=\"ToastText01\"><text id=\"1\">$(messageParam)</text></binding></visual></toast>";
+
+            JObject headers = new JObject();
+            headers["X-WNS-Type"] = "wns/toast";
+
+            JObject templates = new JObject();
+            templates["genericMessage"] = new JObject
+            {
+                { "body", templateBodyWNS},
+                {"headers", headers}
+            };
+
+            var CloudService = ServiceLocator.Instance.Resolve<ICloudService>();
+
+            await CloudService.GetMobileServiceClient().GetPush()
+                              .RegisterAsync(channel.Uri, templates);
         }
     }
 }

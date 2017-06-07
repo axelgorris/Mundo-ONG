@@ -13,7 +13,7 @@ namespace NGODirectory.ViewModels
     {
         public SettingsViewModel()
         {
-            Title = "Settings";
+            Title = "Ajustes";
         }
 
         ICloudService _cloudService => ServiceLocator.Instance.Resolve<ICloudService>();

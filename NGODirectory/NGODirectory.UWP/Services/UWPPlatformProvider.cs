@@ -10,14 +10,14 @@ using System.Linq;
 using Windows.Security.Credentials;
 using System.Diagnostics;
 
-[assembly: Xamarin.Forms.Dependency(typeof(UWPLoginProvider))]
+[assembly: Xamarin.Forms.Dependency(typeof(UWPPlatformProvider))]
 namespace NGODirectory.UWP.Services
 {
-    public class UWPLoginProvider : ILoginProvider
+    public class UWPPlatformProvider : IPlatformProvider
     {
         public PasswordVault PasswordVault { get; private set; }
 
-        public UWPLoginProvider()
+        public UWPPlatformProvider()
         {
             PasswordVault = new PasswordVault();
         }
@@ -73,7 +73,7 @@ namespace NGODirectory.UWP.Services
         {
             // Server-Flow Version
             return await client.LoginAsync("aad");
-        }
+        }        
         #endregion
     }
 }

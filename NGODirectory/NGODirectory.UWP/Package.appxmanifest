@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="d13912f5-6fea-4fd1-9a10-0a2136ed85d2" Publisher="CN=axelg" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="d13912f5-6fea-4fd1-9a10-0a2136ed85d2" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" IgnorableNamespaces="uap mp uap3">
+  <Identity Name="26293AxelGorris.NGODirectory" Publisher="CN=11427FEF-604B-4B5C-9D63-381822347409" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="442d44c6-fcd6-444b-8690-5b52ed9c7114" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>NGODirectory.UWP</DisplayName>
-    <PublisherDisplayName>axelg</PublisherDisplayName>
+    <DisplayName>NGO Directory</DisplayName>
+    <PublisherDisplayName>Axel Gorris</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="NGODirectory.UWP.App">
-      <uap:VisualElements DisplayName="NGODirectory.UWP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="NGODirectory.UWP" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="NGO Directory" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="NGODirectory.UWP" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#01A6BD" />
@@ -25,5 +25,6 @@
   <Capabilities>
     <Capability Name="internetClient" />
     <uap:Capability Name="picturesLibrary" />
+    <uap3:Capability Name="userNotificationListener" />
   </Capabilities>
 </Package>
