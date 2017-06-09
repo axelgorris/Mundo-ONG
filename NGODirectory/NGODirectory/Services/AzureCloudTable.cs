@@ -39,13 +39,12 @@ namespace NGODirectory.Services
             return await table.Skip(start).Take(count).ToListAsync();
         }
 
-        public async Task<ICollection<T>> ReadAllItemsOrderedAsync<TKey>(Expression<Func<T, TKey>> orderby = null, bool descending = false)
+        public async Task<ICollection<T>> ReadAllItemsOrderedAsync<TKey>(Expression<Func<T, TKey>> orderbyExpression = null, bool descending = false)
         {
             if (descending)
-                return await table.OrderByDescending(orderby).ToListAsync();
+                return await table.OrderByDescending(orderbyExpression).ToListAsync();
             else
-                return await table.OrderBy(orderby).ToListAsync();
-
+                return await table.OrderBy(orderbyExpression).ToListAsync();
         }
 
         public async Task<ICollection<T>> ReadItemsOrderedAsync<TKey>(int start, int count, Expression<Func<T, TKey>> orderby = null, bool descending = false)
@@ -54,6 +53,19 @@ namespace NGODirectory.Services
                 return await table.OrderByDescending(orderby).Skip(start).Take(count).ToListAsync();
             else
                 return await table.OrderBy(orderby).Skip(start).Take(count).ToListAsync();
+        }
+
+        public async Task<ICollection<T>> SearchAllItemsOrderedAsync<TKey>(Expression<Func<T, bool>> searchExpression, Expression < Func<T, TKey>> orderbyExpression = null, bool descending = false)
+        {
+            if (descending)
+                return await table  .Where(searchExpression)
+                                    .OrderByDescending(orderbyExpression)                                  
+                                    .ToListAsync();
+            else
+                return await table
+                                    .Where(searchExpression)
+                                    .OrderBy(orderbyExpression)
+                                    .ToListAsync();
         }
 
         public async Task<T> ReadItemAsync(string id)

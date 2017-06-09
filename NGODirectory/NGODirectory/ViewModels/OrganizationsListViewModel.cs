@@ -2,7 +2,7 @@
 using NGODirectory.Helpers;
 using NGODirectory.Models;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,20 +16,17 @@ namespace NGODirectory.ViewModels
 
         public OrganizationsListViewModel()
         {
-            Title = "Directorio ONG";
+            Title = "Organizaciones";
 
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
-            //LoadMoreCommand = new Command<Organization>(async (Organization item) => await LoadMore(item));
             SettingsCommand = new Command(async () => await GoToSettings());
-            
-            // Subscribe to events from the Task Detail Page
+
             MessagingCenter.Subscribe<OrganizationEditViewModel>(this, "ItemsChanged", async (sender) =>
             {
                 await Refresh();
             });
 
-            // Execute the refresh command
             RefreshCommand.Execute(null);
         }
 
@@ -38,6 +35,7 @@ namespace NGODirectory.ViewModels
             IsUserLoggedIn = CloudService.IsUserLoggedIn();
         }
 
+        public ObservableRangeCollection<Organization> ItemsCopy;
         ObservableRangeCollection<Organization> items = new ObservableRangeCollection<Organization>();
         public ObservableRangeCollection<Organization> Items
         {
@@ -60,6 +58,18 @@ namespace NGODirectory.ViewModels
             }
         }
 
+        private string searchFilter;
+        public string SearchFilter
+        {
+            get { return searchFilter; }
+            set
+            {
+                searchFilter = value;
+                SetProperty(ref searchFilter, value, "SearchFilter");
+                FilterItems();
+            }
+        }
+
         public Command RefreshCommand { get; }
         async Task Refresh()
         {
@@ -72,8 +82,14 @@ namespace NGODirectory.ViewModels
             {
                 await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
                 var table = await CloudService.GetTableAsync<Organization>();
-                var list = await table.ReadAllItemsOrderedAsync(o => o.Name);
-                Items = new ObservableRangeCollection<Organization>(list);
+
+                ICollection<Organization> list;
+
+                list = await table.ReadAllItemsOrderedAsync(o => o.Name);
+
+                Items = new ObservableRangeCollection<Organization>(list);                
+                ItemsCopy = Items;
+                //SearchFilter = string.Empty;
             }
             catch (Exception ex)
             {
@@ -105,7 +121,7 @@ namespace NGODirectory.ViewModels
                 IsBusy = false;
             }
         }
-        
+
         public Command SettingsCommand { get; }
         async Task GoToSettings()
         {
@@ -139,6 +155,21 @@ namespace NGODirectory.ViewModels
             get
             {
                 return Device.RuntimePlatform.Equals(Device.Windows);
+            }
+        }
+
+        private void FilterItems()
+        {
+            if (ItemsCopy != null)
+            {
+                if (String.IsNullOrEmpty(SearchFilter))
+                {
+                    Items = ItemsCopy;
+                }
+                else
+                {
+                    Items = new ObservableRangeCollection<Organization>(ItemsCopy.Where(x => x.Name.ToLower().Contains(SearchFilter.ToLower())));
+                }
             }
         }
     }

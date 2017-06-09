@@ -22,7 +22,7 @@ namespace NGODirectory.Views
         {
             base.OnCurrentPageChanged();
             
-            Title = CurrentPage?.Title;
+            Title = "Directorio ONG";
         }
     }
 }

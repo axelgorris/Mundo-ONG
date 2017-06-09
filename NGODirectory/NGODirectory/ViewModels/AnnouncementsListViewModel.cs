@@ -16,20 +16,18 @@ namespace NGODirectory.ViewModels
 
         public AnnouncementsListViewModel()
         {
-            Title = "Directorio ONG";
+            Title = "Comunicados";
 
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
             LoadMoreCommand = new Command<Announcement>(async (Announcement item) => await LoadMore(item));
             SettingsCommand = new Command(async () => await GoToSettings());
-
-            // Subscribe to events from the Detail Page
+            
             MessagingCenter.Subscribe<AnnouncementEditViewModel>(this, "ItemsChanged", async (sender) =>
             {
                 await Refresh();
             });
-
-            // Execute the refresh command
+            
             RefreshCommand.Execute(null);
         }
 

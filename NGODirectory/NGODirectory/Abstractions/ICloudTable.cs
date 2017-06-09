@@ -13,7 +13,8 @@ namespace NGODirectory.Abstractions
         Task DeleteItemAsync(T item);
         Task<ICollection<T>> ReadAllItemsAsync();
         Task<ICollection<T>> ReadItemsAsync(int start, int count);
-        Task<ICollection<T>> ReadAllItemsOrderedAsync<TKey>(Expression<Func<T, TKey>> orderby, bool descending = false);
+        Task<ICollection<T>> ReadAllItemsOrderedAsync<TKey>(Expression<Func<T, TKey>> orderbyExpression, bool descending = false);
+        Task<ICollection<T>> SearchAllItemsOrderedAsync<TKey>(Expression<Func<T, bool>> searchExpression, Expression<Func<T, TKey>> orderbyExpression, bool descending = false);
         Task<ICollection<T>> ReadItemsOrderedAsync<TKey>(int start, int count, Expression<Func<T, TKey>> orderby = null, bool descending = false);
         Task PullAsync();
     }
