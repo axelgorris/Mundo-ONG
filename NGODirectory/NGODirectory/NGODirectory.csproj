@@ -71,6 +71,9 @@
     <Compile Include="Views\AnnouncementEditView.xaml.cs">
       <DependentUpon>AnnouncementEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BarPage.xaml.cs">
+      <DependentUpon>BarPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CustomNavigationPage.xaml.cs">
       <DependentUpon>CustomNavigationPage.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,9 @@
     <Compile Include="Services\AzureCloudTable.cs" />
     <Compile Include="ViewModels\OrganizationEditViewModel.cs" />
     <Compile Include="ViewModels\OrganizationsListViewModel.cs" />
+    <Compile Include="Views\TabPage.xaml.cs">
+      <DependentUpon>TabPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Templates\AnnouncementTemplate.xaml.cs">
       <DependentUpon>AnnouncementTemplate.xaml</DependentUpon>
     </Compile>
@@ -111,6 +117,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="BottomBar.XamarinForms">
+      <HintPath>..\..\packages\ThriveGmbH.BottomNavigationBar.XF.1.0.1\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\BottomBar.XamarinForms.dll</HintPath>
+    </Reference>
     <Reference Include="FFImageLoading, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.FFImageLoading.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.dll</HintPath>
     </Reference>
@@ -254,6 +263,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Templates\OrganizationTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\BarPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\TabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

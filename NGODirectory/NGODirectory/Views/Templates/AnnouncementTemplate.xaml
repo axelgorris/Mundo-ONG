@@ -11,21 +11,77 @@
                 <Setter Property="Aspect" Value="AspectFill" />
             </Style>
 
-            <Style x:Key="AnnouncementTitleStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="Large" />
-                <Setter Property="TextColor" Value="{StaticResource AccentColor}" />
-                <Setter Property="Margin" Value="12, 0" />
+            <Style x:Key="AnnouncementPrimaryStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
             </Style>
 
-            <Style x:Key="AnnouncementDescriptionStyle" TargetType="Label">
+            <Style x:Key="AnnouncementSecondaryStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Small"/>
-                <Setter Property="TextColor" Value="{StaticResource BlackColor}"/>
-                <Setter Property="Margin" Value="12, 0"/>
+                <Setter Property="TextColor" Value="{StaticResource GrayColor}"/>
             </Style>
 
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
+        <Frame
+            OutlineColor="{StaticResource GrayColor}"
+            BackgroundColor="{StaticResource WhiteColor}"
+            Margin="4">
+            <Frame.HasShadow>
+                <OnPlatform 
+                    x:TypeArguments="x:Boolean"
+                    Android="True"
+                    iOS="False"
+                    WinPhone="False"/>
+            </Frame.HasShadow>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ffimageloading:CachedImage     
+                    Grid.Column="0"
+                    Source="{Binding ImageUrl}"
+                    CacheType="Disk"
+                    CacheDuration="30"
+                    DownsampleToViewSize="True"
+                    Style="{StaticResource AnnouncementImageStyle}">
+                    <ffimageloading:CachedImage.LoadingPlaceholder>
+                        <OnPlatform                       
+                            x:TypeArguments="ImageSource"
+                            iOS="loading"
+                            Android="loading"
+                            WinPhone="Assets/loading.png"/>
+                    </ffimageloading:CachedImage.LoadingPlaceholder>
+                    <ffimageloading:CachedImage.ErrorPlaceholder>
+                        <OnPlatform                       
+                            x:TypeArguments="ImageSource"
+                            iOS="noimage"
+                            Android="noimage"
+                            WinPhone="Assets/noimage.png"/>
+                    </ffimageloading:CachedImage.ErrorPlaceholder>
+                </ffimageloading:CachedImage>
+                <Grid
+                    Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Text="{Binding Title}"
+                        Style="{StaticResource AnnouncementPrimaryStyle}" />
+                    <Label
+                        Grid.Row="1"
+                        Text="{Binding Organization}"
+                        Style="{StaticResource AnnouncementSecondaryStyle}" />
+                </Grid>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+
+    <!--<ContentView.Content>
         <Frame
             OutlineColor="{StaticResource GrayColor}"
             BackgroundColor="{StaticResource BackgroundColor}"
@@ -44,5 +100,5 @@
                     Text="{Binding Description}" />
             </StackLayout>
         </Frame>
-    </ContentView.Content>
+    </ContentView.Content>-->
 </ContentView>

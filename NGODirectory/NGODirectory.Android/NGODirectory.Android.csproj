@@ -49,6 +49,12 @@
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BottomBar.Droid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ThriveGmbH.BottomNavigationBar.XF.1.0.1\lib\MonoAndroid10\BottomBar.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="BottomNavigationBar, Version=1.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BottomNavigationBar.1.4.0.3\lib\MonoAndroid403\BottomNavigationBar.dll</HintPath>
+    </Reference>
     <Reference Include="FFImageLoading, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.FFImageLoading.2.2.9\lib\MonoAndroid10\FFImageLoading.dll</HintPath>
     </Reference>

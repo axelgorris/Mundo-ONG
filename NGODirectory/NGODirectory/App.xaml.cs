@@ -17,7 +17,7 @@ namespace NGODirectory
             var CloudService = ServiceLocator.Instance.Resolve<ICloudService>();
             CloudService.StoredLoginAsync();
 
-            MainPage = new CustomNavigationPage(new MainView());
+            MainPage = new CustomNavigationPage(new BarPage());
         }
 
         protected override void OnStart()
