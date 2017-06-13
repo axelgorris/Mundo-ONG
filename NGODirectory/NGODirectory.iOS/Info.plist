@@ -23,9 +23,9 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>NGO Directory</string>
+	<string>Mundo ONG</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.NGODirectory</string>
+	<string>axelgd.mundoong</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>

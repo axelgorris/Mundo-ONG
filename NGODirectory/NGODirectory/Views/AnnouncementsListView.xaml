@@ -65,6 +65,7 @@
             RefreshCommand="{Binding RefreshCommand}"
             HasUnevenRows="True"
             SeparatorColor="Transparent"
+            RowHeight="100"
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 
             <ListView.Behaviors>

@@ -27,7 +27,7 @@
     </ContentView.Resources>
     <ContentView.Content>
         <Frame
-            OutlineColor="{StaticResource GrayColor}"
+            OutlineColor="{StaticResource AccentColor}"
             BackgroundColor="{StaticResource BackgroundColor}"
             MinimumHeightRequest="200">
             <Frame.HasShadow>

@@ -3,12 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xf="clr-namespace:BottomBar.XamarinForms;assembly=BottomBar.XamarinForms"
              xmlns:views="clr-namespace:NGODirectory.Views"
-             BarBackgroundColor="{StaticResource AccentColor}"
+             BarBackgroundColor="Transparent"
              BarTextColor="{StaticResource WhiteColor}"
              BackgroundColor="{StaticResource WhiteColor}"
-             Title="Directorio ONG"
+             Title="Mundo ONG"
              x:Class="NGODirectory.Views.BarPage">
-
 
     <views:AnnouncementsListView>
         <views:AnnouncementsListView.Icon>
@@ -27,14 +26,6 @@
                     iOS="world_icon"                    
                     WinPhone="Assets/world_icon.png"/>
         </views:OrganizationsListView.Icon>
-    </views:OrganizationsListView>
-
-    <!--<views:TabPage Title="Favorites" Icon="world_icon.png" />-->
-    <!--<views:TabPage Title="Friends" Icon="world_icon.png" xf:BottomBarPageExtensions.TabColor="#5D4037" />
-    <views:TabPage Title="Nearby" Icon="world_icon.png" xf:BottomBarPageExtensions.TabColor="#7B1FA2" />
-    <views:TabPage Title="Recents" Icon="world_icon.png" xf:BottomBarPageExtensions.TabColor="#FF5252"
-                   xf:BottomBarPageExtensions.BadgeCount="2" xf:BottomBarPageExtensions.BadgeColor="Black"/>
-    <views:TabPage Title="Restaurants" Icon="world_icon.png" xf:BottomBarPageExtensions.TabColor="#FF9800" />-->
-    
+    </views:OrganizationsListView>    
     
 </xf:BottomBarPage>

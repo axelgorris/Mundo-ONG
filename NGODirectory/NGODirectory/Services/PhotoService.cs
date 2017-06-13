@@ -37,7 +37,11 @@ namespace NGODirectory.Services
                     return null;
                 }
 
-                var file = await CrossMedia.Current.PickPhotoAsync();
+                var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions()
+                {
+                    PhotoSize = PhotoSize.Medium,
+                    CompressionQuality = 92
+                });
 
                 if (file != null)
                 {
@@ -64,8 +68,12 @@ namespace NGODirectory.Services
                     return null;
                 }
 
-                var file = await CrossMedia.Current.TakePhotoAsync(
-                    new StoreCameraMediaOptions());
+                var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                {
+                    PhotoSize = PhotoSize.Medium,
+                    AllowCropping = true,
+                    CompressionQuality = 92                    
+                });
 
                 if (file != null)
                 {

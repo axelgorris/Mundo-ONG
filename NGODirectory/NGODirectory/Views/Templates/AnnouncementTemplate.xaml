@@ -17,7 +17,7 @@
             </Style>
 
             <Style x:Key="AnnouncementSecondaryStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="FontSize" Value="Micro"/>
                 <Setter Property="TextColor" Value="{StaticResource GrayColor}"/>
             </Style>
 
@@ -25,9 +25,11 @@
     </ContentView.Resources>
     <ContentView.Content>
         <Frame
-            OutlineColor="{StaticResource GrayColor}"
+            OutlineColor="{StaticResource AccentColor}"
             BackgroundColor="{StaticResource WhiteColor}"
-            Margin="4">
+            MinimumHeightRequest="200"
+            Margin="8,4"
+            Padding="8">
             <Frame.HasShadow>
                 <OnPlatform 
                     x:TypeArguments="x:Boolean"
@@ -66,7 +68,7 @@
                     Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
                     <Label
                         Grid.Row="0"
@@ -74,31 +76,11 @@
                         Style="{StaticResource AnnouncementPrimaryStyle}" />
                     <Label
                         Grid.Row="1"
-                        Text="{Binding Organization}"
+                        Text="{Binding CreatedAt.Date, StringFormat='{0:MMMM dd, yyyy}'}"
                         Style="{StaticResource AnnouncementSecondaryStyle}" />
                 </Grid>
             </Grid>
         </Frame>
     </ContentView.Content>
 
-    <!--<ContentView.Content>
-        <Frame
-            OutlineColor="{StaticResource GrayColor}"
-            BackgroundColor="{StaticResource BackgroundColor}"
-            MinimumHeightRequest="200">
-            <Frame.HasShadow>
-                <OnPlatform 
-                    x:TypeArguments="x:Boolean"
-                    Android="True"
-                    iOS="False"
-                    WinPhone="False"/>
-            </Frame.HasShadow>
-            <StackLayout>
-                <Label
-                    Text="{Binding Title}" />
-                <Label
-                    Text="{Binding Description}" />
-            </StackLayout>
-        </Frame>
-    </ContentView.Content>-->
 </ContentView>

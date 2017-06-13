@@ -76,9 +76,9 @@
                     <Image.Source>
                         <OnPlatform                       
                             x:TypeArguments="ImageSource"
-                            iOS="camera_icon"
-                            Android="camera_icon"
-                            WinPhone="Assets/camera_icon.png"/>
+                            iOS="image_icon"
+                            Android="image_icon"
+                            WinPhone="Assets/image_icon.png"/>
                     </Image.Source>
                 </Image>
                 <Grid.GestureRecognizers>
@@ -115,7 +115,5 @@
             </StackLayout>
         </Grid>
     </ScrollView>
-
-
 
 </ContentPage>

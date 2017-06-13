@@ -21,13 +21,13 @@ namespace NGODirectory.ViewModels
             if (item != null)
             {
                 Item = item;
-                Title = item.Name;
+                Title = "Editar organización";
                 LogoUrl = item.LogoUrl;
             }
             else
             {
                 Item = new Organization();
-                Title = "NewNueva organización";
+                Title = "Nueva organización";
             }
         }
 
@@ -47,7 +47,7 @@ namespace NGODirectory.ViewModels
             {
                 if (Image != null)
                 {
-                    LogoUrl = await CloudService.UploadStreamAsync(Item.Id, Image.GetStream());
+                    LogoUrl = await CloudService.UploadStreamAsync(CloudService.GetCurrentUser().UserId, Image.GetStream());
                     Item.LogoUrl = LogoUrl;
                 }
 

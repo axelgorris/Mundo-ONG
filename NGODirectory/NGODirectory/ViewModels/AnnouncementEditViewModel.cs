@@ -1,6 +1,8 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Models;
+using NGODirectory.Services;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,18 +17,20 @@ namespace NGODirectory.ViewModels
     {
         public AnnouncementEditViewModel(Announcement item = null)
         {
-            SaveCommand = new Command(async () => await Save());
-            DeleteCommand = new Command(async () => await Delete());
+            SaveCommand = new Command(async () => await SaveAsync());
+            DeleteCommand = new Command(async () => await DeleteAsync());
+            PickImageCommand = new Command(async () => await PickImageAsync());
 
             if (item != null)
             {
                 Item = item;
-                Title = item.Title;
+                Title = "Editar notícia";
+                ImageUrl = item.ImageUrl;
             }
             else
             {
                 Item = new Announcement();
-                Title = "New announcement";
+                Title = "Nueva notícia";
             }
         }
 
@@ -35,7 +39,7 @@ namespace NGODirectory.ViewModels
         public Announcement Item { get; set; }
 
         public Command SaveCommand { get; }
-        async Task Save()
+        async Task SaveAsync()
         {
             if (IsBusy)
                 return;
@@ -44,6 +48,12 @@ namespace NGODirectory.ViewModels
 
             try
             {
+                if (Image != null)
+                {
+                    ImageUrl = await CloudService.UploadStreamAsync(CloudService.GetCurrentUser().UserId, Image.GetStream());
+                    Item.ImageUrl = ImageUrl;
+                }
+
                 var table = await CloudService.GetTableAsync<Announcement>();
 
                 if (Item.Id == null)
@@ -54,6 +64,7 @@ namespace NGODirectory.ViewModels
                 {
                     await table.UpdateItemAsync(Item);
                 }
+
 
                 await CloudService.SyncOfflineCacheAsync<Announcement>(overrideServerChanges: true);
                 MessagingCenter.Send(this, "ItemsChanged");
@@ -70,7 +81,7 @@ namespace NGODirectory.ViewModels
         }
 
         public Command DeleteCommand { get; }
-        async Task Delete()
+        async Task DeleteAsync()
         {
             if (IsBusy)
                 return;
@@ -96,6 +107,32 @@ namespace NGODirectory.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        private string imageUrl;
+        public string ImageUrl
+        {
+            get { return imageUrl; }
+            set { SetProperty(ref imageUrl, value, "ImageUrl"); }
+        }
+
+        private MediaFile image;
+        public MediaFile Image
+        {
+            get { return image; }
+            set { SetProperty(ref image, value, "Image"); }
+        }
+
+        public Command PickImageCommand { get; }
+        private async Task PickImageAsync()
+        {
+            var result = await PhotoService.Instance.PickPhotoAsync();
+
+            if (result != null)
+            {
+                Image = result;
+                ImageUrl = result.Path;
             }
         }
     }

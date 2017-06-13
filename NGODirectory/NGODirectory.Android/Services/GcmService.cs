@@ -84,7 +84,7 @@ namespace NGODirectory.Droid.Services
             string message = intent.Extras.GetString("message");
             if (!string.IsNullOrEmpty(message))
             {
-                CreateNotification("Nueva notificación!", message);
+                CreateNotification("Mundo ONG", message);
                 return;
             }
         }

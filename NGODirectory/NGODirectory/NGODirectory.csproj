@@ -77,9 +77,6 @@
     <Compile Include="Views\CustomNavigationPage.xaml.cs">
       <DependentUpon>CustomNavigationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\OrganizationDisplayView.xaml.cs">
       <DependentUpon>OrganizationDisplayView.xaml</DependentUpon>
     </Compile>
@@ -100,9 +97,6 @@
     <Compile Include="Services\AzureCloudTable.cs" />
     <Compile Include="ViewModels\OrganizationEditViewModel.cs" />
     <Compile Include="ViewModels\OrganizationsListViewModel.cs" />
-    <Compile Include="Views\TabPage.xaml.cs">
-      <DependentUpon>TabPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Templates\AnnouncementTemplate.xaml.cs">
       <DependentUpon>AnnouncementTemplate.xaml</DependentUpon>
     </Compile>
@@ -256,12 +250,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\MainView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Views\Templates\OrganizationTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -269,12 +257,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\BarPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\TabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -15,7 +15,7 @@ namespace NGODirectory.ViewModels
             EditCommand = new Command(async () => await Edit());
 
             Item = item;
-            Title = item.Title;
+            Title = string.Empty;
         }
 
         public override void OnAppearing(object navigationContext)
