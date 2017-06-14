@@ -7,7 +7,7 @@
              xmlns:templates="clr-namespace:NGODirectory.Views.Templates;assembly=NGODirectory"
              xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
              Title="{Binding Title}">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ItemVisivilityConverter x:Key="ItemVisibilityConverter" />
@@ -17,9 +17,10 @@
     <ContentPage.ToolbarItems>
 
         <control:ConditionalToolbarItem
-            Name="Refresh"
+            Name="Refrescar"
             Command="{Binding RefreshCommand}"
-            IsVisible="{Binding IsUWPDevice}">
+            IsVisible="{Binding IsUWPDevice}"
+            Priority="0">
             <control:ConditionalToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
@@ -30,8 +31,9 @@
         </control:ConditionalToolbarItem>
 
         <ToolbarItem 
-            Text="Settings"
-            Command="{Binding SettingsCommand}">
+            Text="Ajustes"
+            Command="{Binding SettingsCommand}"
+            Priority="1">
             <ToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
@@ -42,9 +44,10 @@
         </ToolbarItem>
 
         <control:ConditionalToolbarItem
-            Text="Add" 
+            Text="Añadir noticia" 
             Command="{Binding AddNewItemCommand}"
-            IsVisible="{Binding IsUserLoggedIn}">
+            IsVisible="{Binding IsUserLoggedIn}"
+            Priority="2">
             <control:ConditionalToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"

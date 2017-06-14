@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NGODirectory.Views.AnnouncementEditView"
              xmlns:behaviors="clr-namespace:NGODirectory.Behaviors;assembly=NGODirectory"
+             xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
@@ -29,7 +30,7 @@
 
     <ContentPage.ToolbarItems>
 
-        <ToolbarItem Name="Refresh"
+        <ToolbarItem Name="Guardar noticia"
                      Command="{Binding SaveCommand}"
                      Order="Primary"
                      Priority="0" >
@@ -42,10 +43,10 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
 
-        <ToolbarItem Name="New item"
+        <!--<ToolbarItem Name="Eliminar noticia"
                      Command="{Binding DeleteCommand}"
                      Order="Primary"
-                     Priority="0" >
+                     Priority="1" >
             <ToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
@@ -53,7 +54,21 @@
                     iOS="delete_icon"
                     WinPhone="Assets/delete_icon.png"/>
             </ToolbarItem.Icon>
-        </ToolbarItem>
+        </ToolbarItem>-->
+
+        <control:ConditionalToolbarItem
+            Text="Eliminar noticia" 
+            Command="{Binding DeleteCommand}"
+            IsVisible="{Binding IsEditMode}"
+            Priority="1">
+            <control:ConditionalToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="edit_icon"
+                    iOS="edit_icon"    
+                    WinPhone="Assets/edit_icon.png"/>
+            </control:ConditionalToolbarItem.Icon>
+        </control:ConditionalToolbarItem>
 
     </ContentPage.ToolbarItems>
 
@@ -65,8 +80,21 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
+            <StackLayout
+                Grid.Row="0">
+                <Label 
+                    Text="Título"
+                    Style="{StaticResource ItemHeaderStyle}"/>
+                <Entry 
+                    Placeholder="Introduce el título"
+                    Text="{Binding Item.Title, Mode=TwoWay}">
+                    <Entry.Behaviors>
+                        <behaviors:EntryMaxLengthValidatorBehavior MaxLength="140"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
             <Grid
-                Grid.Row="0"
+                Grid.Row="1"
                 BackgroundColor="{StaticResource GrayColor}">
                 <Image
                     Source="{Binding ImageUrl}"
@@ -86,32 +114,18 @@
                         Command="{Binding PickImageCommand}"
                         NumberOfTapsRequired="1" />
                 </Grid.GestureRecognizers>
-            </Grid>
-            <StackLayout
-                Grid.Row="1">
-                <Label 
-                    Text="Name"
-                    Style="{StaticResource ItemHeaderStyle}"/>
-                <Entry 
-                    Placeholder="Insert name"
-                    Text="{Binding Item.Title, Mode=TwoWay}">
-                    <Entry.Behaviors>
-                        <behaviors:MaxLengthValidatorBehavior MaxLength="140"/>
-                    </Entry.Behaviors>
-                </Entry>
-            </StackLayout>
+            </Grid>            
             <StackLayout
                 Grid.Row="2">
                 <Label 
-                    Text="Description"
+                    Text="Descripción"
                     Style="{StaticResource ItemHeaderStyle}"/>
-                <Entry
-                    Placeholder="Insert description"
+                <Editor
                     Text="{Binding Item.Description, Mode=TwoWay}">
-                    <Entry.Behaviors>
-                        <behaviors:MaxLengthValidatorBehavior MaxLength="5000"/>
-                    </Entry.Behaviors>
-                </Entry>
+                    <Editor.Behaviors>
+                        <behaviors:EditorMaxLengthValidatorBehavior MaxLength="5000"/>
+                    </Editor.Behaviors>
+                </Editor>
             </StackLayout>
         </Grid>
     </ScrollView>

@@ -24,13 +24,15 @@ namespace NGODirectory.ViewModels
             if (item != null)
             {
                 Item = item;
-                Title = "Editar notícia";
+                Title = "Editar noticia";
                 ImageUrl = item.ImageUrl;
+                IsEditMode = true;
             }
             else
             {
                 Item = new Announcement();
-                Title = "Nueva notícia";
+                Title = "Nueva noticia";
+                IsEditMode = false;
             }
         }
 
@@ -64,11 +66,10 @@ namespace NGODirectory.ViewModels
                 {
                     await table.UpdateItemAsync(Item);
                 }
-
-
+                
                 await CloudService.SyncOfflineCacheAsync<Announcement>(overrideServerChanges: true);
                 MessagingCenter.Send(this, "ItemsChanged");
-                await Application.Current.MainPage.Navigation.PopAsync();
+                await Application.Current.MainPage.Navigation.PopToRootAsync();
             }
             catch (Exception ex)
             {
@@ -135,5 +136,7 @@ namespace NGODirectory.ViewModels
                 ImageUrl = result.Path;
             }
         }
+
+        public bool IsEditMode { get; private set; }
     }
 }

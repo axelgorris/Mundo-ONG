@@ -45,7 +45,8 @@
     </Compile>
     <Compile Include="Behaviors\BehaviorBase.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
-    <Compile Include="Behaviors\MaxLengthValidatorBehavior.cs" />
+    <Compile Include="Behaviors\EditorMaxLengthValidatorBehavior.cs" />
+    <Compile Include="Behaviors\EntryMaxLengthValidatorBehavior.cs" />
     <Compile Include="Controls\ConditionalToolbarItem.cs" />
     <Compile Include="Converters\ItemVisivilityConverter.cs" />
     <Compile Include="Converters\NegateBooleanConverter.cs" />

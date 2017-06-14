@@ -8,7 +8,7 @@
     <ContentPage.ToolbarItems>
 
         <control:ConditionalToolbarItem
-            Text="Edit" 
+            Text="Editar organización" 
             Command="{Binding EditCommand}"
             IsVisible="{Binding IsOrganizationAdmin}">
             <control:ConditionalToolbarItem.Icon>

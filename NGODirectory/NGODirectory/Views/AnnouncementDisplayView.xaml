@@ -5,10 +5,39 @@
              xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
              Title="{Binding Title}">
 
-    <ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
 
+            <Style x:Key="ItemImageStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="200" />
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="Margin" Value="12" />
+            </Style>
+
+            <Style x:Key="DescriptionStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="Margin" Value="12" />
+            </Style>
+
+            <Style x:Key="CreatedStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Micro" />
+                <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
+                <Setter Property="Margin" Value="12" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        
         <control:ConditionalToolbarItem
-            Text="Edit" 
+            Text="Editar noticia" 
             Command="{Binding EditCommand}"
             IsVisible="{Binding IsAuthor}">
             <control:ConditionalToolbarItem.Icon>
@@ -19,16 +48,47 @@
                     WinPhone="Assets/edit_icon.png"/>
             </control:ConditionalToolbarItem.Icon>
         </control:ConditionalToolbarItem>
-
+        
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout Padding="10" Spacing="10">
-            <Label Text="Name"/>
-            <Label Text="{Binding Item.Title}"/>
-            <Label Text="Description"/>
-            <Label Text="{Binding Item.Description}"/>
-        </StackLayout>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackLayout
+                    Grid.Row="0">
+                    <Label 
+                        Text="{Binding Item.Title}"
+                        Style="{StaticResource TitleStyle}" />
+                </StackLayout>
+                <Grid
+                    Grid.Row="1"
+                    BackgroundColor="{StaticResource GrayColor}">
+                    <Image
+                        Source="{Binding Item.ImageUrl}"
+                        Style="{StaticResource ItemImageStyle}"/>
+                </Grid>
+                <StackLayout
+                    Grid.Row="2">
+                    <Label
+                        Text="{Binding Item.Description}"
+                        Style="{StaticResource DescriptionStyle}"/>
+                </StackLayout>
+                <StackLayout
+                    HorizontalOptions="End"
+                    Grid.Row="3">
+                    <Label
+                        Text="{Binding Item.CreatedAt.Date, StringFormat='{0:dd MMMM, yyyy}'}"
+                        Style="{StaticResource CreatedStyle}" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 
 </ContentPage>

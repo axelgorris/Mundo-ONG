@@ -76,7 +76,7 @@
                         Style="{StaticResource AnnouncementPrimaryStyle}" />
                     <Label
                         Grid.Row="1"
-                        Text="{Binding CreatedAt.Date, StringFormat='{0:MMMM dd, yyyy}'}"
+                        Text="{Binding CreatedAt.Date, StringFormat='{0:dd MMMM, yyyy}'}"
                         Style="{StaticResource AnnouncementSecondaryStyle}" />
                 </Grid>
             </Grid>

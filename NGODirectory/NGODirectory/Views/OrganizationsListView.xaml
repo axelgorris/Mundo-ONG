@@ -9,9 +9,10 @@
     <ContentPage.ToolbarItems>
 
         <control:ConditionalToolbarItem
-            Name="Refresh"
+            Name="Refrescar"
             Command="{Binding RefreshCommand}"
-            IsVisible="{Binding IsUWPDevice}">
+            IsVisible="{Binding IsUWPDevice}"
+            Priority="0">
             <control:ConditionalToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
@@ -22,8 +23,9 @@
         </control:ConditionalToolbarItem>
 
         <ToolbarItem 
-            Text="Settings"   
-            Command="{Binding SettingsCommand}">
+            Text="Ajustes"   
+            Command="{Binding SettingsCommand}"
+            Priority="1">
             <ToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
@@ -34,9 +36,10 @@
         </ToolbarItem>
 
         <control:ConditionalToolbarItem
-            Text="Add" 
+            Text="Añadir organización" 
             Command="{Binding AddNewItemCommand}"
-            IsVisible="{Binding IsUserLoggedIn}">
+            IsVisible="{Binding IsUserLoggedIn}"
+            Priority="2">
             <control:ConditionalToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
@@ -48,19 +51,18 @@
 
     </ContentPage.ToolbarItems>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <SearchBar 
+        <SearchBar 
                 Placeholder="Buscar" 
                 Text="{Binding SearchFilter}" 
                 HeightRequest="50"
                 Grid.Row="0"/>
-            <ListView
+        <ListView
                 CachingStrategy="RecycleElement"
                 IsPullToRefreshEnabled="True"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
@@ -70,14 +72,14 @@
                 SeparatorColor="Transparent"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 Grid.Row="1">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <templates:OrganizationTemplate />
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <templates:OrganizationTemplate />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 
 </ContentPage>
