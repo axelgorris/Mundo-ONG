@@ -58,20 +58,37 @@
         </Grid.RowDefinitions>
 
         <SearchBar 
-                Placeholder="Buscar" 
-                Text="{Binding SearchFilter}" 
-                HeightRequest="50"
-                Grid.Row="0"/>
+            Placeholder="Buscar" 
+            Text="{Binding SearchFilter}" 
+            HeightRequest="50"
+            Grid.Row="0"/>
         <ListView
-                CachingStrategy="RecycleElement"
-                IsPullToRefreshEnabled="True"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                ItemsSource="{Binding Items}"
-                RefreshCommand="{Binding RefreshCommand}"
-                HasUnevenRows="True"
-                SeparatorColor="Transparent"
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                Grid.Row="1">
+            CachingStrategy="RecycleElement"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+            ItemsSource="{Binding ItemsGrouped}"
+            RefreshCommand="{Binding RefreshCommand}"
+            HasUnevenRows="True"
+            SeparatorColor="Transparent"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            GroupShortNameBinding = "{Binding Key}"
+            IsGroupingEnabled = "true"
+            GroupDisplayBinding = "{Binding Key}"
+            Grid.Row="1">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell Height="25">
+                        <StackLayout VerticalOptions="FillAndExpand"
+                       Padding="5"
+                       BackgroundColor="{StaticResource AccentColor}}">
+                            <Label Text="{Binding Key}" 
+                               TextColor="{StaticResource WhiteColor}"
+                               Font="Bold"
+                               VerticalOptions="Center"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

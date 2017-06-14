@@ -51,6 +51,7 @@
     <Compile Include="Converters\ItemVisivilityConverter.cs" />
     <Compile Include="Converters\NegateBooleanConverter.cs" />
     <Compile Include="Helpers\AuthenticationDelegatingHandler.cs" />
+    <Compile Include="Helpers\Grouping.cs" />
     <Compile Include="Helpers\Locations.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
     <Compile Include="Helpers\ServiceLocator.cs" />

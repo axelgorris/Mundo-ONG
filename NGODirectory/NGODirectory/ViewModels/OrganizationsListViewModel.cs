@@ -3,6 +3,7 @@ using NGODirectory.Helpers;
 using NGODirectory.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,12 +36,20 @@ namespace NGODirectory.ViewModels
             IsUserLoggedIn = CloudService.IsUserLoggedIn();
         }
 
-        public ObservableRangeCollection<Organization> ItemsCopy;
-        ObservableRangeCollection<Organization> items = new ObservableRangeCollection<Organization>();
-        public ObservableRangeCollection<Organization> Items
+        //public ObservableRangeCollection<Organization> ItemsCopy;
+        //ObservableRangeCollection<Organization> items = new ObservableRangeCollection<Organization>();
+        //public ObservableRangeCollection<Organization> Items
+        //{
+        //    get { return items; }
+        //    set { SetProperty(ref items, value, "Items"); }
+        //}
+
+        public ObservableCollection<Organization> ItemsCopy { get; set; }
+        ObservableCollection<Grouping<string, Organization>> itemsGrouped = new ObservableCollection<Grouping<string, Organization>>();
+        public ObservableCollection<Grouping<string, Organization>> ItemsGrouped
         {
-            get { return items; }
-            set { SetProperty(ref items, value, "Items"); }
+            get { return itemsGrouped; }
+            set { SetProperty(ref itemsGrouped, value, "ItemsGrouped"); }
         }
 
         Organization selectedItem;
@@ -87,9 +96,13 @@ namespace NGODirectory.ViewModels
 
                 list = await table.ReadAllItemsOrderedAsync(o => o.Name);
 
-                Items = new ObservableRangeCollection<Organization>(list);                
-                ItemsCopy = Items;
-                //SearchFilter = string.Empty;
+                var sorted = from item in list
+                             orderby item.Name
+                             group item by item.Name.Substring(0, 1).ToUpper() into itemGroup
+                             select new Grouping<string, Organization>(itemGroup.Key, itemGroup);
+
+                ItemsGrouped = new ObservableCollection<Grouping<string, Organization>>(sorted);
+                ItemsCopy = new ObservableCollection<Organization>(list);
             }
             catch (Exception ex)
             {
@@ -162,14 +175,24 @@ namespace NGODirectory.ViewModels
         {
             if (ItemsCopy != null)
             {
+                ObservableCollection<Organization> source;
+
                 if (String.IsNullOrEmpty(SearchFilter))
                 {
-                    Items = ItemsCopy;
+                    source = ItemsCopy;
                 }
                 else
                 {
-                    Items = new ObservableRangeCollection<Organization>(ItemsCopy.Where(x => x.Name.ToLower().Contains(SearchFilter.ToLower())));
+                    source = new ObservableRangeCollection<Organization>(ItemsCopy.Where(x => x.Name.ToUpper()
+                                                                                               .Contains(SearchFilter.ToUpper())));
                 }
+
+                var sorted = from item in source
+                             orderby item.Name
+                             group item by item.Name.Substring(0, 1).ToUpper() into itemGroup
+                             select new Grouping<string, Organization>(itemGroup.Key, itemGroup);
+
+                ItemsGrouped = new ObservableCollection<Grouping<string, Organization>>(sorted);
             }
         }
     }

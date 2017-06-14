@@ -43,19 +43,6 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
 
-        <!--<ToolbarItem Name="Eliminar noticia"
-                     Command="{Binding DeleteCommand}"
-                     Order="Primary"
-                     Priority="1" >
-            <ToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="delete_icon"
-                    iOS="delete_icon"
-                    WinPhone="Assets/delete_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>-->
-
         <control:ConditionalToolbarItem
             Text="Eliminar noticia" 
             Command="{Binding DeleteCommand}"
@@ -64,9 +51,9 @@
             <control:ConditionalToolbarItem.Icon>
                 <OnPlatform 
                     x:TypeArguments="FileImageSource"
-                    Android="edit_icon"
-                    iOS="edit_icon"    
-                    WinPhone="Assets/edit_icon.png"/>
+                    Android="delete_icon"
+                    iOS="delete_icon"    
+                    WinPhone="Assets/delete_icon.png"/>
             </control:ConditionalToolbarItem.Icon>
         </control:ConditionalToolbarItem>
 

@@ -5,7 +5,7 @@
              xmlns:views="clr-namespace:NGODirectory.Views"
              BarBackgroundColor="Transparent"
              BarTextColor="{StaticResource WhiteColor}"
-             BackgroundColor="{StaticResource WhiteColor}"
+             BackgroundColor="{StaticResource BackgroundColor}"
              Title="Mundo ONG"
              x:Class="NGODirectory.Views.BarPage">
 
