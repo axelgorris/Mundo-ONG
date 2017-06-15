@@ -60,8 +60,16 @@
         <SearchBar 
             Placeholder="Buscar" 
             Text="{Binding SearchFilter}" 
-            HeightRequest="50"
-            Grid.Row="0"/>
+            VerticalOptions="Center"
+            Grid.Row="0">
+            <SearchBar.HeightRequest>
+                <OnPlatform 
+                    x:TypeArguments="x:Double"
+                    Android="50"
+                    iOS="50"
+                    WinPhone="35"/>
+            </SearchBar.HeightRequest>
+        </SearchBar>
         <ListView
             CachingStrategy="RecycleElement"
             IsPullToRefreshEnabled="True"
@@ -77,10 +85,18 @@
             Grid.Row="1">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
-                    <ViewCell Height="25">
-                        <StackLayout VerticalOptions="FillAndExpand"
-                       Padding="5"
-                       BackgroundColor="{StaticResource AccentColor}}">
+                    <ViewCell>
+                        <ViewCell.Height>
+                            <OnPlatform 
+                                    x:TypeArguments="x:Double"
+                                    Android="25"
+                                    iOS="25"    
+                                    WinPhone="45"/>
+                        </ViewCell.Height>
+                        <StackLayout
+                            VerticalOptions="FillAndExpand"
+                            Padding="5"
+                            BackgroundColor="{StaticResource AccentColor}}">                            
                             <Label Text="{Binding Key}" 
                                TextColor="{StaticResource WhiteColor}"
                                Font="Bold"

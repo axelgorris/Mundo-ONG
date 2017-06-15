@@ -45,26 +45,29 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                if (Image != null)
+                if ((await Application.Current.MainPage.DisplayActionSheet("Se guardarán los cambios realizados. ¿Estás seguro?", "Guardar", "Cancelar")).Equals("Guardar"))
                 {
-                    LogoUrl = await CloudService.UploadStreamAsync(CloudService.GetCurrentUser().UserId, Image.GetStream());
-                    Item.LogoUrl = LogoUrl;
-                }
+                    if (Image != null)
+                    {
+                        LogoUrl = await CloudService.UploadStreamAsync(CloudService.GetCurrentUser().UserId, Image.GetStream());
+                        Item.LogoUrl = LogoUrl;
+                    }
 
-                var table = await CloudService.GetTableAsync<Organization>();
+                    var table = await CloudService.GetTableAsync<Organization>();
 
-                if (Item.Id == null)
-                {
-                    await table.CreateItemAsync(Item);
-                }
-                else
-                {
-                    await table.UpdateItemAsync(Item);
-                }
+                    if (Item.Id == null)
+                    {
+                        await table.CreateItemAsync(Item);
+                    }
+                    else
+                    {
+                        await table.UpdateItemAsync(Item);
+                    }
 
-                await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
-                MessagingCenter.Send(this, "ItemsChanged");
-                await Application.Current.MainPage.Navigation.PopAsync();
+                    await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
+                    MessagingCenter.Send(this, "ItemsChanged");
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                }
             }
             catch (Exception ex)
             {
@@ -86,15 +89,18 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                if (Item.Id != null)
+                if ((await Application.Current.MainPage.DisplayActionSheet("Se eliminará la organización. ¿Estás seguro?", "Eliminar", "Cancelar")).Equals("Eliminar"))
                 {
-                    var table = await CloudService.GetTableAsync<Organization>();
-                    await table.DeleteItemAsync(Item);
-                    await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
-                    MessagingCenter.Send(this, "ItemsChanged");
-                }
+                    if (Item.Id != null)
+                    {
+                        var table = await CloudService.GetTableAsync<Organization>();
+                        await table.DeleteItemAsync(Item);
+                        await CloudService.SyncOfflineCacheAsync<Organization>(overrideServerChanges: true);
+                        MessagingCenter.Send(this, "ItemsChanged");
+                    }
 
-                await Application.Current.MainPage.Navigation.PopToRootAsync();
+                    await Application.Current.MainPage.Navigation.PopToRootAsync();
+                }
             }
             catch (Exception ex)
             {

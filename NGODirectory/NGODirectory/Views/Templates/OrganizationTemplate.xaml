@@ -16,7 +16,6 @@
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
                 <Setter Property="Margin" Value="12, 6" />
-                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -53,6 +52,7 @@
             </ffimageloading:CachedImage>
 
             <StackLayout
+                VerticalOptions="Center"
                 Grid.Column="1">
                 <Label
                     Text="{Binding Name}"                    
