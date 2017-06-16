@@ -19,13 +19,15 @@
             <Button BackgroundColor="{StaticResource AccentColor}"
                     Command="{Binding LoginCommand}"
                     IsVisible="{Binding IsUserLoggedIn, Converter={StaticResource booleanInverter}"
-                    Text="Login"
-                    TextColor="{StaticResource WhiteColor}" />
+                    Text="Iniciar sesión"
+                    TextColor="{StaticResource WhiteColor}" 
+                    WidthRequest="150"/>
             <Button BackgroundColor="{StaticResource AccentColor}"
                     Command="{Binding LogoutCommand}"                    
                     IsVisible="{Binding IsUserLoggedIn}"
-                    Text="Logout"
-                    TextColor="{StaticResource WhiteColor}" />
+                    Text="Cerrar sesión"
+                    TextColor="{StaticResource WhiteColor}"
+                    WidthRequest="150"/>
         </StackLayout>
     </ContentPage.Content>
 

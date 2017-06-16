@@ -89,8 +89,8 @@
                         <ViewCell.Height>
                             <OnPlatform 
                                     x:TypeArguments="x:Double"
-                                    Android="25"
-                                    iOS="25"    
+                                    Android="30"
+                                    iOS="30"    
                                     WinPhone="45"/>
                         </ViewCell.Height>
                         <StackLayout

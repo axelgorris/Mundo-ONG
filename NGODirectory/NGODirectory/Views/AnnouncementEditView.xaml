@@ -9,9 +9,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style x:Key="ItemImageStyle" TargetType="Image">
-                <Setter Property="HeightRequest" Value="200" />
-                <Setter Property="Aspect" Value="AspectFill" />
+            <Style x:Key="ItemImageStyle" TargetType="Image">                
+                <!--<Setter Property="Aspect" Value="AspectFill" />-->
             </Style>
 
             <Style x:Key="CameraImageStyle" TargetType="Image">
@@ -64,15 +63,18 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <StackLayout
                 Grid.Row="0">
-                <Label 
+                <Label                     
+                    HorizontalOptions="Center"
                     Text="Título"
                     Style="{StaticResource ItemHeaderStyle}"/>
                 <Entry 
+                    WidthRequest="800"
+                    HorizontalOptions="Center"
                     Placeholder="Introduce el título"
                     Text="{Binding Item.Title, Mode=TwoWay}">
                     <Entry.Behaviors>
@@ -80,7 +82,9 @@
                     </Entry.Behaviors>
                 </Entry>
             </StackLayout>
+            
             <Grid
+                HorizontalOptions="Center"
                 Grid.Row="1"
                 BackgroundColor="{StaticResource GrayColor}">
                 <Image
@@ -101,13 +105,15 @@
                         Command="{Binding PickImageCommand}"
                         NumberOfTapsRequired="1" />
                 </Grid.GestureRecognizers>
-            </Grid>            
+            </Grid>
+            
             <StackLayout
                 Grid.Row="2">
                 <Label 
                     Text="Descripción"
                     Style="{StaticResource ItemHeaderStyle}"/>
                 <Editor
+                    HeightRequest="300"
                     Text="{Binding Item.Description, Mode=TwoWay}">
                     <Editor.Behaviors>
                         <behaviors:EditorMaxLengthValidatorBehavior MaxLength="5000"/>

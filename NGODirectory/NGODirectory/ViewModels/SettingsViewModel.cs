@@ -16,10 +16,10 @@ namespace NGODirectory.ViewModels
             Title = "Ajustes";
         }
 
-        ICloudService _cloudService => ServiceLocator.Instance.Resolve<ICloudService>();
+        ICloudService cloudService => ServiceLocator.Instance.Resolve<ICloudService>();
         public ICloudService CloudService
         {
-            get { return _cloudService; }
+            get { return cloudService; }
         }
 
         public bool IsUserLoggedIn
