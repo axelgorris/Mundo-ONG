@@ -12,17 +12,14 @@ namespace NGODirectory.ViewModels
     {
         public AnnouncementDisplayViewModel(Announcement item)
         {
-            EditCommand = new Command(async () => await Edit());
-
-            Item = item;
             Title = string.Empty;
-        }
+            Item = item;
+            
+            EditCommand = new Command(async () => await Edit());            
 
-        public override void OnAppearing(object navigationContext)
-        {
             IsAuthor = CloudService.IsUserLoggedIn() && CloudService.GetCurrentUser().UserId.Equals(Item.Author);
         }
-
+        
         public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
 
         public Announcement Item { get; set; }

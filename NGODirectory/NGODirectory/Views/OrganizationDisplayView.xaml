@@ -9,15 +9,7 @@
         <ResourceDictionary>
 
             <Style x:Key="ItemImageStyle" TargetType="Image">
-                <Setter Property="Aspect">
-                    <Setter.Value>
-                        <OnPlatform x:TypeArguments="Aspect">
-                            <OnPlatform.iOS>AspectFit</OnPlatform.iOS>
-                            <OnPlatform.Android>AspectFit</OnPlatform.Android>
-                            <OnPlatform.WinPhone>AspectFit</OnPlatform.WinPhone>
-                        </OnPlatform>
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Aspect" Value="AspectFit" />
                 <Setter Property="HeightRequest">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:Double"
@@ -35,16 +27,15 @@
                 <Setter Property="Margin" Value="12" />
             </Style>
 
-            <Style x:Key="DescriptionStyle" TargetType="Label">
+            <Style x:Key="InfoStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Small" />
                 <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
                 <Setter Property="Margin" Value="12" />
             </Style>
 
-            <Style x:Key="InfoStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="Small" />
-                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
-                <Setter Property="Margin" Value="12" />
+            <Style x:Key="InfoIconStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="25" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
         </ResourceDictionary>
@@ -53,7 +44,7 @@
     <ContentPage.ToolbarItems>
 
         <control:ConditionalToolbarItem
-            Text="Editar organización" 
+            Text="Editar" 
             Command="{Binding EditCommand}"
             IsVisible="{Binding IsOrganizationAdmin}"
             Icon="{StaticResource EditIcon}"
@@ -125,66 +116,83 @@
                 </StackLayout.HorizontalOptions>
 
                 <StackLayout>
+                    <StackLayout.HorizontalOptions>
+                        <OnPlatform 
+                        x:TypeArguments="LayoutOptions"
+                        Android="Fill"
+                        iOS="Fill"
+                        WinPhone="Center"/>
+                    </StackLayout.HorizontalOptions>
                     <Label
                         Text="{Binding Item.Description}"
-                        Style="{StaticResource DescriptionStyle}"/>
+                        Style="{StaticResource InfoStyle}"/>
                 </StackLayout>
 
-                <StackLayout 
+                <StackLayout
                     Orientation="Horizontal">
-                    <Image 
-                        VerticalOptions="Center"
-                        Source="{StaticResource WebIcon}"/>
+                    <Image
+                        Source="{StaticResource WebIcon}"
+                        Style="{StaticResource InfoIconStyle}"/>
                     <Label
                         Text="{Binding Item.Web}"
                         Style="{StaticResource InfoStyle}"/>
                 </StackLayout>
 
-                <StackLayout 
+                <StackLayout
+                    HeightRequest="20"
                     Orientation="Horizontal">
-                    <Image 
+                    <Image
                         VerticalOptions="Center"
-                        Source="{StaticResource EmailIcon}"/>
+                        Source="{StaticResource EmailIcon}"
+                        Style="{StaticResource InfoIconStyle}"/>
                     <Label
                         Text="{Binding Item.Email}"
                         Style="{StaticResource InfoStyle}"/>
                 </StackLayout>
 
-                <StackLayout 
+                <StackLayout
+                    HeightRequest="20"
                     Orientation="Horizontal">
-                    <Image 
+                    <Image
                         VerticalOptions="Center"
-                        Source="{StaticResource PhoneIcon}"/>
+                        Source="{StaticResource PhoneIcon}"
+                        Style="{StaticResource InfoIconStyle}"/>
                     <Label
                         Text="{Binding Item.Phone}"
                         Style="{StaticResource InfoStyle}"/>
                 </StackLayout>
 
-                <StackLayout 
+                <StackLayout
+                    HeightRequest="20"
                     Orientation="Horizontal">
-                    <Image 
+                    <Image
                         VerticalOptions="Center"
-                        Source="{StaticResource FacebookIcon}"/>
+                        Source="{StaticResource FacebookIcon}"
+                        Style="{StaticResource InfoIconStyle}"/>
                     <Label
                         Text="{Binding Item.Facebook}"
                         Style="{StaticResource InfoStyle}"/>
                 </StackLayout>
 
-                <StackLayout 
+                <StackLayout
+                    HeightRequest="20"
                     Orientation="Horizontal">
-                    <Image 
+                    <Image
                         VerticalOptions="Center"
-                        Source="{StaticResource TwitterIcon}"/>
+                        Source="{StaticResource TwitterIcon}"
+                        Style="{StaticResource InfoIconStyle}"/>
                     <Label
                         Text="{Binding Item.Twitter}"
                         Style="{StaticResource InfoStyle}"/>
                 </StackLayout>
 
-                <StackLayout 
+                <StackLayout
+                    HeightRequest="20"
                     Orientation="Horizontal">
-                    <Image 
+                    <Image
                         VerticalOptions="Center"
-                        Source="{StaticResource InstagramIcon}"/>
+                        Source="{StaticResource InstagramIcon}"
+                        Style="{StaticResource InfoIconStyle}"/>
                     <Label
                         Text="{Binding Item.Instagram}"
                         Style="{StaticResource InfoStyle}"/>

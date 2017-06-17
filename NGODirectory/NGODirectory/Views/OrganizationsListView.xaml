@@ -24,7 +24,7 @@
             Priority="1"/>
 
         <control:ConditionalToolbarItem
-            Text="Añadir organización" 
+            Text="Añadir" 
             Command="{Binding AddNewItemCommand}"
             IsVisible="{Binding IsUserLoggedIn}"
             Icon="{StaticResource AddIcon}"

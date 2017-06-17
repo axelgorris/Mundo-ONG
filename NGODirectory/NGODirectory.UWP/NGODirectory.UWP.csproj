@@ -111,20 +111,21 @@
     <None Include="NGODirectory.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\add_icon.png" />
-    <Content Include="Assets\camera_icon.png" />
-    <Content Include="Assets\cancel_icon.png" />
-    <Content Include="Assets\delete_icon.png" />
-    <Content Include="Assets\edit_icon.png" />
+    <Content Include="Assets\ic_content_save_white_24dp.png" />
+    <Content Include="Assets\ic_crop_original_white_48dp.png" />
+    <Content Include="Assets\ic_delete_white_24dp.png" />
     <Content Include="Assets\ic_earth_grey600_24dp.png" />
     <Content Include="Assets\ic_email_grey600_24dp.png" />
     <Content Include="Assets\ic_facebook_box_grey600_24dp.png" />
     <Content Include="Assets\ic_instagram_grey600_24dp.png" />
     <Content Include="Assets\ic_newspaper_grey600_24dp.png" />
+    <Content Include="Assets\ic_pencil_white_24dp.png" />
     <Content Include="Assets\ic_phone_grey600_24dp.png" />
+    <Content Include="Assets\ic_plus_white_24dp.png" />
+    <Content Include="Assets\ic_refresh_white_24dp.png" />
+    <Content Include="Assets\ic_settings_white_24dp.png" />
     <Content Include="Assets\ic_twitter_box_grey600_24dp.png" />
     <Content Include="Assets\ic_web_grey600_24dp.png" />
-    <Content Include="Assets\image_icon.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -132,10 +133,6 @@
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\noimage.png" />
     <Content Include="Assets\playstore-icon.png" />
-    <Content Include="Assets\refresh_icon.png" />
-    <Content Include="Assets\save_icon.png" />
-    <Content Include="Assets\search_icon.png" />
-    <Content Include="Assets\settings_icon.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />

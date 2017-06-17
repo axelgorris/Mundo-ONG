@@ -28,34 +28,34 @@
             <!-- TOOLBAR ICONS -->
             <OnPlatform x:Key="AddIcon" 
                 x:TypeArguments="FileImageSource"
-                Android="add_icon"
-                iOS="add_icon"
-                WinPhone="Assets/add_icon.png"/>
+                Android="ic_plus_white_24dp"
+                iOS="ic_plus_white_24dp"
+                WinPhone="Assets/ic_plus_white_24dp.png"/>
             <OnPlatform x:Key="EditIcon" 
                 x:TypeArguments="FileImageSource"
-                Android="edit_icon"
-                iOS="edit_icon"    
-                WinPhone="Assets/edit_icon.png"/>
+                Android="ic_pencil_white_24dp"
+                iOS="ic_pencil_white_24dp"    
+                WinPhone="Assets/ic_pencil_white_24dp.png"/>
             <OnPlatform x:Key="SaveIcon" 
                 x:TypeArguments="FileImageSource"
-                Android="save_icon"
-                iOS="save_icon"    
-                WinPhone="Assets/save_icon.png"/>
+                Android="ic_content_save_white_24dp"
+                iOS="ic_content_save_white_24dp"    
+                WinPhone="Assets/ic_content_save_white_24dp.png"/>
             <OnPlatform x:Key="DeleteIcon" 
                 x:TypeArguments="FileImageSource"
-                Android="delete_icon"
-                iOS="delete_icon"    
-                WinPhone="Assets/delete_icon.png"/>
+                Android="ic_delete_white_24dp"
+                iOS="ic_delete_white_24dp"    
+                WinPhone="Assets/ic_delete_white_24dp.png"/>
             <OnPlatform x:Key="RefreshIcon" 
                 x:TypeArguments="FileImageSource"
-                Android="refresh_icon"
-                iOS="refresh_icon"    
-                WinPhone="Assets/refresh_icon.png"/>
+                Android="ic_refresh_white_24dp"
+                iOS="ic_refresh_white_24dp"    
+                WinPhone="Assets/ic_refresh_white_24dp.png"/>
             <OnPlatform x:Key="SettingsIcon" 
                 x:TypeArguments="FileImageSource"
-                Android="settings_icon"
-                iOS="settings_icon"    
-                WinPhone="Assets/settings_icon.png"/>
+                Android="ic_settings_white_24dp"
+                iOS="ic_settings_white_24dp"    
+                WinPhone="Assets/ic_settings_white_24dp.png"/>
 
             <!-- ICONS -->
             <OnPlatform x:Key="WebIcon" 
@@ -88,6 +88,11 @@
                 Android="ic_instagram_grey600_24dp"
                 iOS="ic_instagram_grey600_24dp"    
                 WinPhone="Assets/ic_instagram_grey600_24dp.png"/>
+            <OnPlatform x:Key="PickImageIcon" 
+                x:TypeArguments="ImageSource"
+                Android="ic_crop_original_white_48dp"
+                iOS="ic_crop_original_white_48dp"    
+                WinPhone="Assets/ic_crop_original_white_48dp.png"/>
 
         </ResourceDictionary>
     </Application.Resources>

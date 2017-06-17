@@ -14,10 +14,6 @@ namespace NGODirectory.ViewModels
     {
         public OrganizationEditViewModel(Organization item = null)
         {
-            SaveCommand = new Command(async () => await SaveAsync());
-            DeleteCommand = new Command(async () => await DeleteAsync());
-            PickImageCommand = new Command(async () => await PickImageAsync());
-
             if (item != null)
             {
                 Item = item;
@@ -31,6 +27,10 @@ namespace NGODirectory.ViewModels
                 Title = "Nueva organización";
                 IsEditMode = false;
             }
+
+            SaveCommand = new Command(async () => await SaveAsync());
+            DeleteCommand = new Command(async () => await DeleteAsync());
+            PickImageCommand = new Command(async () => await PickImageAsync());
         }
 
         public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();

@@ -18,6 +18,7 @@ namespace NGODirectory.ViewModels
         public OrganizationsListViewModel()
         {
             Title = "Organizaciones";
+            IsUserLoggedIn = CloudService.IsUserLoggedIn();
 
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
@@ -30,20 +31,7 @@ namespace NGODirectory.ViewModels
 
             RefreshCommand.Execute(null);
         }
-
-        public override void OnAppearing(object navigationContext)
-        {
-            IsUserLoggedIn = CloudService.IsUserLoggedIn();
-        }
-
-        //public ObservableRangeCollection<Organization> ItemsCopy;
-        //ObservableRangeCollection<Organization> items = new ObservableRangeCollection<Organization>();
-        //public ObservableRangeCollection<Organization> Items
-        //{
-        //    get { return items; }
-        //    set { SetProperty(ref items, value, "Items"); }
-        //}
-
+                
         public ObservableCollection<Organization> ItemsCopy { get; set; }
         ObservableCollection<Grouping<string, Organization>> itemsGrouped = new ObservableCollection<Grouping<string, Organization>>();
         public ObservableCollection<Grouping<string, Organization>> ItemsGrouped

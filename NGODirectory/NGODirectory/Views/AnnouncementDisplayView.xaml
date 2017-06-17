@@ -45,7 +45,7 @@
     <ContentPage.ToolbarItems>
 
         <control:ConditionalToolbarItem
-            Text="Editar noticia" 
+            Text="Editar" 
             Command="{Binding EditCommand}"
             IsVisible="{Binding IsAuthor}"
             Icon="{StaticResource EditIcon}"

@@ -15,8 +15,9 @@ namespace NGODirectory.ViewModels
         bool hasMoreItems = true;
 
         public AnnouncementsListViewModel()
-        {
+        {   
             Title = "Noticias";
+            IsUserLoggedIn = CloudService.IsUserLoggedIn();
 
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
@@ -30,12 +31,7 @@ namespace NGODirectory.ViewModels
             
             RefreshCommand.Execute(null);
         }
-
-        public override void OnAppearing(object navigationContext)
-        {
-            IsUserLoggedIn = CloudService.IsUserLoggedIn();
-        }
-
+        
         ObservableRangeCollection<Announcement> items = new ObservableRangeCollection<Announcement>();
         public ObservableRangeCollection<Announcement> Items
         {
