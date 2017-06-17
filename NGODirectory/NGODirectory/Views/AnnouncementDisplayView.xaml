@@ -26,8 +26,6 @@
                 <Setter Property="TextColor" Value="{StaticResource AccentColor}" />
                 <Setter Property="Margin" Value="12" />
             </Style>
-            
-
 
             <Style x:Key="DescriptionStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Small" />
@@ -49,15 +47,10 @@
         <control:ConditionalToolbarItem
             Text="Editar noticia" 
             Command="{Binding EditCommand}"
-            IsVisible="{Binding IsAuthor}">
-            <control:ConditionalToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="edit_icon"
-                    iOS="edit_icon"    
-                    WinPhone="Assets/edit_icon.png"/>
-            </control:ConditionalToolbarItem.Icon>
-        </control:ConditionalToolbarItem>
+            IsVisible="{Binding IsAuthor}"
+            Icon="{StaticResource EditIcon}"
+            Order="Primary"
+            Priority="0"/>
 
     </ContentPage.ToolbarItems>
 
@@ -117,8 +110,8 @@
                 <StackLayout.HorizontalOptions>
                     <OnPlatform 
                         x:TypeArguments="LayoutOptions"
-                        Android="Fill"
-                        iOS="Fill"
+                        Android="End"
+                        iOS="End"
                         WinPhone="Center"/>
                 </StackLayout.HorizontalOptions>
                 <Label

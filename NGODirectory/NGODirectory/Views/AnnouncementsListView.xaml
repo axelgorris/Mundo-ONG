@@ -17,46 +17,28 @@
     <ContentPage.ToolbarItems>
 
         <control:ConditionalToolbarItem
-            Name="Refrescar"
+            Text="Refrescar" 
             Command="{Binding RefreshCommand}"
             IsVisible="{Binding IsUWPDevice}"
-            Priority="0">
-            <control:ConditionalToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="refresh_icon"
-                    iOS="refresh_icon"
-                    WinPhone="Assets/refresh_icon.png"/>
-            </control:ConditionalToolbarItem.Icon>
-        </control:ConditionalToolbarItem>
-
-        <ToolbarItem 
-            Text="Ajustes"
+            Icon="{StaticResource RefreshIcon}"
+            Order="Primary"
+            Priority="0"/>
+        
+        <ToolbarItem
+            Text="Ajustes" 
             Command="{Binding SettingsCommand}"
-            Priority="1">
-            <ToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="settings_icon"
-                    iOS="settings_icon"    
-                    WinPhone="Assets/settings_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
+            Icon="{StaticResource SettingsIcon}"
+            Order="Primary"
+            Priority="1"/>
 
         <control:ConditionalToolbarItem
             Text="Añadir noticia" 
             Command="{Binding AddNewItemCommand}"
             IsVisible="{Binding IsUserLoggedIn}"
-            Priority="2">
-            <control:ConditionalToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="add_icon"
-                    iOS="add_icon"    
-                    WinPhone="Assets/add_icon.png"/>
-            </control:ConditionalToolbarItem.Icon>
-        </control:ConditionalToolbarItem>
-
+            Icon="{StaticResource AddIcon}"
+            Order="Primary"
+            Priority="2"/>
+        
     </ContentPage.ToolbarItems>
 
     <Grid>

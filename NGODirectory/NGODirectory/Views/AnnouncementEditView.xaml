@@ -29,32 +29,20 @@
 
     <ContentPage.ToolbarItems>
 
-        <ToolbarItem Name="Guardar noticia"
-                     Command="{Binding SaveCommand}"
-                     Order="Primary"
-                     Priority="0" >
-            <ToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="save_icon"
-                    iOS="save_icon"
-                    WinPhone="Assets/save_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
+        <ToolbarItem
+            Text="Guardar noticia" 
+            Command="{Binding SaveCommand}"
+            Icon="{StaticResource SaveIcon}"
+            Order="Primary"
+            Priority="0"/>
 
         <control:ConditionalToolbarItem
             Text="Eliminar noticia" 
             Command="{Binding DeleteCommand}"
             IsVisible="{Binding IsEditMode}"
-            Priority="1">
-            <control:ConditionalToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="delete_icon"
-                    iOS="delete_icon"    
-                    WinPhone="Assets/delete_icon.png"/>
-            </control:ConditionalToolbarItem.Icon>
-        </control:ConditionalToolbarItem>
+            Icon="{StaticResource DeleteIcon}"
+            Order="Primary"
+            Priority="1"/>
 
     </ContentPage.ToolbarItems>
 
@@ -68,8 +56,14 @@
 
             <StackLayout
                 Grid.Row="0">
-                <Label                     
-                    HorizontalOptions="Center"
+                <StackLayout.HorizontalOptions>
+                    <OnPlatform 
+                        x:TypeArguments="LayoutOptions"
+                        Android="Fill"
+                        iOS="Fill"
+                        WinPhone="Center"/>
+                </StackLayout.HorizontalOptions>
+                <Label
                     Text="Título"
                     Style="{StaticResource ItemHeaderStyle}"/>
                 <Entry 

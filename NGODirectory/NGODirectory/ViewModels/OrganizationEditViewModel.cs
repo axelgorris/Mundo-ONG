@@ -23,11 +23,13 @@ namespace NGODirectory.ViewModels
                 Item = item;
                 Title = "Editar organización";
                 LogoUrl = item.LogoUrl;
+                IsEditMode = true;
             }
             else
             {
                 Item = new Organization();
                 Title = "Nueva organización";
+                IsEditMode = false;
             }
         }
 
@@ -137,5 +139,7 @@ namespace NGODirectory.ViewModels
                 LogoUrl = result.Path;
             }
         }
+
+        public bool IsEditMode { get; private set; }
     }
 }

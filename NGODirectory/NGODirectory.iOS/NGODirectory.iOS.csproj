@@ -328,15 +328,6 @@
     <BundleResource Include="Resources\search_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\announcement_icon_3x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\announcement_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\announcement_icon_2x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\settings_icon_2x.png" />
   </ItemGroup>
   <ItemGroup>
@@ -352,13 +343,7 @@
     <BundleResource Include="Resources\world_icon_3x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\world_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon%402x %282%29.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon%402x.png" />
@@ -421,6 +406,78 @@
     <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\splashscreen_960.png">
       <InProject>false</InProject>
     </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_email_grey600_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_email_grey600_24dp_2x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_email_grey600_24dp_3x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_facebook_box_grey600_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_facebook_box_grey600_24dp_2x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_facebook_box_grey600_24dp_3x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_instagram_grey600_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_instagram_grey600_24dp_2x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_instagram_grey600_24dp_3x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_newspaper_grey600_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_newspaper_grey600_24dp_2x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_newspaper_grey600_24dp_3x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_phone_grey600_24dp_2x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_phone_grey600_24dp_3x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_twitter_box_grey600_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_twitter_box_grey600_24dp_2x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_twitter_box_grey600_24dp_3x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_web_grey600_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_web_grey600_24dp_2x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_web_grey600_24dp_3x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_earth_grey600_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_earth_grey600_24dp_2x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_earth_grey600_24dp_3x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_phone_grey600_24dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

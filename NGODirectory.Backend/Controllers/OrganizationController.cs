@@ -59,7 +59,7 @@ namespace NGODirectory.Backend.Controllers
             Organization current = await InsertAsync(item);
 
             HubNotificationHelper hubNotification = new HubNotificationHelper(this.Configuration);
-            bool messageSent = await hubNotification.SendPushNotification($"¡Hay una nueva ONG registrada! Damos la bienvenida a {item.Name}");
+            bool messageSent = await hubNotification.SendPushNotification($"¡Damos la bienvenida a {item.Name}!");
 
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }

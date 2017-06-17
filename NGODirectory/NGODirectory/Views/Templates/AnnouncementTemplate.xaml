@@ -8,7 +8,7 @@
         <ResourceDictionary>
 
             <Style x:Key="AnnouncementImageStyle" TargetType="ffimageloading:CachedImage">
-                <Setter Property="Aspect" Value="AspectFill" />
+                <Setter Property="Aspect" Value="AspectFit" />
             </Style>
 
             <Style x:Key="AnnouncementPrimaryStyle" TargetType="Label">
@@ -26,10 +26,9 @@
     <ContentView.Content>
         <Frame
             OutlineColor="{StaticResource AccentColor}"
-            BackgroundColor="{StaticResource WhiteColor}"
-            MinimumHeightRequest="200"
+            BackgroundColor="{StaticResource WhiteColor}"            
             Margin="8,4"
-            Padding="8">
+            Padding="8">            
             <Frame.HasShadow>
                 <OnPlatform 
                     x:TypeArguments="x:Boolean"
@@ -37,11 +36,20 @@
                     iOS="False"
                     WinPhone="False"/>
             </Frame.HasShadow>
-            <Grid>
+            <Grid>                
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition>
+                        <ColumnDefinition.Width>
+                            <OnPlatform 
+                                x:TypeArguments="GridLength" 
+                                Android="80" 
+                                iOS="80"                              
+                                WinPhone="160" />
+                        </ColumnDefinition.Width>
+                    </ColumnDefinition>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+
                 <ffimageloading:CachedImage     
                     Grid.Column="0"
                     Source="{Binding ImageUrl}"

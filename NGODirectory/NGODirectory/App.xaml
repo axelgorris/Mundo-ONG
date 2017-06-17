@@ -13,6 +13,82 @@
             <Color x:Key="WhiteColor">#FFFFFF</Color>
             <Color x:Key="GrayColor">#CCCCCC</Color>
 
+            <!-- BOTTOM NAVIGATION BAR ICONS -->
+            <OnPlatform x:Key="AnnouncementIcon" 
+                x:TypeArguments="FileImageSource"
+                Android="ic_newspaper_grey600_24dp"
+                iOS="ic_newspaper_grey600_24dp"
+                WinPhone="Assets/ic_newspaper_grey600_24dp.png"/>
+            <OnPlatform x:Key="OrganizationIcon" 
+                x:TypeArguments="FileImageSource"
+                Android="ic_earth_grey600_24dp"
+                iOS="ic_earth_grey600_24dp"
+                WinPhone="Assets/ic_earth_grey600_24dp.png"/>
+
+            <!-- TOOLBAR ICONS -->
+            <OnPlatform x:Key="AddIcon" 
+                x:TypeArguments="FileImageSource"
+                Android="add_icon"
+                iOS="add_icon"
+                WinPhone="Assets/add_icon.png"/>
+            <OnPlatform x:Key="EditIcon" 
+                x:TypeArguments="FileImageSource"
+                Android="edit_icon"
+                iOS="edit_icon"    
+                WinPhone="Assets/edit_icon.png"/>
+            <OnPlatform x:Key="SaveIcon" 
+                x:TypeArguments="FileImageSource"
+                Android="save_icon"
+                iOS="save_icon"    
+                WinPhone="Assets/save_icon.png"/>
+            <OnPlatform x:Key="DeleteIcon" 
+                x:TypeArguments="FileImageSource"
+                Android="delete_icon"
+                iOS="delete_icon"    
+                WinPhone="Assets/delete_icon.png"/>
+            <OnPlatform x:Key="RefreshIcon" 
+                x:TypeArguments="FileImageSource"
+                Android="refresh_icon"
+                iOS="refresh_icon"    
+                WinPhone="Assets/refresh_icon.png"/>
+            <OnPlatform x:Key="SettingsIcon" 
+                x:TypeArguments="FileImageSource"
+                Android="settings_icon"
+                iOS="settings_icon"    
+                WinPhone="Assets/settings_icon.png"/>
+
+            <!-- ICONS -->
+            <OnPlatform x:Key="WebIcon" 
+                x:TypeArguments="ImageSource"
+                Android="ic_web_grey600_24dp"
+                iOS="ic_web_grey600_24dp"    
+                WinPhone="Assets/ic_web_grey600_24dp.png"/>            
+            <OnPlatform x:Key="EmailIcon" 
+                x:TypeArguments="ImageSource"
+                Android="ic_email_grey600_24dp"
+                iOS="ic_email_grey600_24dp"    
+                WinPhone="Assets/ic_email_grey600_24dp.png"/>
+            <OnPlatform x:Key="PhoneIcon" 
+                x:TypeArguments="ImageSource"
+                Android="ic_phone_grey600_24dp"
+                iOS="ic_phone_grey600_24dp"    
+                WinPhone="Assets/ic_phone_grey600_24dp.png"/>
+            <OnPlatform x:Key="FacebookIcon" 
+                x:TypeArguments="ImageSource"
+                Android="ic_facebook_box_grey600_24dp"
+                iOS="ic_facebook_box_grey600_24dp"    
+                WinPhone="Assets/ic_facebook_box_grey600_24dp.png"/>
+            <OnPlatform x:Key="TwitterIcon" 
+                x:TypeArguments="ImageSource"
+                Android="ic_twitter_box_grey600_24dp"
+                iOS="ic_twitter_box_grey600_24dp"    
+                WinPhone="Assets/ic_twitter_box_grey600_24dp.png"/>
+            <OnPlatform x:Key="InstagramIcon" 
+                x:TypeArguments="ImageSource"
+                Android="ic_instagram_grey600_24dp"
+                iOS="ic_instagram_grey600_24dp"    
+                WinPhone="Assets/ic_instagram_grey600_24dp.png"/>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

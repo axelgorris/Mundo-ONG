@@ -5,30 +5,194 @@
              xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
              Title="{Binding Title}">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="ItemImageStyle" TargetType="Image">
+                <Setter Property="Aspect">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="Aspect">
+                            <OnPlatform.iOS>AspectFit</OnPlatform.iOS>
+                            <OnPlatform.Android>AspectFit</OnPlatform.Android>
+                            <OnPlatform.WinPhone>AspectFit</OnPlatform.WinPhone>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HeightRequest">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double"
+                                    Android="200"
+                                    iOS="200"
+                                    WinPhone="250">
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="Margin" Value="12" />
+            </Style>
+
+            <Style x:Key="DescriptionStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="Margin" Value="12" />
+            </Style>
+
+            <Style x:Key="InfoStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="Margin" Value="12" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
 
         <control:ConditionalToolbarItem
             Text="Editar organización" 
             Command="{Binding EditCommand}"
-            IsVisible="{Binding IsOrganizationAdmin}">
-            <control:ConditionalToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="edit_icon"
-                    iOS="edit_icon"    
-                    WinPhone="Assets/edit_icon.png"/>
-            </control:ConditionalToolbarItem.Icon>
-        </control:ConditionalToolbarItem>
-        
+            IsVisible="{Binding IsOrganizationAdmin}"
+            Icon="{StaticResource EditIcon}"
+            Order="Primary"
+            Priority="0"/>
+
     </ContentPage.ToolbarItems>
 
-    <ContentPage.Content>
-        <StackLayout Padding="10" Spacing="10">
-            <Label Text="Name"/>
-            <Label Text="{Binding Item.Name}"/>
-            <Label Text="Description"/>
-            <Label Text="{Binding Item.Description}"/>
-        </StackLayout>
-    </ContentPage.Content>
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout                
+                Grid.Row="0">
+                <StackLayout.Padding>
+                    <OnPlatform 
+                    x:TypeArguments="Thickness"
+                    Android="10"
+                    iOS="10"
+                    WinPhone="30"/>
+                </StackLayout.Padding>
+                <StackLayout.HorizontalOptions>
+                    <OnPlatform 
+                        x:TypeArguments="LayoutOptions"
+                        Android="Fill"
+                        iOS="Fill"
+                        WinPhone="Center"/>
+                </StackLayout.HorizontalOptions>
+                <Label 
+                    Text="{Binding Item.Name}"
+                    Style="{StaticResource TitleStyle}" />
+            </StackLayout>
+
+            <Grid                
+                Grid.Row="1"
+                BackgroundColor="Transparent">
+                <Grid.HorizontalOptions>
+                    <OnPlatform 
+                        x:TypeArguments="LayoutOptions"
+                        Android="Fill"
+                        iOS="Fill"
+                        WinPhone="Center"/>
+                </Grid.HorizontalOptions>
+                <Image
+                    Source="{Binding Item.LogoUrl}"
+                    Style="{StaticResource ItemImageStyle}"/>
+            </Grid>
+
+            <StackLayout                
+                Grid.Row="2">
+                <StackLayout.Padding>
+                    <OnPlatform 
+                    x:TypeArguments="Thickness"
+                    Android="10"
+                    iOS="10"
+                    WinPhone="30"/>
+                </StackLayout.Padding>
+                <StackLayout.HorizontalOptions>
+                    <OnPlatform 
+                        x:TypeArguments="LayoutOptions"
+                        Android="Fill"
+                        iOS="Fill"
+                        WinPhone="Center"/>
+                </StackLayout.HorizontalOptions>
+
+                <StackLayout>
+                    <Label
+                        Text="{Binding Item.Description}"
+                        Style="{StaticResource DescriptionStyle}"/>
+                </StackLayout>
+
+                <StackLayout 
+                    Orientation="Horizontal">
+                    <Image 
+                        VerticalOptions="Center"
+                        Source="{StaticResource WebIcon}"/>
+                    <Label
+                        Text="{Binding Item.Web}"
+                        Style="{StaticResource InfoStyle}"/>
+                </StackLayout>
+
+                <StackLayout 
+                    Orientation="Horizontal">
+                    <Image 
+                        VerticalOptions="Center"
+                        Source="{StaticResource EmailIcon}"/>
+                    <Label
+                        Text="{Binding Item.Email}"
+                        Style="{StaticResource InfoStyle}"/>
+                </StackLayout>
+
+                <StackLayout 
+                    Orientation="Horizontal">
+                    <Image 
+                        VerticalOptions="Center"
+                        Source="{StaticResource PhoneIcon}"/>
+                    <Label
+                        Text="{Binding Item.Phone}"
+                        Style="{StaticResource InfoStyle}"/>
+                </StackLayout>
+
+                <StackLayout 
+                    Orientation="Horizontal">
+                    <Image 
+                        VerticalOptions="Center"
+                        Source="{StaticResource FacebookIcon}"/>
+                    <Label
+                        Text="{Binding Item.Facebook}"
+                        Style="{StaticResource InfoStyle}"/>
+                </StackLayout>
+
+                <StackLayout 
+                    Orientation="Horizontal">
+                    <Image 
+                        VerticalOptions="Center"
+                        Source="{StaticResource TwitterIcon}"/>
+                    <Label
+                        Text="{Binding Item.Twitter}"
+                        Style="{StaticResource InfoStyle}"/>
+                </StackLayout>
+
+                <StackLayout 
+                    Orientation="Horizontal">
+                    <Image 
+                        VerticalOptions="Center"
+                        Source="{StaticResource InstagramIcon}"/>
+                    <Label
+                        Text="{Binding Item.Instagram}"
+                        Style="{StaticResource InfoStyle}"/>
+                </StackLayout>
+
+            </StackLayout>
+
+        </Grid>
+    </ScrollView>
 
 </ContentPage>

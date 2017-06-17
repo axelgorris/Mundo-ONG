@@ -8,7 +8,7 @@
         <ResourceDictionary>
 
             <Style x:Key="OrganizationImageStyle" TargetType="ffimageloading:CachedImage">
-                <Setter Property="Aspect" Value="AspectFill" />
+                <Setter Property="Aspect" Value="AspectFit" />
                 <Setter Property="Margin" Value="6"/>
             </Style>
 

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NGODirectory.Views.OrganizationEditView"
              xmlns:behaviors="clr-namespace:NGODirectory.Behaviors;assembly=NGODirectory"
+             xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
@@ -29,31 +30,20 @@
 
     <ContentPage.ToolbarItems>
 
-        <ToolbarItem Name="Guardar organización"
-                     Command="{Binding SaveCommand}"
-                     Order="Primary"
-                     Priority="0" >
-            <ToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="save_icon"
-                    iOS="save_icon"
-                    WinPhone="Assets/save_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
+        <ToolbarItem
+            Text="Guardar organización" 
+            Command="{Binding SaveCommand}"
+            Icon="{StaticResource SaveIcon}"
+            Order="Primary"
+            Priority="0"/>
 
-        <ToolbarItem Name="Añadir organización"
-                     Command="{Binding DeleteCommand}"
-                     Order="Primary"
-                     Priority="1" >
-            <ToolbarItem.Icon>
-                <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="delete_icon"
-                    iOS="delete_icon"
-                    WinPhone="Assets/delete_icon.png"/>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
+        <control:ConditionalToolbarItem
+            Text="Eliminar organización" 
+            Command="{Binding DeleteCommand}"
+            IsVisible="{Binding IsEditMode}"
+            Icon="{StaticResource DeleteIcon}"
+            Order="Primary"
+            Priority="1"/>
 
     </ContentPage.ToolbarItems>
 
@@ -74,7 +64,7 @@
                     Placeholder="Introduce el nombre"
                     Text="{Binding Item.Name, Mode=TwoWay}">
                     <Entry.Behaviors>
-                        <behaviors:EntryMaxLengthValidatorBehavior MaxLength="40"/>
+                        <behaviors:EntryMaxLengthValidatorBehavior MaxLength="50"/>
                     </Entry.Behaviors>
                 </Entry>
             </StackLayout>
@@ -108,7 +98,7 @@
                 <Editor
                     Text="{Binding Item.Description, Mode=TwoWay}">
                     <Editor.Behaviors>
-                        <behaviors:EditorMaxLengthValidatorBehavior MaxLength="150"/>
+                        <behaviors:EditorMaxLengthValidatorBehavior MaxLength="500"/>
                     </Editor.Behaviors>
                 </Editor>
             </StackLayout>

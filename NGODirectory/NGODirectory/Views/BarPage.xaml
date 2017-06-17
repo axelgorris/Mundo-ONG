@@ -15,25 +15,11 @@
       iOS="{StaticResource WhiteColor}"
       WinPhone="{StaticResource WhiteColor}"/>
   </xf:BottomBarPage.BarBackgroundColor>
+
+  <views:AnnouncementsListView
+      Icon="{StaticResource AnnouncementIcon}"/>
   
-    <views:AnnouncementsListView>
-        <views:AnnouncementsListView.Icon>
-            <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="announcement_icon"
-                    iOS="announcement_icon"
-                    WinPhone="Assets/announcement_icon.png"/>
-        </views:AnnouncementsListView.Icon>
-    </views:AnnouncementsListView>
-  
-    <views:OrganizationsListView>
-        <views:OrganizationsListView.Icon>
-            <OnPlatform 
-                    x:TypeArguments="FileImageSource"
-                    Android="world_icon"
-                    iOS="world_icon"                    
-                    WinPhone="Assets/world_icon"/>
-        </views:OrganizationsListView.Icon>
-    </views:OrganizationsListView>    
+  <views:OrganizationsListView
+      Icon="{StaticResource OrganizationIcon}"/>  
     
 </xf:BottomBarPage>

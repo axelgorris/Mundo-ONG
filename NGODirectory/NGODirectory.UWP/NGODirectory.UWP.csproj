@@ -112,11 +112,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\add_icon.png" />
-    <Content Include="Assets\announcement_icon.png" />
     <Content Include="Assets\camera_icon.png" />
     <Content Include="Assets\cancel_icon.png" />
     <Content Include="Assets\delete_icon.png" />
     <Content Include="Assets\edit_icon.png" />
+    <Content Include="Assets\ic_earth_grey600_24dp.png" />
+    <Content Include="Assets\ic_email_grey600_24dp.png" />
+    <Content Include="Assets\ic_facebook_box_grey600_24dp.png" />
+    <Content Include="Assets\ic_instagram_grey600_24dp.png" />
+    <Content Include="Assets\ic_newspaper_grey600_24dp.png" />
+    <Content Include="Assets\ic_phone_grey600_24dp.png" />
+    <Content Include="Assets\ic_twitter_box_grey600_24dp.png" />
+    <Content Include="Assets\ic_web_grey600_24dp.png" />
     <Content Include="Assets\image_icon.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
@@ -139,7 +146,6 @@
     <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
-    <Content Include="Assets\world_icon.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />
