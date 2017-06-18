@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201705271615070_AddedAnnouncementAuthorField.Designer.cs">
       <DependentUpon>201705271615070_AddedAnnouncementAuthorField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706181757204_UpdateDb.cs" />
+    <Compile Include="Migrations\201706181757204_UpdateDb.Designer.cs">
+      <DependentUpon>201706181757204_UpdateDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -224,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705271615070_AddedAnnouncementAuthorField.resx">
       <DependentUpon>201705271615070_AddedAnnouncementAuthorField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706181757204_UpdateDb.resx">
+      <DependentUpon>201706181757204_UpdateDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -139,10 +139,8 @@
                 </StackLayout>
 
                 <StackLayout
-                    HeightRequest="20"
                     Orientation="Horizontal">
-                    <Image
-                        VerticalOptions="Center"
+                    <Image                        
                         Source="{StaticResource EmailIcon}"
                         Style="{StaticResource InfoIconStyle}"/>
                     <Label
@@ -151,7 +149,6 @@
                 </StackLayout>
 
                 <StackLayout
-                    HeightRequest="20"
                     Orientation="Horizontal">
                     <Image
                         VerticalOptions="Center"
@@ -163,7 +160,6 @@
                 </StackLayout>
 
                 <StackLayout
-                    HeightRequest="20"
                     Orientation="Horizontal">
                     <Image
                         VerticalOptions="Center"
@@ -175,7 +171,6 @@
                 </StackLayout>
 
                 <StackLayout
-                    HeightRequest="20"
                     Orientation="Horizontal">
                     <Image
                         VerticalOptions="Center"
@@ -187,7 +182,6 @@
                 </StackLayout>
 
                 <StackLayout
-                    HeightRequest="20"
                     Orientation="Horizontal">
                     <Image
                         VerticalOptions="Center"
