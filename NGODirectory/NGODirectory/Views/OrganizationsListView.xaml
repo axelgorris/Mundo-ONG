@@ -78,9 +78,9 @@
                         <StackLayout
                             VerticalOptions="FillAndExpand"
                             Padding="5"
-                            BackgroundColor="{StaticResource AccentColor}}">                            
+                            BackgroundColor="{StaticResource DefaultPrimaryColor}}">                            
                             <Label Text="{Binding Key}" 
-                               TextColor="{StaticResource WhiteColor}"
+                               TextColor="{StaticResource DefaultPrimaryColorText}"
                                Font="Bold"
                                VerticalOptions="Center"/>
                         </StackLayout>

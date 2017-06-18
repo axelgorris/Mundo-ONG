@@ -16,17 +16,17 @@
                      Orientation="Vertical"
                      VerticalOptions="Center">
 
-            <Button BackgroundColor="{StaticResource AccentColor}"
+            <Button BackgroundColor="{StaticResource DefaultPrimaryColor}"
                     Command="{Binding LoginCommand}"
                     IsVisible="{Binding IsUserLoggedIn, Converter={StaticResource booleanInverter}"
                     Text="Iniciar sesión"
-                    TextColor="{StaticResource WhiteColor}" 
+                    TextColor="{StaticResource DefaultPrimaryColorText}" 
                     WidthRequest="150"/>
-            <Button BackgroundColor="{StaticResource AccentColor}"
+            <Button BackgroundColor="{StaticResource DefaultPrimaryColor}"
                     Command="{Binding LogoutCommand}"                    
                     IsVisible="{Binding IsUserLoggedIn}"
                     Text="Cerrar sesión"
-                    TextColor="{StaticResource WhiteColor}"
+                    TextColor="{StaticResource DefaultPrimaryColorText}"
                     WidthRequest="150"/>
         </StackLayout>
     </ContentPage.Content>

@@ -16,10 +16,13 @@ namespace NGODirectory.ViewModels
 
             Item = item;
             Title = item.Name;
+        }
 
+        public override void OnAppearing(object navigationContext)
+        {
             IsOrganizationAdmin = CloudService.IsUserLoggedIn() && CloudService.GetCurrentUser().UserId.Equals(Item.AdminUser);
         }
-        
+
         public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
 
         public Organization Item { get; set; }

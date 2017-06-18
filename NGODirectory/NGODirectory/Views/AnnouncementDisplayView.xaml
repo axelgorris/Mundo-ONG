@@ -23,19 +23,19 @@
 
             <Style x:Key="TitleStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Large" />
-                <Setter Property="TextColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="TextColor" Value="{StaticResource DefaultPrimaryColor}" />
                 <Setter Property="Margin" Value="12" />
             </Style>
 
             <Style x:Key="DescriptionStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Small" />
-                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
                 <Setter Property="Margin" Value="12" />
             </Style>
 
             <Style x:Key="CreatedStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Micro" />
-                <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
+                <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
                 <Setter Property="Margin" Value="12" />
             </Style>
 

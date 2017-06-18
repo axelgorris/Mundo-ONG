@@ -3,73 +3,80 @@
     {
       "scale": "2x",
       "size": "29x29",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "mundo-ong-icon_58x58.png"
     },
     {
       "scale": "3x",
       "size": "29x29",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "mundo-ong-icon_87x87.png"
     },
     {
       "scale": "2x",
       "size": "40x40",
       "idiom": "iphone",
-      "filename": "Icon-40@2x.png"
+      "filename": "mundo-ong-icon_80x80.png"
     },
     {
       "scale": "3x",
       "size": "40x40",
       "idiom": "iphone",
-      "filename": "Icon-40@3x.png"
+      "filename": "mundo-ong-icon_120x120.png"
     },
     {
       "scale": "2x",
       "size": "60x60",
       "idiom": "iphone",
-      "filename": "Icon-40@3x.png"
+      "filename": "mundo-ong-icon_120x120.png"
     },
     {
       "scale": "3x",
       "size": "60x60",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "mundo-ong-icon_180x180.png"
     },
     {
       "scale": "1x",
       "size": "29x29",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "mundo-ong-icon_29x29.png"
     },
     {
       "scale": "2x",
       "size": "29x29",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "mundo-ong-icon_58x58.png"
     },
     {
       "scale": "1x",
       "size": "40x40",
       "idiom": "ipad",
-      "filename": "Icon.png"
+      "filename": "mundo-ong-icon_40x40.png"
     },
     {
       "scale": "2x",
       "size": "40x40",
       "idiom": "ipad",
-      "filename": "Icon-40@2x.png"
+      "filename": "mundo-ong-icon_80x80.png"
     },
     {
       "scale": "1x",
       "size": "76x76",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "mundo-ong-icon_76x76.png"
     },
     {
       "scale": "2x",
       "size": "76x76",
       "idiom": "ipad",
-      "filename": "Icon@2x (2).png"
+      "filename": "mundo-ong-icon_152x152.png"
     },
     {
       "scale": "2x",
       "size": "83.5x83.5",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "mundo-ong-icon_167x167.png"
     }
   ],
   "properties": {

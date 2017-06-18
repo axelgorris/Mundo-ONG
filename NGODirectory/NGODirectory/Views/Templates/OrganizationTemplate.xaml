@@ -14,7 +14,7 @@
 
             <Style x:Key="OrganizationTitleStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Medium" />
-                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
                 <Setter Property="Margin" Value="12, 6" />
             </Style>
         </ResourceDictionary>

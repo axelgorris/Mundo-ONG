@@ -6,12 +6,18 @@
         <ResourceDictionary>
 
             <!-- COLORS -->
-            <Color x:Key="AccentColor">#01A6BD</Color>
-            <Color x:Key="BackgroundColor">#E5DCDD</Color>
-            <Color x:Key="DarkColor">#433D3F</Color>
-            <Color x:Key="BlackColor">#000000</Color>
-            <Color x:Key="WhiteColor">#FFFFFF</Color>
+            <Color x:Key="DefaultPrimaryColor">#8BC34A</Color>
+            <Color x:Key="DarkPrimaryColor">#689F38</Color>
+            <Color x:Key="LightPrimaryColor">#B2DFDB</Color>
+            <Color x:Key="AccentColor">#FF5722</Color>
+            
+            <Color x:Key="DefaultPrimaryColorText">#FFFFFF</Color>            
+            <Color x:Key="PrimaryTextColor">#212121</Color>
+            <Color x:Key="SecondaryTextColor">#757575</Color>                        
+
+            <Color x:Key="BackgroundColor">#E5DCDD</Color>            
             <Color x:Key="GrayColor">#CCCCCC</Color>
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
 
             <!-- BOTTOM NAVIGATION BAR ICONS -->
             <OnPlatform x:Key="AnnouncementIcon" 
@@ -21,9 +27,9 @@
                 WinPhone="Assets/ic_newspaper_grey600_24dp.png"/>
             <OnPlatform x:Key="OrganizationIcon" 
                 x:TypeArguments="FileImageSource"
-                Android="ic_earth_grey600_24dp"
-                iOS="ic_earth_grey600_24dp"
-                WinPhone="Assets/ic_earth_grey600_24dp.png"/>
+                Android="ngo_grey_24dp"
+                iOS="ngo_grey_24dp"
+                WinPhone="Assets/ngo_grey_24dp.png"/>
 
             <!-- TOOLBAR ICONS -->
             <OnPlatform x:Key="AddIcon" 
