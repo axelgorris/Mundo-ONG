@@ -49,10 +49,8 @@
             ItemsSource="{Binding Items}"
             RefreshCommand="{Binding RefreshCommand}"
             HasUnevenRows="True"
-            SeparatorColor="Transparent"
-            RowHeight="100"
+            SeparatorColor="Transparent"            
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-
             <ListView.Behaviors>
                 <behaviors:EventToCommandBehavior Command="{Binding LoadMoreCommand}"
                                                 Converter="{StaticResource ItemVisibilityConverter}"

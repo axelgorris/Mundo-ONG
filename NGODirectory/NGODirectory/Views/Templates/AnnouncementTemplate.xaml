@@ -8,7 +8,7 @@
         <ResourceDictionary>
 
             <Style x:Key="AnnouncementImageStyle" TargetType="ffimageloading:CachedImage">
-                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="Aspect" Value="AspectFill" />
             </Style>
 
             <Style x:Key="AnnouncementPrimaryStyle" TargetType="Label">

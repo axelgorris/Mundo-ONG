@@ -87,7 +87,7 @@
                     Text="{Binding Item.Name, Mode=TwoWay}"
                     Style="{StaticResource EntryStyle}">
                     <Entry.Behaviors>
-                        <behaviors:EntryMaxLengthValidatorBehavior MaxLength="50"/>
+                        <behaviors:EntryMaxLengthValidatorBehavior MaxLength="250"/>
                     </Entry.Behaviors>
                 </Entry>
             </StackLayout>
@@ -134,7 +134,7 @@
                         Text="{Binding Item.Description, Mode=TwoWay}"
                         Style="{StaticResource EditorStyle}">
                         <Editor.Behaviors>
-                            <behaviors:EditorMaxLengthValidatorBehavior MaxLength="500"/>
+                            <behaviors:EditorMaxLengthValidatorBehavior MaxLength="2000"/>
                         </Editor.Behaviors>
                     </Editor>
                 </StackLayout>

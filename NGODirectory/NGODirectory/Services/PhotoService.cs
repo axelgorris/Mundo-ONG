@@ -32,6 +32,9 @@ namespace NGODirectory.Services
                 MediaFile image = null;
                 await CrossMedia.Current.Initialize();
 
+                //var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                //var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsPickPhotoSupported)
                 {
                     return null;
