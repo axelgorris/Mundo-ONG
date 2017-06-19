@@ -37,8 +37,9 @@ namespace NGODirectory.ViewModels
             try
             {
                 await CloudService.LoginAsync();
-
-                await Application.Current.MainPage.Navigation.PopToRootAsync();
+                
+                await ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PopToRootAsync();
+                App.MenuIsPresented = false;
             }
             catch (Exception ex)
             {

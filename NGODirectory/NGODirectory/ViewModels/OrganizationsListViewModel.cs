@@ -21,7 +21,6 @@ namespace NGODirectory.ViewModels
 
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
-            SettingsCommand = new Command(async () => await GoToSettings());
 
             MessagingCenter.Subscribe<OrganizationEditViewModel>(this, "ItemsChanged", async (sender) =>
             {
@@ -53,7 +52,7 @@ namespace NGODirectory.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    Application.Current.MainPage.Navigation.PushAsync(new Views.OrganizationDisplayView(selectedItem));
+                    ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Views.OrganizationDisplayView(selectedItem));
                     SelectedItem = null;
                 }
             }
@@ -115,32 +114,11 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.OrganizationEditView());
+                await ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Views.OrganizationEditView());
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[OrganizationsList] Error in AddNewItem: {ex.Message}");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
-        public Command SettingsCommand { get; }
-        async Task GoToSettings()
-        {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-
-            try
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.SettingsView());
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[OrganizationsList] Error in GoToSettings: {ex.Message}");
             }
             finally
             {

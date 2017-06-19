@@ -82,6 +82,9 @@
     <Compile Include="Views\OrganizationDisplayView.xaml.cs">
       <DependentUpon>OrganizationDisplayView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RootPage.xaml.cs">
+      <DependentUpon>RootPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -268,6 +271,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\BarPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RootPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -21,7 +21,6 @@ namespace NGODirectory.ViewModels
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
             LoadMoreCommand = new Command<Announcement>(async (Announcement item) => await LoadMore(item));
-            SettingsCommand = new Command(async () => await GoToSettings());
             
             MessagingCenter.Subscribe<AnnouncementEditViewModel>(this, "ItemsChanged", async (sender) =>
             {
@@ -52,7 +51,7 @@ namespace NGODirectory.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    Application.Current.MainPage.Navigation.PushAsync(new Views.AnnouncementDisplayView(selectedItem));
+                    ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Views.AnnouncementDisplayView(selectedItem));
                     SelectedItem = null;
                 }
             }
@@ -93,7 +92,7 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.AnnouncementEditView());
+                await ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Views.AnnouncementEditView());
             }
             catch (Exception ex)
             {
@@ -153,28 +152,7 @@ namespace NGODirectory.ViewModels
                 IsBusy = false;
             }
         }
-
-        public Command SettingsCommand { get; }
-        async Task GoToSettings()
-        {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-
-            try
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.SettingsView());
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[AnnouncementsList] Error in GoToSettings: {ex.Message}");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
+        
         private bool isUserLoggedIn;
         public bool IsUserLoggedIn
         {

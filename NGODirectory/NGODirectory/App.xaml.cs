@@ -11,6 +11,23 @@ namespace NGODirectory
 {
     public partial class App : Application
     {
+        public static NavigationPage NavigationPage { get; private set; }
+        public static RootPage RootPage { get; set; }
+
+        public static bool MenuIsPresented
+        {
+            get
+            {
+                return RootPage.IsPresented;
+            }
+            set
+            {
+                RootPage.IsPresented = value;
+            }
+        }
+
+        public static CustomNavigationPage Detail { get; set; }
+
         public App()
         {
             InitializeComponent();
@@ -20,7 +37,16 @@ namespace NGODirectory
             var CloudService = ServiceLocator.Instance.Resolve<ICloudService>();
             CloudService.StoredLoginAsync();
 
-            MainPage = new CustomNavigationPage(new BarPage());
+            //MainPage = new CustomNavigationPage(new BarPage());
+            
+            RootPage = new RootPage();
+            RootPage.Master = new SettingsView();
+            Detail = new CustomNavigationPage(new BarPage());
+            RootPage.Detail = Detail;
+
+            MainPage = RootPage;
+
+
         }
 
         protected override void OnStart()

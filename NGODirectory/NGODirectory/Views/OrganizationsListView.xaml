@@ -16,13 +16,6 @@
             Order="Primary"
             Priority="0"/>
 
-        <ToolbarItem
-            Text="Ajustes" 
-            Command="{Binding SettingsCommand}"
-            Icon="{StaticResource SettingsIcon}"
-            Order="Primary"
-            Priority="1"/>
-
         <control:ConditionalToolbarItem
             Text="Añadir" 
             Command="{Binding AddNewItemCommand}"
