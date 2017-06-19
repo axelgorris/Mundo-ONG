@@ -79,9 +79,11 @@ namespace NGODirectory.Services
 
             // Pull each sync table
             Debug.WriteLine("SyncOfflineCacheAsync: Pulling organization table");
-            var organizationTable = await GetTableAsync<Organization>(); await organizationTable.PullAsync();
+            var organizationTable = await GetTableAsync<Organization>();
+            await organizationTable.PullAsync();
             Debug.WriteLine("SyncOfflineCacheAsync: Pulling announcements table");
-            var announcementTable = await GetTableAsync<Announcement>(); await announcementTable.PullAsync();
+            var announcementTable = await GetTableAsync<Announcement>();
+            await announcementTable.PullAsync();
         }
 
         async Task ResolveConflictAsync<T>(MobileServiceTableOperationError error, bool overrideServerChanges) where T : TableData

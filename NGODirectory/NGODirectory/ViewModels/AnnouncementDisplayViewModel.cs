@@ -3,6 +3,7 @@ using NGODirectory.Helpers;
 using NGODirectory.Models;
 using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,9 +13,11 @@ namespace NGODirectory.ViewModels
     {
         public AnnouncementDisplayViewModel(Announcement item)
         {
-            Title = string.Empty;
-            Item = item;
-            
+            Title = string.Empty;            
+            item.Description = Regex.Replace(item.Description, @"\r\n?|\n", Environment.NewLine);
+
+            Item = item;            
+
             EditCommand = new Command(async () => await Edit());
         }
 
