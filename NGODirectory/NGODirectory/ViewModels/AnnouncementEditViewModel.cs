@@ -50,28 +50,37 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                if ((await Application.Current.MainPage.DisplayActionSheet("Se guardarán los cambios realizados. ¿Estás seguro?", "Guardar", "Cancelar")).Equals("Guardar"))
+                if (!ValidateFields())
                 {
-                    if (Image != null)
+                    await Application.Current.MainPage.DisplayAlert("Campos requeridos",
+                                        "Por favor, introduce título y descripción de la notícia",
+                                        "Ok");
+                }
+                else
+                {
+                    if ((await Application.Current.MainPage.DisplayActionSheet("Se guardarán los cambios realizados. ¿Estás seguro?", "Guardar", "Cancelar")).Equals("Guardar"))
                     {
-                        ImageUrl = await CloudService.UploadStreamAsync(CloudService.GetCurrentUser().UserId, Image.GetStream());
-                        Item.ImageUrl = ImageUrl;
-                    }
+                        if (Image != null)
+                        {
+                            ImageUrl = await CloudService.UploadStreamAsync(CloudService.GetCurrentUser().UserId, Image.GetStream());
+                            Item.ImageUrl = ImageUrl;
+                        }
 
-                    var table = await CloudService.GetTableAsync<Announcement>();
+                        var table = await CloudService.GetTableAsync<Announcement>();
 
-                    if (Item.Id == null)
-                    {
-                        await table.CreateItemAsync(Item);
-                    }
-                    else
-                    {
-                        await table.UpdateItemAsync(Item);
-                    }
+                        if (Item.Id == null)
+                        {
+                            await table.CreateItemAsync(Item);
+                        }
+                        else
+                        {
+                            await table.UpdateItemAsync(Item);
+                        }
 
-                    await CloudService.SyncOfflineCacheAsync<Announcement>(overrideServerChanges: true);
-                    MessagingCenter.Send(this, "ItemsChanged");
-                    await Application.Current.MainPage.Navigation.PopToRootAsync();
+                        await CloudService.SyncOfflineCacheAsync<Announcement>(overrideServerChanges: true);
+                        MessagingCenter.Send(this, "ItemsChanged");
+                        await Application.Current.MainPage.Navigation.PopToRootAsync();
+                    }
                 }
             }
             catch (Exception ex)
@@ -82,6 +91,12 @@ namespace NGODirectory.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private bool ValidateFields()
+        {
+            return !(string.IsNullOrEmpty(Item.Title) ||
+                    string.IsNullOrEmpty(Item.Description));
         }
 
         public Command DeleteCommand { get; }
@@ -144,5 +159,6 @@ namespace NGODirectory.ViewModels
         }
 
         public bool IsEditMode { get; private set; }
+        
     }
 }
