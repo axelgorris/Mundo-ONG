@@ -1,5 +1,7 @@
 ﻿using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,14 +33,15 @@ namespace NGODirectory.Services
             {
                 MediaFile image = null;
                 await CrossMedia.Current.Initialize();
-
-                //var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-                //var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
-
+                
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsPickPhotoSupported)
                 {
                     return null;
                 }
+                
+                var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+                if (storageStatus != PermissionStatus.Granted)
+                    await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Storage);
 
                 var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions()
                 {
@@ -70,6 +73,10 @@ namespace NGODirectory.Services
                 {
                     return null;
                 }
+
+                var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                if (cameraStatus != PermissionStatus.Granted)
+                    await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Camera);
 
                 var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
