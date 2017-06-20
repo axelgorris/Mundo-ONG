@@ -21,20 +21,21 @@ namespace NGODirectory.ViewModels
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
             LoadMoreCommand = new Command<Announcement>(async (Announcement item) => await LoadMore(item));
-            
+            IsUserLoggedIn = CloudService.IsUserLoggedIn();
+
             MessagingCenter.Subscribe<AnnouncementEditViewModel>(this, "ItemsChanged", async (sender) =>
             {
                 await Refresh();
             });
-            
+
+            MessagingCenter.Subscribe<MasterModel>(this, "RefreshLogin", (sender) =>
+            {
+                IsUserLoggedIn = CloudService.IsUserLoggedIn();
+            });
+
             RefreshCommand.Execute(null);
         }
-
-        public override void OnAppearing(object navigationContext)
-        {
-            IsUserLoggedIn = CloudService.IsUserLoggedIn();
-        }
-
+       
         ObservableRangeCollection<Announcement> items = new ObservableRangeCollection<Announcement>();
         public ObservableRangeCollection<Announcement> Items
         {
@@ -51,7 +52,7 @@ namespace NGODirectory.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Pages.AnnouncementDisplayPage(selectedItem));
+                    App.NavigationPage.Navigation.PushAsync(new Pages.AnnouncementDisplayPage(selectedItem));
                     SelectedItem = null;
                 }
             }
@@ -92,7 +93,7 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                await ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Pages.AnnouncementEditPage());
+                await App.NavigationPage.Navigation.PushAsync(new Pages.AnnouncementEditPage());
             }
             catch (Exception ex)
             {

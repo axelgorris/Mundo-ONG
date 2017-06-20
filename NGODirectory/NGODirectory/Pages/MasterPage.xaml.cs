@@ -5,12 +5,12 @@ using Xamarin.Forms.Xaml;
 namespace NGODirectory.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsPage : ContentPage
+    public partial class MasterPage : ContentPage
     {
-        public SettingsPage()
+        public MasterPage()
         {
             InitializeComponent();
-            BindingContext = new SettingsViewModel();
+            BindingContext = new MasterModel();
         }
     }
 }

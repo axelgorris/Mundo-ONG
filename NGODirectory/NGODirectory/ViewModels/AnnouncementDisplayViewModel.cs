@@ -40,7 +40,7 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                await ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Pages.AnnouncementEditPage(Item));
+                await App.NavigationPage.Navigation.PushAsync(new Pages.AnnouncementEditPage(Item));
             }
             catch (Exception ex)
             {

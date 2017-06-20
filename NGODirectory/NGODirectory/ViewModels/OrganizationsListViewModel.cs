@@ -21,20 +21,21 @@ namespace NGODirectory.ViewModels
 
             RefreshCommand = new Command(async () => await Refresh());
             AddNewItemCommand = new Command(async () => await AddNewItem());
+            IsUserLoggedIn = CloudService.IsUserLoggedIn();
 
             MessagingCenter.Subscribe<OrganizationEditViewModel>(this, "ItemsChanged", async (sender) =>
             {
                 await Refresh();
             });
 
+            MessagingCenter.Subscribe<MasterModel>(this, "RefreshLogin", (sender) =>
+            {
+                IsUserLoggedIn = CloudService.IsUserLoggedIn();
+            });
+
             RefreshCommand.Execute(null);
         }
-
-        public override void OnAppearing(object navigationContext)
-        {
-            IsUserLoggedIn = CloudService.IsUserLoggedIn();
-        }
-
+       
         public ObservableCollection<Organization> ItemsCopy { get; set; }
         ObservableCollection<Grouping<string, Organization>> itemsGrouped = new ObservableCollection<Grouping<string, Organization>>();
         public ObservableCollection<Grouping<string, Organization>> ItemsGrouped

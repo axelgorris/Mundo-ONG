@@ -9,11 +9,13 @@ using Xamarin.Forms;
 
 namespace NGODirectory.ViewModels
 {
-    public class SettingsViewModel : BaseViewModel
+    public class MasterModel : BaseViewModel
     {
-        public SettingsViewModel()
+        public MasterModel()
         {
             Title = "Ajustes";
+
+            IsUserLoggedIn = CloudService.IsUserLoggedIn();
         }
 
         ICloudService cloudService => ServiceLocator.Instance.Resolve<ICloudService>();
@@ -22,9 +24,11 @@ namespace NGODirectory.ViewModels
             get { return cloudService; }
         }
 
+        private bool isUserLoggedIn;
         public bool IsUserLoggedIn
         {
-            get { return CloudService.IsUserLoggedIn(); }
+            get { return isUserLoggedIn; }
+            set { isUserLoggedIn = value; }
         }
 
         public ICommand LoginCommand => new Command(async () => await Login());
@@ -37,8 +41,8 @@ namespace NGODirectory.ViewModels
             try
             {
                 await CloudService.LoginAsync();
-                
-                await ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PopToRootAsync();
+                SetProperty(ref isUserLoggedIn, CloudService.IsUserLoggedIn(), "IsUserLoggedIn");
+                MessagingCenter.Send(this, "RefreshLogin");
                 App.MenuIsPresented = false;
             }
             catch (Exception ex)
@@ -61,8 +65,9 @@ namespace NGODirectory.ViewModels
             try
             {
                 await CloudService.LogoutAsync();
-
-                await Application.Current.MainPage.Navigation.PopToRootAsync();
+                SetProperty(ref isUserLoggedIn, CloudService.IsUserLoggedIn(), "IsUserLoggedIn");
+                MessagingCenter.Send(this, "RefreshLogin");
+                App.MenuIsPresented = false;
             }
             catch (Exception ex)
             {

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NGODirectory.Pages.SettingsPage"
+             x:Class="NGODirectory.Pages.MasterPage"
              xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"
              Title="{Binding Title}">
 
@@ -12,23 +12,41 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center"
-                     Orientation="Vertical"
-                     VerticalOptions="Center">
 
-            <Button BackgroundColor="{StaticResource DefaultPrimaryColor}"
+        <Grid BackgroundColor="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid
+                BackgroundColor="{StaticResource LightPrimaryColor}">
+                <StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Image Source="{StaticResource ApplicationIcon}" WidthRequest="85" HeightRequest="85" />
+                    <Label Text="Mundo ONG" TextColor="{StaticResource DefaultPrimaryColor}" FontSize="Large" />
+                </StackLayout>
+            </Grid>
+            <StackLayout Margin="20,20,20,0" 
+                Grid.Row="1" 
+                Spacing="15"
+                HorizontalOptions="Center"
+                Orientation="Vertical"
+                VerticalOptions="Center">
+
+                <Button BackgroundColor="{StaticResource AccentColor}"
                     Command="{Binding LoginCommand}"
                     IsVisible="{Binding IsUserLoggedIn, Converter={StaticResource booleanInverter}"
                     Text="Iniciar sesión"
                     TextColor="{StaticResource DefaultPrimaryColorText}" 
                     WidthRequest="150"/>
-            <Button BackgroundColor="{StaticResource DefaultPrimaryColor}"
+                <Button BackgroundColor="{StaticResource AccentColor}"
                     Command="{Binding LogoutCommand}"                    
                     IsVisible="{Binding IsUserLoggedIn}"
                     Text="Cerrar sesión"
                     TextColor="{StaticResource DefaultPrimaryColorText}"
                     WidthRequest="150"/>
-        </StackLayout>
+
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 
 </ContentPage>

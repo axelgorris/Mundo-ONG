@@ -66,7 +66,7 @@
     <Compile Include="ViewModels\AnnouncementEditViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />
     <Compile Include="ViewModels\OrganizationDisplayViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\MasterModel.cs" />
     <Compile Include="Pages\AnnouncementDisplayPage.xaml.cs">
       <DependentUpon>AnnouncementDisplayPage.xaml</DependentUpon>
     </Compile>
@@ -82,11 +82,8 @@
     <Compile Include="Pages\OrganizationDisplayPage.xaml.cs">
       <DependentUpon>OrganizationDisplayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\RootPage.xaml.cs">
-      <DependentUpon>RootPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    <Compile Include="Pages\MasterPage.xaml.cs">
+      <DependentUpon>MasterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AnnouncementsListPage.xaml.cs">
       <DependentUpon>AnnouncementsListPage.xaml</DependentUpon>
@@ -212,7 +209,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\SettingsPage.xaml">
+    <EmbeddedResource Include="Pages\MasterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -271,12 +268,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\BarPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\RootPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
