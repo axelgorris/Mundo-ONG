@@ -79,7 +79,7 @@ namespace NGODirectory.ViewModels
 
                         await CloudService.SyncOfflineCacheAsync<Announcement>(overrideServerChanges: true);
                         MessagingCenter.Send(this, "ItemsChanged");
-                        await Application.Current.MainPage.Navigation.PopToRootAsync();
+                        await App.NavigationPage.PopToRootAsync();
                     }
                 }
             }
@@ -119,7 +119,7 @@ namespace NGODirectory.ViewModels
                         MessagingCenter.Send(this, "ItemsChanged");
                     }
 
-                    await Application.Current.MainPage.Navigation.PopToRootAsync();
+                    await App.NavigationPage.PopToRootAsync();
                 }
             }
             catch (Exception ex)

@@ -18,6 +18,7 @@
                 <RowDefinition Height="200" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+
             <Grid
                 BackgroundColor="{StaticResource LightPrimaryColor}">
                 <StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -44,6 +45,13 @@
                     Text="Cerrar sesión"
                     TextColor="{StaticResource DefaultPrimaryColorText}"
                     WidthRequest="150"/>
+
+                <ActivityIndicator 
+                    IsVisible="{Binding IsBusy}" 
+                    IsRunning="{Binding IsBusy}"
+                    Color="{StaticResource AccentColor}"
+                    VerticalOptions="FillAndExpand" 
+                    HorizontalOptions="FillAndExpand" />
 
             </StackLayout>
         </Grid>

@@ -53,7 +53,7 @@ namespace NGODirectory.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Pages.OrganizationDisplayPage(selectedItem));
+                    App.NavigationPage.PushAsync(new Pages.OrganizationDisplayPage(selectedItem));
                     SelectedItem = null;
                 }
             }
@@ -115,7 +115,7 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                await ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Pages.OrganizationEditPage());
+                await App.NavigationPage.PushAsync(new Pages.OrganizationEditPage());
             }
             catch (Exception ex)
             {
