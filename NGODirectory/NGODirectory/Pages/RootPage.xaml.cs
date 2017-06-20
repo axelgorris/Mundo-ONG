@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace NGODirectory.Views
+namespace NGODirectory.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RootPage : MasterDetailPage

@@ -1,6 +1,6 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
-using NGODirectory.Views;
+using NGODirectory.Pages;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;

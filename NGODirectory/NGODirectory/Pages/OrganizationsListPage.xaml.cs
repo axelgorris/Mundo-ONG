@@ -2,22 +2,22 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace NGODirectory.Views
+namespace NGODirectory.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AnnouncementsListView : ContentPage
+    public partial class OrganizationsListPage : ContentPage
     {
-        public AnnouncementsListView()
+        public OrganizationsListPage()
         {
             InitializeComponent();
-            BindingContext = new AnnouncementsListViewModel();
+            BindingContext = new OrganizationsListViewModel();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            var viewModel = BindingContext as AnnouncementsListViewModel;
+            var viewModel = BindingContext as OrganizationsListViewModel;
             if (viewModel != null) viewModel.OnAppearing(null);
         }
     }

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace NGODirectory.Views
+namespace NGODirectory.Pages
 {
     public partial class CustomNavigationPage : NavigationPage
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace NGODirectory.Views
+namespace NGODirectory.Pages
 {
     public partial class BarPage
     {

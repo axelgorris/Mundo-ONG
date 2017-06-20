@@ -51,7 +51,7 @@ namespace NGODirectory.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Views.AnnouncementDisplayView(selectedItem));
+                    ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Pages.AnnouncementDisplayPage(selectedItem));
                     SelectedItem = null;
                 }
             }
@@ -92,7 +92,7 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                await ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Views.AnnouncementEditView());
+                await ((MasterDetailPage)(Application.Current.MainPage)).Detail.Navigation.PushAsync(new Pages.AnnouncementEditPage());
             }
             catch (Exception ex)
             {

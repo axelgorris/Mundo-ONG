@@ -3,12 +3,12 @@ using NGODirectory.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace NGODirectory.Views
+namespace NGODirectory.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OrganizationEditView : ContentPage
+    public partial class OrganizationEditPage : ContentPage
     {
-        public OrganizationEditView(Organization item = null)
+        public OrganizationEditPage(Organization item = null)
         {
             InitializeComponent();
             BindingContext = new OrganizationEditViewModel(item);

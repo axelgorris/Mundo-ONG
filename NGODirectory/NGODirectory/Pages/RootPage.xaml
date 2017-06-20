@@ -2,5 +2,5 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms" 
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:local="clr-namespace:HamburgerMenuExample" 
-                  x:Class="NGODirectory.Views.RootPage">
+                  x:Class="NGODirectory.Pages.RootPage">
 </MasterDetailPage>

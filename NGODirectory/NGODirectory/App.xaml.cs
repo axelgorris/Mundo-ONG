@@ -1,7 +1,7 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Services;
-using NGODirectory.Views;
+using NGODirectory.Pages;
 using Xamarin.Forms;
 using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
@@ -40,7 +40,7 @@ namespace NGODirectory
             //MainPage = new CustomNavigationPage(new BarPage());
             
             RootPage = new RootPage();
-            RootPage.Master = new SettingsView();
+            RootPage.Master = new SettingsPage();
             Detail = new CustomNavigationPage(new BarPage());
             RootPage.Detail = Detail;
 

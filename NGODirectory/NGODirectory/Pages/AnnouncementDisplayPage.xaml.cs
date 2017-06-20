@@ -3,12 +3,12 @@ using NGODirectory.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace NGODirectory.Views
+namespace NGODirectory.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AnnouncementDisplayView : ContentPage
+    public partial class AnnouncementDisplayPage : ContentPage
     {
-        public AnnouncementDisplayView(Announcement item)
+        public AnnouncementDisplayPage(Announcement item)
         {
             InitializeComponent();
             BindingContext = new AnnouncementDisplayViewModel(item);

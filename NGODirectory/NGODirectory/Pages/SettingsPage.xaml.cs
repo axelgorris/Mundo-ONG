@@ -2,12 +2,12 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace NGODirectory.Views
+namespace NGODirectory.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsView : ContentPage
+    public partial class SettingsPage : ContentPage
     {
-        public SettingsView()
+        public SettingsPage()
         {
             InitializeComponent();
             BindingContext = new SettingsViewModel();

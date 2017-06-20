@@ -67,45 +67,45 @@
     <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />
     <Compile Include="ViewModels\OrganizationDisplayViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="Views\AnnouncementDisplayView.xaml.cs">
-      <DependentUpon>AnnouncementDisplayView.xaml</DependentUpon>
+    <Compile Include="Pages\AnnouncementDisplayPage.xaml.cs">
+      <DependentUpon>AnnouncementDisplayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AnnouncementEditView.xaml.cs">
-      <DependentUpon>AnnouncementEditView.xaml</DependentUpon>
+    <Compile Include="Pages\AnnouncementEditPage.xaml.cs">
+      <DependentUpon>AnnouncementEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BarPage.xaml.cs">
+    <Compile Include="Pages\BarPage.xaml.cs">
       <DependentUpon>BarPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CustomNavigationPage.xaml.cs">
+    <Compile Include="Pages\CustomNavigationPage.xaml.cs">
       <DependentUpon>CustomNavigationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OrganizationDisplayView.xaml.cs">
-      <DependentUpon>OrganizationDisplayView.xaml</DependentUpon>
+    <Compile Include="Pages\OrganizationDisplayPage.xaml.cs">
+      <DependentUpon>OrganizationDisplayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RootPage.xaml.cs">
+    <Compile Include="Pages\RootPage.xaml.cs">
       <DependentUpon>RootPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
+    <Compile Include="Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AnnouncementsListView.xaml.cs">
-      <DependentUpon>AnnouncementsListView.xaml</DependentUpon>
+    <Compile Include="Pages\AnnouncementsListPage.xaml.cs">
+      <DependentUpon>AnnouncementsListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OrganizationEditView.xaml.cs">
-      <DependentUpon>OrganizationEditView.xaml</DependentUpon>
+    <Compile Include="Pages\OrganizationEditPage.xaml.cs">
+      <DependentUpon>OrganizationEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OrganizationsListView.xaml.cs">
-      <DependentUpon>OrganizationsListView.xaml</DependentUpon>
+    <Compile Include="Pages\OrganizationsListPage.xaml.cs">
+      <DependentUpon>OrganizationsListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AzureCloudService.cs" />
     <Compile Include="Services\AzureCloudTable.cs" />
     <Compile Include="ViewModels\OrganizationEditViewModel.cs" />
     <Compile Include="ViewModels\OrganizationsListViewModel.cs" />
-    <Compile Include="Views\Templates\AnnouncementTemplate.xaml.cs">
+    <Compile Include="Pages\Templates\AnnouncementTemplate.xaml.cs">
       <DependentUpon>AnnouncementTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Templates\OrganizationTemplate.xaml.cs">
+    <Compile Include="Pages\Templates\OrganizationTemplate.xaml.cs">
       <DependentUpon>OrganizationTemplate.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -212,71 +212,71 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\SettingsView.xaml">
+    <EmbeddedResource Include="Pages\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\OrganizationsListView.xaml">
+    <EmbeddedResource Include="Pages\OrganizationsListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\AnnouncementsListView.xaml">
+    <EmbeddedResource Include="Pages\AnnouncementsListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\OrganizationEditView.xaml">
+    <EmbeddedResource Include="Pages\OrganizationEditPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\AnnouncementEditView.xaml">
+    <EmbeddedResource Include="Pages\AnnouncementEditPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Templates\AnnouncementTemplate.xaml">
+    <EmbeddedResource Include="Pages\Templates\AnnouncementTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\CustomNavigationPage.xaml">
+    <EmbeddedResource Include="Pages\CustomNavigationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\AnnouncementDisplayView.xaml">
+    <EmbeddedResource Include="Pages\AnnouncementDisplayPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\OrganizationDisplayView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Templates\OrganizationTemplate.xaml">
+    <EmbeddedResource Include="Pages\OrganizationDisplayPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\BarPage.xaml">
+    <EmbeddedResource Include="Pages\Templates\OrganizationTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\RootPage.xaml">
+    <EmbeddedResource Include="Pages\BarPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\RootPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

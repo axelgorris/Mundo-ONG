@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace NGODirectory.Views
+namespace NGODirectory.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AnnouncementEditView : ContentPage
+    public partial class AnnouncementEditPage : ContentPage
     {
-        public AnnouncementEditView(Announcement item = null)
+        public AnnouncementEditPage(Announcement item = null)
         {
             InitializeComponent();
             BindingContext = new AnnouncementEditViewModel(item);

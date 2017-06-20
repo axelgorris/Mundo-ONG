@@ -2,11 +2,11 @@
 <xf:BottomBarPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xf="clr-namespace:BottomBar.XamarinForms;assembly=BottomBar.XamarinForms"
-             xmlns:views="clr-namespace:NGODirectory.Views"             
+             xmlns:views="clr-namespace:NGODirectory.Pages"             
              BarTextColor="{StaticResource DefaultPrimaryColor}"
              BackgroundColor="{StaticResource BackgroundColor}"
              Title="Mundo ONG"
-             x:Class="NGODirectory.Views.BarPage">
+             x:Class="NGODirectory.Pages.BarPage">
 
   <xf:BottomBarPage.BarBackgroundColor>
     <OnPlatform 
@@ -16,10 +16,10 @@
       WinPhone="{StaticResource WhiteColor}"/>
   </xf:BottomBarPage.BarBackgroundColor>
 
-  <views:AnnouncementsListView
+  <views:AnnouncementsListPage
       Icon="{StaticResource AnnouncementIcon}"/>
   
-  <views:OrganizationsListView
+  <views:OrganizationsListPage
       Icon="{StaticResource OrganizationIcon}"/>  
     
 </xf:BottomBarPage>
