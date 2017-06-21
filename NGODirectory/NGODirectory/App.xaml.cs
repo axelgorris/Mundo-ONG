@@ -39,6 +39,7 @@ namespace NGODirectory
             var masterPage = new MasterDetailPage();
             masterPage.Master = new MasterPage() { Title = "Ajustes" };
             masterPage.Detail = NavigationPage;
+            masterPage.MasterBehavior = MasterBehavior.Popover;
 
             MainPage = masterPage;
         }

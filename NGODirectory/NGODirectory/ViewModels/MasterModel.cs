@@ -1,6 +1,7 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Pages;
+using Plugin.Share;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -77,6 +78,17 @@ namespace NGODirectory.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        public ICommand OpenAppCommand => new Command(async () => await OpenApp());
+        async Task OpenApp()
+        {
+            //var openAppService = DependencyService.Get<IOpenAppService>();
+            //await openAppService.Launch("twitter://user?user_id=24221652");
+
+            //Device.OpenUri(new Uri("https://twitter.com/AxelGorris"));
+
+            await CrossShare.Current.OpenBrowser("https://twitter.com/AxelGorris");
         }
     }
 }

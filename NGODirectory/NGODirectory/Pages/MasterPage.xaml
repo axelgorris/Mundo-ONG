@@ -20,28 +20,35 @@
 
         <Grid BackgroundColor="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="200" />
+                <RowDefinition Height="220" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Grid
-                BackgroundColor="{StaticResource LightPrimaryColor}">
+                BackgroundColor="White">
                 <StackLayout Padding="0,20,0,0" 
                              HorizontalOptions="CenterAndExpand" 
                              VerticalOptions="CenterAndExpand">
                     <Image Source="{StaticResource ApplicationIcon}" 
                            WidthRequest="85" 
-                           HeightRequest="85" />
+                           HeightRequest="85" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
                     <Label Text="Mundo ONG" 
                            TextColor="{StaticResource DefaultPrimaryColor}" 
                            FontSize="Large" />
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="Center"
                                  Margin="10">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding OpenAppCommand}"
+                                NumberOfTapsRequired="1" />
+                        </StackLayout.GestureRecognizers>
                         <Image VerticalOptions="Center"
                             Source="{StaticResource TwitterIcon}"
                             Style="{StaticResource InfoIconStyle}"/>
-                        <Label Text="@AxelGD" 
+                        <Label Text="@AxelGorris" 
                                TextColor="{StaticResource GrayColor}" 
                                FontSize="Small" 
                                Font="Bold"/>
