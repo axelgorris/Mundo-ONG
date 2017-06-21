@@ -19,13 +19,17 @@ namespace NGODirectory.ViewModels
             Item = item;            
 
             EditCommand = new Command(async () => await Edit());
-        }
 
-        public override void OnAppearing(object navigationContext)
-        {
-            IsAuthor = CloudService.IsUserLoggedIn() && CloudService.GetCurrentUser().UserId.Equals(Item.Author);
-        }
+            IsAuthor = CloudService.IsUserLoggedIn() &&
+                        CloudService.GetCurrentUser().UserId.Equals(Item.Author);
 
+            MessagingCenter.Subscribe<MasterModel>(this, "RefreshLogin", (sender) =>
+            {
+                IsAuthor = CloudService.IsUserLoggedIn() && 
+                            CloudService.GetCurrentUser().UserId.Equals(Item.Author);
+            });
+        }
+        
         public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
 
         public Announcement Item { get; set; }

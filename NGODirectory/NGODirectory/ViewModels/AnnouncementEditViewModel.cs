@@ -34,6 +34,13 @@ namespace NGODirectory.ViewModels
             SaveCommand = new Command(async () => await SaveAsync());
             DeleteCommand = new Command(async () => await DeleteAsync());
             PickImageCommand = new Command(async () => await PickImageAsync());
+
+            MessagingCenter.Subscribe<MasterModel>(this, "RefreshLogin", (sender) =>
+            {
+                if (!(CloudService.IsUserLoggedIn() &&
+                      CloudService.GetCurrentUser().UserId.Equals(Item.Author)))
+                    App.NavigationPage.PopToRootAsync();
+            });
         }
 
         public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();

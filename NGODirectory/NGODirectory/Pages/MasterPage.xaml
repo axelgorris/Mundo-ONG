@@ -8,6 +8,11 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:NegateBooleanConverter x:Key="booleanInverter" />
+
+            <Style x:Key="InfoIconStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="25" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -21,9 +26,26 @@
 
             <Grid
                 BackgroundColor="{StaticResource LightPrimaryColor}">
-                <StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                    <Image Source="{StaticResource ApplicationIcon}" WidthRequest="85" HeightRequest="85" />
-                    <Label Text="Mundo ONG" TextColor="{StaticResource DefaultPrimaryColor}" FontSize="Large" />
+                <StackLayout Padding="0,20,0,0" 
+                             HorizontalOptions="CenterAndExpand" 
+                             VerticalOptions="CenterAndExpand">
+                    <Image Source="{StaticResource ApplicationIcon}" 
+                           WidthRequest="85" 
+                           HeightRequest="85" />
+                    <Label Text="Mundo ONG" 
+                           TextColor="{StaticResource DefaultPrimaryColor}" 
+                           FontSize="Large" />
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center"
+                                 Margin="10">
+                        <Image VerticalOptions="Center"
+                            Source="{StaticResource TwitterIcon}"
+                            Style="{StaticResource InfoIconStyle}"/>
+                        <Label Text="@AxelGD" 
+                               TextColor="{StaticResource GrayColor}" 
+                               FontSize="Small" 
+                               Font="Bold"/>
+                    </StackLayout>
                 </StackLayout>
             </Grid>
             <StackLayout Margin="20,20,20,0" 
