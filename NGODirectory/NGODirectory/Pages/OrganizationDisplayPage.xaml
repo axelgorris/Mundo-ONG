@@ -146,6 +146,12 @@
 
                 <StackLayout
                     Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding SendEmailCommand}"
+                            CommandParameter="{Binding Item.Email}" 
+                            NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
                     <Image                        
                         Source="{StaticResource EmailIcon}"
                         Style="{StaticResource InfoIconStyle}"/>
@@ -156,6 +162,12 @@
 
                 <StackLayout
                     Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding MakePhoneCallCommand}"
+                            CommandParameter="{Binding Item.Phone}" 
+                            NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
                     <Image
                         VerticalOptions="Center"
                         Source="{StaticResource PhoneIcon}"

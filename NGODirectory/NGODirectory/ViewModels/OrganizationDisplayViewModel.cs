@@ -1,6 +1,7 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Models;
+using Plugin.Messaging;
 using Plugin.Share;
 using System;
 using System.Diagnostics;
@@ -21,17 +22,19 @@ namespace NGODirectory.ViewModels
 
             EditCommand = new Command(async () => await EditAsync());
             OpenBrowserCommand = new Command<string>(async (param) => await OpenBrowserAsync(param));
+            MakePhoneCallCommand = new Command<string>(MakePhoneCall);
+            SendEmailCommand = new Command<string>(SendEmail);
 
             IsOrganizationAdmin = CloudService.IsUserLoggedIn() &&
                                     CloudService.GetCurrentUser().UserId.Equals(Item.AdminUser);
 
             MessagingCenter.Subscribe<MasterModel>(this, "RefreshLogin", (sender) =>
             {
-                IsOrganizationAdmin = CloudService.IsUserLoggedIn() && 
+                IsOrganizationAdmin = CloudService.IsUserLoggedIn() &&
                                     CloudService.GetCurrentUser().UserId.Equals(Item.AdminUser);
             });
         }
-        
+
         public ICloudService CloudService => ServiceLocator.Instance.Resolve<ICloudService>();
 
         public Organization Item { get; set; }
@@ -64,6 +67,30 @@ namespace NGODirectory.ViewModels
         {
             if (!string.IsNullOrEmpty(value))
                 await CrossShare.Current.OpenBrowser(value);
+        }
+
+        public Command<string> MakePhoneCallCommand { get; }
+        void MakePhoneCall(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                var phoneDialer = CrossMessaging.Current.PhoneDialer;
+                if (phoneDialer.CanMakePhoneCall)
+                    phoneDialer.MakePhoneCall(value);
+            }
+        }
+
+        public Command<string> SendEmailCommand { get; }
+        void SendEmail(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                var emailTask = CrossMessaging.Current.EmailMessenger;
+                if (emailTask.CanSendEmail)
+                {
+                    emailTask.SendEmail(value);
+                }
+            }
         }
 
         private bool isOrganizationAdmin;
