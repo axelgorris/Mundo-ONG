@@ -195,6 +195,10 @@
     <Compile Include="Migrations\201706181757204_UpdateDb.Designer.cs">
       <DependentUpon>201706181757204_UpdateDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706211925292_AddedAnnouncementExternalUrlField.cs" />
+    <Compile Include="Migrations\201706211925292_AddedAnnouncementExternalUrlField.Designer.cs">
+      <DependentUpon>201706211925292_AddedAnnouncementExternalUrlField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -231,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706181757204_UpdateDb.resx">
       <DependentUpon>201706181757204_UpdateDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706211925292_AddedAnnouncementExternalUrlField.resx">
+      <DependentUpon>201706211925292_AddedAnnouncementExternalUrlField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

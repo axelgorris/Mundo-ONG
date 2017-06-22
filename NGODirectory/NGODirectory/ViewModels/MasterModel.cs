@@ -16,6 +16,10 @@ namespace NGODirectory.ViewModels
         {
             Title = "Ajustes";
 
+            LoginCommand = new Command(async () => await LoginAsync());
+            LogoutCommand = new Command(async () => await LogoutAsync());
+            OpenBrowserCommand = new Command<string>(async (param) => await OpenBrowserAsync(param));
+
             IsUserLoggedIn = CloudService.IsUserLoggedIn();
         }
 
@@ -32,8 +36,8 @@ namespace NGODirectory.ViewModels
             set { isUserLoggedIn = value; }
         }
 
-        public ICommand LoginCommand => new Command(async () => await Login());
-        async Task Login()
+        public Command LoginCommand { get; }
+        async Task LoginAsync()
         {
             if (IsBusy)
                 return;
@@ -56,8 +60,8 @@ namespace NGODirectory.ViewModels
             }
         }
 
-        public ICommand LogoutCommand => new Command(async () => await Logout());
-        async Task Logout()
+        public Command LogoutCommand { get; }
+        async Task LogoutAsync()
         {
             if (IsBusy)
                 return;
@@ -80,15 +84,11 @@ namespace NGODirectory.ViewModels
             }
         }
 
-        public ICommand OpenAppCommand => new Command(async () => await OpenApp());
-        async Task OpenApp()
+        public Command OpenBrowserCommand { get; }
+        async Task OpenBrowserAsync(string value)
         {
-            //var openAppService = DependencyService.Get<IOpenAppService>();
-            //await openAppService.Launch("twitter://user?user_id=24221652");
-
-            //Device.OpenUri(new Uri("https://twitter.com/AxelGorris"));
-
-            await CrossShare.Current.OpenBrowser("https://twitter.com/AxelGorris");
+            if (!string.IsNullOrEmpty(value))
+                await CrossShare.Current.OpenBrowser(value);
         }
     }
 }

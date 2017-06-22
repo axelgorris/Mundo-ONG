@@ -1,6 +1,7 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Models;
+using Plugin.Share;
 using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
@@ -13,11 +14,13 @@ namespace NGODirectory.ViewModels
     {
         public OrganizationDisplayViewModel(Organization item)
         {
-            EditCommand = new Command(async () => await Edit());
             item.Description = Regex.Replace(item.Description, @"\r\n?|\n", Environment.NewLine);
 
             Item = item;
             Title = item.Name;
+
+            EditCommand = new Command(async () => await EditAsync());
+            OpenBrowserCommand = new Command<string>(async (param) => await OpenBrowserAsync(param));
 
             IsOrganizationAdmin = CloudService.IsUserLoggedIn() &&
                                     CloudService.GetCurrentUser().UserId.Equals(Item.AdminUser);
@@ -34,7 +37,7 @@ namespace NGODirectory.ViewModels
         public Organization Item { get; set; }
 
         public Command EditCommand { get; }
-        async Task Edit()
+        async Task EditAsync()
         {
             if (IsBusy)
                 return;
@@ -53,6 +56,14 @@ namespace NGODirectory.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+
+        public Command<string> OpenBrowserCommand { get; }
+        async Task OpenBrowserAsync(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+                await CrossShare.Current.OpenBrowser(value);
         }
 
         private bool isOrganizationAdmin;

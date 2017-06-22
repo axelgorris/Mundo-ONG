@@ -130,6 +130,12 @@
 
                 <StackLayout
                     Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding OpenBrowserCommand}"
+                            CommandParameter="{Binding Item.Web}" 
+                            NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
                     <Image
                         Source="{StaticResource WebIcon}"
                         Style="{StaticResource InfoIconStyle}"/>
@@ -161,6 +167,12 @@
 
                 <StackLayout
                     Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding OpenBrowserCommand}"
+                            CommandParameter="{Binding Item.Facebook}" 
+                            NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
                     <Image
                         VerticalOptions="Center"
                         Source="{StaticResource FacebookIcon}"
@@ -172,6 +184,12 @@
 
                 <StackLayout
                     Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding OpenBrowserCommand}"
+                            CommandParameter="{Binding Item.Twitter}" 
+                            NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
                     <Image
                         VerticalOptions="Center"
                         Source="{StaticResource TwitterIcon}"
@@ -183,6 +201,12 @@
 
                 <StackLayout
                     Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding OpenBrowserCommand}"
+                            CommandParameter="{Binding Item.Instagram}" 
+                            NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
                     <Image
                         VerticalOptions="Center"
                         Source="{StaticResource InstagramIcon}"

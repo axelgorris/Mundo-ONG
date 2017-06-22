@@ -1,6 +1,7 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Models;
+using Plugin.Share;
 using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
@@ -18,7 +19,8 @@ namespace NGODirectory.ViewModels
 
             Item = item;            
 
-            EditCommand = new Command(async () => await Edit());
+            EditCommand = new Command(async () => await EditAsync());
+            OpenBrowserCommand = new Command<string>(async (param) => await OpenBrowserAsync(param));
 
             IsAuthor = CloudService.IsUserLoggedIn() &&
                         CloudService.GetCurrentUser().UserId.Equals(Item.Author);
@@ -35,7 +37,7 @@ namespace NGODirectory.ViewModels
         public Announcement Item { get; set; }
 
         public Command EditCommand { get; }
-        async Task Edit()
+        async Task EditAsync()
         {
             if (IsBusy)
                 return;
@@ -54,6 +56,13 @@ namespace NGODirectory.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        public Command OpenBrowserCommand { get; }
+        async Task OpenBrowserAsync(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+                await CrossShare.Current.OpenBrowser(value);
         }
 
         private bool isAuthor;

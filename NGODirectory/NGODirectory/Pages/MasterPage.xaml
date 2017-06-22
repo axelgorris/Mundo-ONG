@@ -42,13 +42,15 @@
                                  Margin="10">
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command="{Binding OpenAppCommand}"
+                                Command="{Binding OpenBrowserCommand}"
+                                CommandParameter="https://twitter.com/AxelGorris"
                                 NumberOfTapsRequired="1" />
                         </StackLayout.GestureRecognizers>
                         <Image VerticalOptions="Center"
                             Source="{StaticResource TwitterIcon}"
                             Style="{StaticResource InfoIconStyle}"/>
-                        <Label Text="@AxelGorris" 
+                        <Label Text="@AxelGorris"
+                               VerticalOptions="Center"
                                TextColor="{StaticResource GrayColor}" 
                                FontSize="Small" 
                                Font="Bold"/>
