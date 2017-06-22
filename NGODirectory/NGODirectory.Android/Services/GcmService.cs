@@ -102,7 +102,7 @@ namespace NGODirectory.Droid.Services
 
             // Creamos la notificación
             var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
-            .SetSmallIcon(Android.Resource.Drawable.SymActionEmail)
+            .SetSmallIcon(Resource.Drawable.icon)
             .SetTicker(title)
             .SetContentTitle(title)
             .SetContentText(desc)

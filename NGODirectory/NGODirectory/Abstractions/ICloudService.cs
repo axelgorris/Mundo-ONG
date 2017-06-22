@@ -17,6 +17,5 @@ namespace NGODirectory.Abstractions
         bool IsUserLoggedIn();
         MobileServiceUser GetCurrentUser();
         MobileServiceClient GetMobileServiceClient();
-        //Task RegisterForPushNotifications();
     }
 }
