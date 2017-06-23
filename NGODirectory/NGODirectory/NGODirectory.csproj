@@ -61,6 +61,7 @@
     <Compile Include="Models\Organization.cs" />
     <Compile Include="Models\PushToSync.cs" />
     <Compile Include="Models\StorageTokenViewModel.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PhotoService.cs" />
     <Compile Include="Services\StorageService.cs" />
     <Compile Include="ViewModels\AnnouncementDisplayViewModel.cs" />

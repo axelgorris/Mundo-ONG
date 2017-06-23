@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using NGODirectory.Services;
 
 namespace NGODirectory.ViewModels
 {
@@ -20,7 +21,7 @@ namespace NGODirectory.ViewModels
             Title = "Organizaciones";
 
             RefreshCommand = new Command(async () => await Refresh());
-            AddNewItemCommand = new Command(async () => await AddNewItem());
+            AddNewItemCommand = new Command(async () => await AddNewItemAsync());
             IsUserLoggedIn = CloudService.IsUserLoggedIn();
 
             MessagingCenter.Subscribe<OrganizationEditViewModel>(this, "ItemsChanged", async (sender) =>
@@ -53,7 +54,7 @@ namespace NGODirectory.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    App.NavigationPage.PushAsync(new Pages.OrganizationDisplayPage(selectedItem));
+                    NavigationService.Instance.NavigateTo<OrganizationDisplayViewModel>(selectedItem);
                     SelectedItem = null;
                 }
             }
@@ -107,7 +108,7 @@ namespace NGODirectory.ViewModels
         }
 
         public Command AddNewItemCommand { get; }
-        async Task AddNewItem()
+        async Task AddNewItemAsync()
         {
             if (IsBusy)
                 return;
@@ -115,7 +116,7 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                await App.NavigationPage.PushAsync(new Pages.OrganizationEditPage());
+                await NavigationService.Instance.NavigateTo<OrganizationEditViewModel>();
             }
             catch (Exception ex)
             {

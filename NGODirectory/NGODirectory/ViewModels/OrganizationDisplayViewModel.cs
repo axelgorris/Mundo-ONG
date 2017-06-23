@@ -1,6 +1,7 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Models;
+using NGODirectory.Services;
 using Plugin.Messaging;
 using Plugin.Share;
 using System;
@@ -49,7 +50,7 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                await App.NavigationPage.Navigation.PushAsync(new Pages.OrganizationEditPage(Item));
+                await NavigationService.Instance.NavigateTo<OrganizationEditViewModel>(Item);
             }
             catch (Exception ex)
             {

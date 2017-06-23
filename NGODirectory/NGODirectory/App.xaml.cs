@@ -11,20 +11,6 @@ namespace NGODirectory
 {
     public partial class App : Application
     {
-        public static CustomNavigationPage NavigationPage { get; set; }
-
-        public static bool MenuIsPresented
-        {
-            get
-            {
-                return ((MasterDetailPage)(App.Current.MainPage)).IsPresented;
-            }
-            set
-            {
-                ((MasterDetailPage)(App.Current.MainPage)).IsPresented = value;
-            }
-        }
-
         public App()
         {
             InitializeComponent();
@@ -34,11 +20,10 @@ namespace NGODirectory
             var CloudService = ServiceLocator.Instance.Resolve<ICloudService>();
             CloudService.StoredLoginAsync();
             
-            NavigationPage = new CustomNavigationPage(new BarPage());
-
+            
             var masterPage = new MasterDetailPage();
             masterPage.Master = new MasterPage() { Title = "Ajustes" };
-            masterPage.Detail = NavigationPage;
+            masterPage.Detail = new CustomNavigationPage(new BarPage()); ;
             masterPage.MasterBehavior = MasterBehavior.Popover;
 
             MainPage = masterPage;

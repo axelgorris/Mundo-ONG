@@ -1,6 +1,7 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Pages;
+using NGODirectory.Services;
 using Plugin.Share;
 using System;
 using System.Diagnostics;
@@ -23,7 +24,7 @@ namespace NGODirectory.ViewModels
             IsUserLoggedIn = CloudService.IsUserLoggedIn();
         }
 
-        ICloudService cloudService => ServiceLocator.Instance.Resolve<ICloudService>();
+        private ICloudService cloudService = ServiceLocator.Instance.Resolve<ICloudService>();
         public ICloudService CloudService
         {
             get { return cloudService; }
@@ -48,7 +49,7 @@ namespace NGODirectory.ViewModels
                 await CloudService.LoginAsync();
                 SetProperty(ref isUserLoggedIn, CloudService.IsUserLoggedIn(), "IsUserLoggedIn");
                 MessagingCenter.Send(this, "RefreshLogin");
-                App.MenuIsPresented = false;
+                NavigationService.Instance.MenuIsPresented = false;
             }
             catch (Exception ex)
             {
@@ -72,7 +73,7 @@ namespace NGODirectory.ViewModels
                 await CloudService.LogoutAsync();
                 SetProperty(ref isUserLoggedIn, CloudService.IsUserLoggedIn(), "IsUserLoggedIn");
                 MessagingCenter.Send(this, "RefreshLogin");
-                App.MenuIsPresented = false;
+                NavigationService.Instance.MenuIsPresented = false;
             }
             catch (Exception ex)
             {

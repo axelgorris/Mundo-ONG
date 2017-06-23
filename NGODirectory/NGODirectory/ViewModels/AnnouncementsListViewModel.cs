@@ -1,6 +1,7 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
 using NGODirectory.Models;
+using NGODirectory.Services;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace NGODirectory.ViewModels
             Title = "Noticias";
 
             RefreshCommand = new Command(async () => await Refresh());
-            AddNewItemCommand = new Command(async () => await AddNewItem());
+            AddNewItemCommand = new Command(async () => await AddNewItemAsync());
             LoadMoreCommand = new Command<Announcement>(async (Announcement item) => await LoadMore(item));
             IsUserLoggedIn = CloudService.IsUserLoggedIn();
 
@@ -52,7 +53,7 @@ namespace NGODirectory.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    App.NavigationPage.Navigation.PushAsync(new Pages.AnnouncementDisplayPage(selectedItem));
+                    NavigationService.Instance.NavigateTo<AnnouncementDisplayViewModel>(selectedItem);
                     SelectedItem = null;
                 }
             }
@@ -85,7 +86,7 @@ namespace NGODirectory.ViewModels
         }
 
         public Command AddNewItemCommand { get; }
-        async Task AddNewItem()
+        async Task AddNewItemAsync()
         {
             if (IsBusy)
                 return;
@@ -93,7 +94,7 @@ namespace NGODirectory.ViewModels
 
             try
             {
-                await App.NavigationPage.Navigation.PushAsync(new Pages.AnnouncementEditPage());
+                await NavigationService.Instance.NavigateTo<AnnouncementEditViewModel>();
             }
             catch (Exception ex)
             {

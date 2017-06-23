@@ -39,7 +39,7 @@ namespace NGODirectory.ViewModels
             {
                 if (!(CloudService.IsUserLoggedIn() &&
                       CloudService.GetCurrentUser().UserId.Equals(Item.Author)))
-                    App.NavigationPage.PopToRootAsync();
+                    NavigationService.Instance.GoToHomePage();
             });
         }
 
@@ -86,7 +86,7 @@ namespace NGODirectory.ViewModels
 
                         await CloudService.SyncOfflineCacheAsync<Announcement>(overrideServerChanges: true);
                         MessagingCenter.Send(this, "ItemsChanged");
-                        await App.NavigationPage.PopToRootAsync();
+                        await NavigationService.Instance.GoToHomePage();
                     }
                 }
             }
@@ -126,7 +126,7 @@ namespace NGODirectory.ViewModels
                         MessagingCenter.Send(this, "ItemsChanged");
                     }
 
-                    await App.NavigationPage.PopToRootAsync();
+                    await NavigationService.Instance.GoToHomePage();
                 }
             }
             catch (Exception ex)
