@@ -5,9 +5,10 @@ using Xamarin.Forms;
 
 namespace NGODirectory.Behaviors
 {
-    public class EventToCommandBehavior : BehaviorBase<View>
+    public class EventToCommandBehavior : Behavior<View>
     {
         Delegate eventHandler;
+        public View AssociatedObject { get; private set; }
 
         public static readonly BindableProperty EventNameProperty = BindableProperty.Create("EventName", typeof(string), typeof(EventToCommandBehavior), null, propertyChanged: OnEventNameChanged);
         public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof(ICommand), typeof(EventToCommandBehavior), null);
@@ -41,13 +42,26 @@ namespace NGODirectory.Behaviors
         protected override void OnAttachedTo(View bindable)
         {
             base.OnAttachedTo(bindable);
+            
+            AssociatedObject = bindable;
+
+            if (bindable.BindingContext != null)
+            {
+                BindingContext = bindable.BindingContext;
+            }
+
+            bindable.BindingContextChanged += OnBindingContextChanged;
+
             RegisterEvent(EventName);
         }
 
         protected override void OnDetachingFrom(View bindable)
         {
-            DeregisterEvent(EventName);
             base.OnDetachingFrom(bindable);
+
+            DeregisterEvent(EventName);
+            bindable.BindingContextChanged -= OnBindingContextChanged;
+            AssociatedObject = null;
         }
 
         void RegisterEvent(string name)
@@ -127,6 +141,17 @@ namespace NGODirectory.Behaviors
 
             behavior.DeregisterEvent(oldEventName);
             behavior.RegisterEvent(newEventName);
+        }
+
+        void OnBindingContextChanged(object sender, EventArgs e)
+        {
+            OnBindingContextChanged();
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            BindingContext = AssociatedObject.BindingContext;
         }
     }
 }

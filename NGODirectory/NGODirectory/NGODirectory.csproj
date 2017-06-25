@@ -44,7 +44,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Behaviors\BehaviorBase.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Behaviors\EditorMaxLengthValidatorBehavior.cs" />
     <Compile Include="Behaviors\EntryMaxLengthValidatorBehavior.cs" />
