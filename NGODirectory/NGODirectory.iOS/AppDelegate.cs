@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace NGODirectory.iOS
 {
@@ -22,8 +20,8 @@ namespace NGODirectory.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            UISwitch.Appearance.OnTintColor = Color.FromHex("#FF5722").ToUIColor();
             FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
-
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
             global::Xamarin.Forms.Forms.Init();

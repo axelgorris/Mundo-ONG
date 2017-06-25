@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using NGODirectory.Services;
+using Plugin.Connectivity;
+using Plugin.Connectivity.Abstractions;
 
 namespace NGODirectory.ViewModels
 {

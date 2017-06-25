@@ -64,6 +64,13 @@
 
                 <Grid
                     Margin="0,10">
+                    <Grid.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean"
+                                            Android="true"
+                                            iOS="false"
+                                            WinPhone="false">
+                        </OnPlatform>
+                    </Grid.IsVisible>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition>
@@ -81,32 +88,10 @@
                         Text="Habilitar notificaciones"/>
                     <Switch
                         Grid.Column="1"
-                        IsToggled="{Binding EnableNotifications}"
-                        HorizontalOptions="End"/>
-                </Grid>
-                
-                <Grid
-                    Margin="0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition>
-                            <ColumnDefinition.Width>
-                                <OnPlatform x:TypeArguments="GridLength"
-                                            Android="60"
-                                            iOS="60"
-                                            WinPhone="150">
-                                </OnPlatform>
-                            </ColumnDefinition.Width>
-                        </ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label 
-                        Grid.Column="0"
-                        Text="Descargar sólo mediante wifi"/>
-                    <Switch
-                        Grid.Column="1"
-                        IsToggled="{Binding DownloadOnlyOnWifi}"
-                        HorizontalOptions="End"/>
-                </Grid>
+                        IsToggled="{Binding EnableNotifications}"                        
+                        HorizontalOptions="End">                        
+                    </Switch>
+                </Grid>                
 
             </StackLayout>
             <StackLayout Margin="20,40,20,0" 

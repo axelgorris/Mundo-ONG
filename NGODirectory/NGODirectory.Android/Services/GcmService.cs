@@ -68,6 +68,9 @@ namespace NGODirectory.Droid.Services
         {
             Log.Info("PushHandlerBroadcastReceiver", "Mensaje GCM recibido!");
 
+            if (!Settings.EnableNotifications)
+                return;
+
             var msg = new StringBuilder();
 
             if (intent != null && intent.Extras != null)

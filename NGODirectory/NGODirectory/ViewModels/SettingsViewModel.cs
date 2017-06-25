@@ -96,12 +96,6 @@ namespace NGODirectory.ViewModels
         {
             get { return Settings.EnableNotifications; }
             set { Settings.EnableNotifications = value; }
-        }
-
-        public bool DownloadOnlyOnWifi
-        {
-            get { return Settings.DownloadOnlyOnWifi; }
-            set { Settings.DownloadOnlyOnWifi = value; }
-        }
+        }        
     }
 }

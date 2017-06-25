@@ -24,14 +24,6 @@ namespace NGODirectory
         {
             get { return AppSettings.GetValueOrDefault(EnableNotificationsKey, EnableNotificationsDefault); }
             set { AppSettings.AddOrUpdateValue(EnableNotificationsKey, value); }
-        }
-
-        const string DownloadOnlyOnWifiKey = "downloadOnlyOnWifiKey";
-        private static readonly bool DownloadOnlyOnWifiDefault = false;
-        public static bool DownloadOnlyOnWifi
-        {
-            get { return AppSettings.GetValueOrDefault(DownloadOnlyOnWifiKey, DownloadOnlyOnWifiDefault); }
-            set { AppSettings.AddOrUpdateValue(DownloadOnlyOnWifiKey, value); }
-        }
+        }        
     }
 }
