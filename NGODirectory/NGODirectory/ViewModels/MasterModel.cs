@@ -53,7 +53,7 @@ namespace NGODirectory.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Login failed", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert("Error al iniciar sesión", ex.Message, "OK");
             }
             finally
             {
@@ -77,7 +77,7 @@ namespace NGODirectory.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Logout failed", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert("Error al cerar sesión", ex.Message, "OK");
             }
             finally
             {

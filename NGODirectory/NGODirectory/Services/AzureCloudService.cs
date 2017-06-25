@@ -127,6 +127,9 @@ namespace NGODirectory.Services
             if (storedUser != null)
                 return storedUser;
 
+            if (!CrossConnectivity.Current.IsConnected)
+                throw new Exception("Es necesaria una conexión a internet para iniciar sesión");
+
             var loginProvider = DependencyService.Get<IPlatformProvider>();
             // We need to ask for credentials at this point
             await loginProvider.LoginAsync(Client);
@@ -144,18 +147,20 @@ namespace NGODirectory.Services
             if (Client.CurrentUser == null || Client.CurrentUser.MobileServiceAuthenticationToken == null)
                 return;
 
-            // Log out of the identity provider (if required)
-
-            // Invalidate the token on the mobile backend
-            var authUri = new Uri($"{Client.MobileAppUri}/.auth/logout");
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Add("X-ZUMO-AUTH", Client.CurrentUser.MobileServiceAuthenticationToken);
-                await httpClient.GetAsync(authUri);
-            }
-
             // Remove the token from the cache
             DependencyService.Get<IPlatformProvider>().RemoveTokenFromSecureStore();
+
+            // Invalidate the token on the mobile backend
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                var authUri = new Uri($"{Client.MobileAppUri}/.auth/logout");
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Add("X-ZUMO-AUTH", Client.CurrentUser.MobileServiceAuthenticationToken);
+                    await httpClient.GetAsync(authUri);
+                }
+            }
+
 
             // Remove the token from the MobileServiceClient
             await Client.LogoutAsync();
