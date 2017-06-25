@@ -85,9 +85,11 @@
                     </Grid.ColumnDefinitions>
                     <Label 
                         Grid.Column="0"
+                        VerticalOptions="Center"
                         Text="Habilitar notificaciones"/>
                     <Switch
                         Grid.Column="1"
+                        VerticalOptions="Center"
                         IsToggled="{Binding EnableNotifications}"                        
                         HorizontalOptions="End">                        
                     </Switch>
