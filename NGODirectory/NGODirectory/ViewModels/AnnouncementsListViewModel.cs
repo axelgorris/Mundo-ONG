@@ -115,6 +115,9 @@ namespace NGODirectory.ViewModels
                 return;
             }
 
+            if (item == null)
+                return;
+
             // If we are not displaying the last one in the list, then return.
             if (!Items.Last().Id.Equals(item.Id))
             {
