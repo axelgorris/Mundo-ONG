@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NGODirectory.Pages.OrganizationDisplayPage"
              xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
@@ -93,9 +94,28 @@
                         iOS="Fill"
                         WinPhone="Center"/>
                 </Grid.HorizontalOptions>
-                <Image
+                <ffimageloading:CachedImage     
+                    Grid.Column="0"
                     Source="{Binding Item.LogoUrl}"
-                    Style="{StaticResource ItemImageStyle}"/>
+                    CacheType="Disk"
+                    CacheDuration="30"
+                    DownsampleToViewSize="True"
+                    Style="{StaticResource ItemImageStyle}">
+                    <ffimageloading:CachedImage.LoadingPlaceholder>
+                        <OnPlatform                       
+                            x:TypeArguments="ImageSource"
+                            iOS="loading"
+                            Android="loading"
+                            WinPhone="Assets/loading.png"/>
+                    </ffimageloading:CachedImage.LoadingPlaceholder>
+                    <ffimageloading:CachedImage.ErrorPlaceholder>
+                        <OnPlatform                       
+                            x:TypeArguments="ImageSource"
+                            iOS="noimage"
+                            Android="noimage"
+                            WinPhone="Assets/noimage.png"/>
+                    </ffimageloading:CachedImage.ErrorPlaceholder>
+                </ffimageloading:CachedImage>
             </Grid>
 
             <StackLayout                

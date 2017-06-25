@@ -4,6 +4,7 @@
              x:Class="NGODirectory.Pages.OrganizationEditPage"
              xmlns:behaviors="clr-namespace:NGODirectory.Behaviors;assembly=NGODirectory"
              xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
@@ -95,9 +96,28 @@
             <Grid
                 Grid.Row="1"
                 BackgroundColor="{StaticResource GrayColor}">
-                <Image
+                <ffimageloading:CachedImage     
+                    Grid.Column="0"
                     Source="{Binding LogoUrl}"
-                    Style="{StaticResource ItemImageStyle}"/>
+                    CacheType="Disk"
+                    CacheDuration="30"
+                    DownsampleToViewSize="True"
+                    Style="{StaticResource ItemImageStyle}">
+                    <ffimageloading:CachedImage.LoadingPlaceholder>
+                        <OnPlatform                       
+                            x:TypeArguments="ImageSource"
+                            iOS="loading"
+                            Android="loading"
+                            WinPhone="Assets/loading.png"/>
+                    </ffimageloading:CachedImage.LoadingPlaceholder>
+                    <ffimageloading:CachedImage.ErrorPlaceholder>
+                        <OnPlatform                       
+                            x:TypeArguments="ImageSource"
+                            iOS="noimage"
+                            Android="noimage"
+                            WinPhone="Assets/noimage.png"/>
+                    </ffimageloading:CachedImage.ErrorPlaceholder>
+                </ffimageloading:CachedImage>
                 <Image
                     Style="{StaticResource PickImageStyle}"
                     Source="{StaticResource PickImageIcon}" />
