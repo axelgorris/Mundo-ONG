@@ -4,10 +4,12 @@
              x:Class="NGODirectory.Pages.AnnouncementDisplayPage"
              xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converters:StringToBooleanConverter x:Key="stringToBoolean" />
 
             <Style x:Key="ItemImageStyle" TargetType="Image">
                 <Setter Property="Aspect">
@@ -28,10 +30,15 @@
                 <Setter Property="Margin" Value="12" />
             </Style>
 
-            <Style x:Key="DescriptionStyle" TargetType="Label">
+            <Style x:Key="DetailStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Small" />
                 <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
                 <Setter Property="Margin" Value="12" />
+            </Style>
+
+            <Style x:Key="InfoIconStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="25" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
             <Style x:Key="CreatedStyle" TargetType="Label">
@@ -114,7 +121,8 @@
             </Grid>            
 
             <StackLayout                
-                Grid.Row="2">
+                Grid.Row="2"
+                Margin="10">
                 <StackLayout.HorizontalOptions>
                     <OnPlatform 
                         x:TypeArguments="LayoutOptions"
@@ -124,7 +132,32 @@
                 </StackLayout.HorizontalOptions>
                 <Label
                     Text="{Binding Item.Description}"
-                    Style="{StaticResource DescriptionStyle}"/>
+                    Style="{StaticResource DetailStyle}"/>
+                
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding Item.ExternalUrl, Converter={StaticResource stringToBoolean}">
+                    <StackLayout.HorizontalOptions>
+                        <OnPlatform 
+                            x:TypeArguments="LayoutOptions"
+                            Android="Fill"
+                            iOS="Fill"
+                            WinPhone="Center"/>
+                    </StackLayout.HorizontalOptions>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding OpenBrowserCommand}"
+                            CommandParameter="{Binding Item.ExternalUrl}" 
+                            NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image
+                        Source="{StaticResource WebIcon}"
+                        Style="{StaticResource InfoIconStyle}"/>
+                    <Label
+                        Text="Más información"
+                        Style="{StaticResource DetailStyle}"/>
+                </StackLayout>
             </StackLayout>            
 
             <StackLayout

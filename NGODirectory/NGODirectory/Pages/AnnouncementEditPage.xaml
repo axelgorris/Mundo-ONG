@@ -131,6 +131,14 @@
             
             <StackLayout
                 Grid.Row="2">
+                <StackLayout.Padding>
+                    <OnPlatform 
+                    x:TypeArguments="Thickness"
+                    Android="10"
+                    iOS="10"
+                    WinPhone="30"/>
+                </StackLayout.Padding>
+                
                 <Label 
                     Text="Descripción"
                     Style="{StaticResource ItemHeaderStyle}"/>
@@ -141,6 +149,24 @@
                         <behaviors:EditorMaxLengthValidatorBehavior MaxLength="5000"/>
                     </Editor.Behaviors>
                 </Editor>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image 
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        Source="{StaticResource WebIcon}"/>
+                    <Entry
+                        Grid.Column="1"
+                        Text="{Binding Item.ExternalUrl, Mode=TwoWay}"
+                        Style="{StaticResource EntryStyle}">
+                        <Entry.Behaviors>
+                            <behaviors:EntryMaxLengthValidatorBehavior MaxLength="250"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </Grid>
             </StackLayout>
         </Grid>
     </ScrollView>

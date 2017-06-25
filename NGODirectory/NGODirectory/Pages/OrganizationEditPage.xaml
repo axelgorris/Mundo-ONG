@@ -173,7 +173,7 @@
                         Text="{Binding Item.Web, Mode=TwoWay}"
                         Style="{StaticResource EntryStyle}">
                         <Entry.Behaviors>
-                            <behaviors:EntryMaxLengthValidatorBehavior MaxLength="140"/>
+                            <behaviors:EntryMaxLengthValidatorBehavior MaxLength="250"/>
                         </Entry.Behaviors>
                     </Entry>
                 </Grid>
@@ -211,7 +211,7 @@
                         Text="{Binding Item.Phone, Mode=TwoWay}"
                         Style="{StaticResource EntryStyle}">
                         <Entry.Behaviors>
-                            <behaviors:EntryMaxLengthValidatorBehavior MaxLength="140"/>
+                            <behaviors:EntryMaxLengthValidatorBehavior MaxLength="20"/>
                         </Entry.Behaviors>
                     </Entry>
                 </Grid>
