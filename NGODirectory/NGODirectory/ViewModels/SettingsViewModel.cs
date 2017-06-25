@@ -11,9 +11,9 @@ using Xamarin.Forms;
 
 namespace NGODirectory.ViewModels
 {
-    public class MasterModel : BaseViewModel
+    public class SettingsViewModel : BaseViewModel
     {
-        public MasterModel()
+        public SettingsViewModel()
         {
             Title = "Ajustes";
 
@@ -90,6 +90,18 @@ namespace NGODirectory.ViewModels
         {
             if (!string.IsNullOrEmpty(value))
                 await CrossShare.Current.OpenBrowser(value);
+        }
+
+        public bool EnableNotifications
+        {
+            get { return Settings.EnableNotifications; }
+            set { Settings.EnableNotifications = value; }
+        }
+
+        public bool DownloadOnlyOnWifi
+        {
+            get { return Settings.DownloadOnlyOnWifi; }
+            set { Settings.DownloadOnlyOnWifi = value; }
         }
     }
 }

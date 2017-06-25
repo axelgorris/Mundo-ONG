@@ -29,7 +29,7 @@ namespace NGODirectory.ViewModels
                 await Refresh();
             });
 
-            MessagingCenter.Subscribe<MasterModel>(this, "RefreshLogin", (sender) =>
+            MessagingCenter.Subscribe<SettingsViewModel>(this, "RefreshLogin", (sender) =>
             {
                 IsUserLoggedIn = CloudService.IsUserLoggedIn();
             });

@@ -29,7 +29,7 @@ namespace NGODirectory.ViewModels
             IsOrganizationAdmin = CloudService.IsUserLoggedIn() &&
                                     CloudService.GetCurrentUser().UserId.Equals(Item.AdminUser);
 
-            MessagingCenter.Subscribe<MasterModel>(this, "RefreshLogin", (sender) =>
+            MessagingCenter.Subscribe<SettingsViewModel>(this, "RefreshLogin", (sender) =>
             {
                 IsOrganizationAdmin = CloudService.IsUserLoggedIn() &&
                                     CloudService.GetCurrentUser().UserId.Equals(Item.AdminUser);

@@ -26,7 +26,7 @@ namespace NGODirectory.ViewModels
             IsAuthor = CloudService.IsUserLoggedIn() &&
                         CloudService.GetCurrentUser().UserId.Equals(Item.Author);
 
-            MessagingCenter.Subscribe<MasterModel>(this, "RefreshLogin", (sender) =>
+            MessagingCenter.Subscribe<SettingsViewModel>(this, "RefreshLogin", (sender) =>
             {
                 IsAuthor = CloudService.IsUserLoggedIn() && 
                             CloudService.GetCurrentUser().UserId.Equals(Item.Author);

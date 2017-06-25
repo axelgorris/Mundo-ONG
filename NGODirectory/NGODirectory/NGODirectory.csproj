@@ -55,6 +55,7 @@
     <Compile Include="Helpers\Locations.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
     <Compile Include="Helpers\ServiceLocator.cs" />
+    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AppServiceIdentity.cs" />
     <Compile Include="Models\Organization.cs" />
@@ -63,11 +64,12 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PhotoService.cs" />
     <Compile Include="Services\StorageService.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\AnnouncementDisplayViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementEditViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />
     <Compile Include="ViewModels\OrganizationDisplayViewModel.cs" />
-    <Compile Include="ViewModels\MasterModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Pages\AnnouncementDisplayPage.xaml.cs">
       <DependentUpon>AnnouncementDisplayPage.xaml</DependentUpon>
     </Compile>
@@ -83,8 +85,8 @@
     <Compile Include="Pages\OrganizationDisplayPage.xaml.cs">
       <DependentUpon>OrganizationDisplayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MasterPage.xaml.cs">
-      <DependentUpon>MasterPage.xaml</DependentUpon>
+    <Compile Include="Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AnnouncementsListPage.xaml.cs">
       <DependentUpon>AnnouncementsListPage.xaml</DependentUpon>
@@ -180,6 +182,12 @@
     <Reference Include="Plugin.Permissions.Abstractions, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Plugin.Permissions.1.2.1\lib\portable-net45+wp80+win+wpa81\Plugin.Permissions.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.Settings, Version=2.5.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.8\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings.Abstractions, Version=2.5.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.8\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Plugin.Share, Version=6.1.0.19, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Plugin.Share.6.1.0.19-beta\lib\portable-net45+wp80+win8+wpa81\Plugin.Share.dll</HintPath>
     </Reference>
@@ -228,7 +236,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\MasterPage.xaml">
+    <EmbeddedResource Include="Pages\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

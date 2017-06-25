@@ -108,5 +108,7 @@
                 WinPhone="Assets/ic_crop_original_white_48dp.png"/>
 
         </ResourceDictionary>
+
+        
     </Application.Resources>
 </Application>

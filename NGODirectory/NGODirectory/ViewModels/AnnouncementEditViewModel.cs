@@ -35,7 +35,7 @@ namespace NGODirectory.ViewModels
             DeleteCommand = new Command(async () => await DeleteAsync());
             PickImageCommand = new Command(async () => await PickImageAsync());
 
-            MessagingCenter.Subscribe<MasterModel>(this, "RefreshLogin", (sender) =>
+            MessagingCenter.Subscribe<SettingsViewModel>(this, "RefreshLogin", (sender) =>
             {
                 if (!(CloudService.IsUserLoggedIn() &&
                       CloudService.GetCurrentUser().UserId.Equals(Item.Author)))
