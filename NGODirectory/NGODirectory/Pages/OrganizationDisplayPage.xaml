@@ -4,10 +4,12 @@
              x:Class="NGODirectory.Pages.OrganizationDisplayPage"
              xmlns:control="clr-namespace:NGODirectory.Controls;assembly=NGODirectory"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converters="clr-namespace:NGODirectory.Converters;assembly=NGODirectory"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converters:StringToBooleanConverter x:Key="stringToBoolean" />
 
             <Style x:Key="ItemImageStyle" TargetType="Image">
                 <Setter Property="Aspect" Value="AspectFit" />
@@ -149,7 +151,8 @@
                 </StackLayout>
 
                 <StackLayout
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    IsVisible="{Binding Item.Web, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
                             Command="{Binding OpenBrowserCommand}"
@@ -165,7 +168,8 @@
                 </StackLayout>
 
                 <StackLayout
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    IsVisible="{Binding Item.Email, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
                             Command="{Binding SendEmailCommand}"
@@ -181,7 +185,8 @@
                 </StackLayout>
 
                 <StackLayout
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    IsVisible="{Binding Item.Phone, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
                             Command="{Binding MakePhoneCallCommand}"
@@ -198,7 +203,8 @@
                 </StackLayout>
 
                 <StackLayout
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    IsVisible="{Binding Item.Facebook, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
                             Command="{Binding OpenBrowserCommand}"
@@ -215,7 +221,8 @@
                 </StackLayout>
 
                 <StackLayout
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    IsVisible="{Binding Item.Twitter, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
                             Command="{Binding OpenBrowserCommand}"
@@ -232,7 +239,8 @@
                 </StackLayout>
 
                 <StackLayout
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    IsVisible="{Binding Item.Instagram, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
                             Command="{Binding OpenBrowserCommand}"

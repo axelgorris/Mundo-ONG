@@ -50,6 +50,7 @@
     <Compile Include="Controls\ConditionalToolbarItem.cs" />
     <Compile Include="Converters\ItemVisivilityConverter.cs" />
     <Compile Include="Converters\NegateBooleanConverter.cs" />
+    <Compile Include="Converters\StringToBooleanConverter.cs" />
     <Compile Include="Helpers\AuthenticationDelegatingHandler.cs" />
     <Compile Include="Helpers\Grouping.cs" />
     <Compile Include="Helpers\Locations.cs" />
