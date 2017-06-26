@@ -22,8 +22,8 @@
             IsVisible="{Binding IsUserLoggedIn}"
             Icon="{StaticResource AddIcon}"
             Order="Primary"
-            Priority="2"/>
-        
+            Priority="1"/>
+
     </ContentPage.ToolbarItems>
 
     <Grid>
@@ -55,8 +55,8 @@
             SeparatorColor="Transparent"
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
             GroupShortNameBinding = "{Binding Key}"
-            IsGroupingEnabled = "true"
-            GroupDisplayBinding = "{Binding Key}"
+            IsGroupingEnabled = "True"
+            GroupDisplayBinding = "{Binding Key}"            
             Grid.Row="1">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
@@ -64,14 +64,15 @@
                         <ViewCell.Height>
                             <OnPlatform 
                                     x:TypeArguments="x:Double"
-                                    Android="30"
-                                    iOS="30"    
-                                    WinPhone="45"/>
+                                    Android="20"
+                                    iOS="20"    
+                                    WinPhone="50"/>
                         </ViewCell.Height>
                         <StackLayout
-                            VerticalOptions="FillAndExpand"
-                            Padding="5"
-                            BackgroundColor="{StaticResource DefaultPrimaryColor}}">                            
+                            VerticalOptions="CenterAndExpand"
+                            Padding="10,0"
+                            Margin="0"
+                            BackgroundColor="{StaticResource DefaultPrimaryColor}}">
                             <Label Text="{Binding Key}" 
                                TextColor="{StaticResource DefaultPrimaryColorText}"
                                Font="Bold"

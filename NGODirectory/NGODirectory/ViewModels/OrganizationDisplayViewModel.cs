@@ -16,7 +16,7 @@ namespace NGODirectory.ViewModels
     {
         public OrganizationDisplayViewModel(Organization item)
         {
-            item.Description = Regex.Replace(item.Description, @"\r\n?|\n", Environment.NewLine);
+            //item.Description = Regex.Replace(item.Description, @"\r\n?|\n", Environment.NewLine);
 
             Item = item;
             Title = item.Name;
@@ -67,7 +67,13 @@ namespace NGODirectory.ViewModels
         async Task OpenBrowserAsync(string value)
         {
             if (!string.IsNullOrEmpty(value))
+            {
+                if (!value.StartsWith("http"))
+                    value = $"http://{value}";
+
                 await CrossShare.Current.OpenBrowser(value);
+            }
+                
         }
 
         public Command<string> MakePhoneCallCommand { get; }

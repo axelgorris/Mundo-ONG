@@ -27,13 +27,13 @@
             <Style x:Key="TitleStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="TextColor" Value="{StaticResource DefaultPrimaryColor}" />
-                <Setter Property="Margin" Value="12" />
+                <Setter Property="Margin" Value="12, 6, 12, 0" />
             </Style>
 
             <Style x:Key="DetailStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Small" />
                 <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-                <Setter Property="Margin" Value="12" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
             <Style x:Key="InfoIconStyle" TargetType="Image">
@@ -109,14 +109,7 @@
                             iOS="loading"
                             Android="loading"
                             WinPhone="Assets/loading.png"/>
-                    </ffimageloading:CachedImage.LoadingPlaceholder>
-                    <ffimageloading:CachedImage.ErrorPlaceholder>
-                        <OnPlatform                       
-                            x:TypeArguments="ImageSource"
-                            iOS="noimage"
-                            Android="noimage"
-                            WinPhone="Assets/noimage.png"/>
-                    </ffimageloading:CachedImage.ErrorPlaceholder>
+                    </ffimageloading:CachedImage.LoadingPlaceholder>                    
                 </ffimageloading:CachedImage>
             </Grid>
 
@@ -125,8 +118,8 @@
                 <StackLayout.Padding>
                     <OnPlatform 
                     x:TypeArguments="Thickness"
-                    Android="10"
-                    iOS="10"
+                    Android="15"
+                    iOS="15"
                     WinPhone="30"/>
                 </StackLayout.Padding>
                 <StackLayout.HorizontalOptions>
@@ -137,7 +130,8 @@
                         WinPhone="Center"/>
                 </StackLayout.HorizontalOptions>
 
-                <StackLayout>
+                <StackLayout
+                    Margin="0,0,0,12">
                     <StackLayout.HorizontalOptions>
                         <OnPlatform 
                         x:TypeArguments="LayoutOptions"
@@ -152,6 +146,7 @@
 
                 <StackLayout
                     Orientation="Horizontal"
+                    Margin="0,0,0,6"
                     IsVisible="{Binding Item.Web, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
@@ -169,6 +164,7 @@
 
                 <StackLayout
                     Orientation="Horizontal"
+                    Margin="0,0,0,6"
                     IsVisible="{Binding Item.Email, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
@@ -186,6 +182,7 @@
 
                 <StackLayout
                     Orientation="Horizontal"
+                    Margin="0,0,0,6"
                     IsVisible="{Binding Item.Phone, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
@@ -204,6 +201,7 @@
 
                 <StackLayout
                     Orientation="Horizontal"
+                    Margin="0,0,0,6"
                     IsVisible="{Binding Item.Facebook, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
@@ -222,6 +220,7 @@
 
                 <StackLayout
                     Orientation="Horizontal"
+                    Margin="0,0,0,6"
                     IsVisible="{Binding Item.Twitter, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
@@ -240,6 +239,7 @@
 
                 <StackLayout
                     Orientation="Horizontal"
+                    Margin="0,0,0,6"
                     IsVisible="{Binding Item.Instagram, Converter={StaticResource stringToBoolean}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
@@ -255,7 +255,7 @@
                         Text="{Binding Item.Instagram}"
                         Style="{StaticResource DetailStyle}"/>
                 </StackLayout>
-
+                
             </StackLayout>
 
         </Grid>

@@ -12,28 +12,20 @@
             <converters:StringToBooleanConverter x:Key="stringToBoolean" />
 
             <Style x:Key="ItemImageStyle" TargetType="Image">
-                <Setter Property="Aspect">
-                    <Setter.Value>
-                        <OnPlatform x:TypeArguments="Aspect">
-                            <OnPlatform.iOS>AspectFill</OnPlatform.iOS>
-                            <OnPlatform.Android>AspectFill</OnPlatform.Android>
-                            <OnPlatform.WinPhone>AspectFit</OnPlatform.WinPhone>
-                        </OnPlatform>
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Aspect" Value="AspectFill" />
                 <Setter Property="HeightRequest" Value="250" />
             </Style>
 
             <Style x:Key="TitleStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="TextColor" Value="{StaticResource DefaultPrimaryColor}" />
-                <Setter Property="Margin" Value="12" />
+                <Setter Property="Margin" Value="12, 6, 12, 0" />
             </Style>
 
             <Style x:Key="DetailStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Small" />
                 <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-                <Setter Property="Margin" Value="12" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
             <Style x:Key="InfoIconStyle" TargetType="Image">
@@ -44,7 +36,8 @@
             <Style x:Key="CreatedStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Micro" />
                 <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
-                <Setter Property="Margin" Value="12" />
+                <Setter Property="Margin" Value="12, 0, 12, 12" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
         </ResourceDictionary>
@@ -108,32 +101,42 @@
                             Android="loading"
                             WinPhone="Assets/loading.png"/>
                     </ffimageloading:CachedImage.LoadingPlaceholder>
-                    <ffimageloading:CachedImage.ErrorPlaceholder>
-                        <OnPlatform                       
-                            x:TypeArguments="ImageSource"
-                            iOS="noimage"
-                            Android="noimage"
-                            WinPhone="Assets/noimage.png"/>
-                    </ffimageloading:CachedImage.ErrorPlaceholder>
                 </ffimageloading:CachedImage>
 
 
             </Grid>            
 
             <StackLayout                
-                Grid.Row="2"
-                Margin="10">
+                Grid.Row="2">
+                <StackLayout.Padding>
+                    <OnPlatform 
+                    x:TypeArguments="Thickness"
+                    Android="15"
+                    iOS="15"
+                    WinPhone="30"/>
+                </StackLayout.Padding>
                 <StackLayout.HorizontalOptions>
                     <OnPlatform 
                         x:TypeArguments="LayoutOptions"
                         Android="Fill"
                         iOS="Fill"
                         WinPhone="Center"/>
-                </StackLayout.HorizontalOptions>
-                <Label
-                    Text="{Binding Item.Description}"
-                    Style="{StaticResource DetailStyle}"/>
-                
+                </StackLayout.HorizontalOptions>                
+
+                <StackLayout
+                    Margin="0,0,0,12">
+                    <StackLayout.HorizontalOptions>
+                        <OnPlatform 
+                        x:TypeArguments="LayoutOptions"
+                        Android="Fill"
+                        iOS="Fill"
+                        WinPhone="Center"/>
+                    </StackLayout.HorizontalOptions>
+                    <Label
+                        Text="{Binding Item.Description}"
+                        Style="{StaticResource DetailStyle}"/>
+                </StackLayout>
+
                 <StackLayout
                     Orientation="Horizontal"
                     HorizontalOptions="Center"

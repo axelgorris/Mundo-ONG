@@ -16,7 +16,7 @@ namespace NGODirectory.ViewModels
         public AnnouncementDisplayViewModel(Announcement item)
         {
             Title = string.Empty;            
-            item.Description = Regex.Replace(item.Description, @"\r\n?|\n", Environment.NewLine);
+            //item.Description = Regex.Replace(item.Description, @"\r\n?|\n", Environment.NewLine);
 
             Item = item;            
 
@@ -63,7 +63,12 @@ namespace NGODirectory.ViewModels
         async Task OpenBrowserAsync(string value)
         {
             if (!string.IsNullOrEmpty(value))
+            {
+                if (!value.StartsWith("http"))
+                    value = $"http://{value}";
+
                 await CrossShare.Current.OpenBrowser(value);
+            }
         }
 
         private bool isAuthor;

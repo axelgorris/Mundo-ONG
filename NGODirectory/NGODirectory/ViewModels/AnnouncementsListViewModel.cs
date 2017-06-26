@@ -25,6 +25,7 @@ namespace NGODirectory.ViewModels
             AddNewItemCommand = new Command(async () => await AddNewItemAsync());
             LoadMoreCommand = new Command<Announcement>(async (Announcement item) => await LoadMore(item));
             IsUserLoggedIn = CloudService.IsUserLoggedIn();
+            isUWPDevice = Device.RuntimePlatform.Equals(Device.Windows);
 
             MessagingCenter.Subscribe<AnnouncementEditViewModel>(this, "ItemsChanged", async (sender) =>
             {
@@ -167,12 +168,11 @@ namespace NGODirectory.ViewModels
             private set { SetProperty(ref isUserLoggedIn, value, "IsUserLoggedIn"); }
         }
 
+        private bool isUWPDevice;
         public bool IsUWPDevice
         {
-            get
-            {
-                return Device.RuntimePlatform.Equals(Device.Windows);
-            }
+            get { return isUWPDevice; }
+            private set { SetProperty(ref isUWPDevice, value, "IsUWPDevice"); }
         }
     }
 }

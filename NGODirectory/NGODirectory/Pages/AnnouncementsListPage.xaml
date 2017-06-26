@@ -30,7 +30,7 @@
             IsVisible="{Binding IsUserLoggedIn}"
             Icon="{StaticResource AddIcon}"
             Order="Primary"
-            Priority="2"/>
+            Priority="1"/>
         
     </ContentPage.ToolbarItems>
 
