@@ -2,8 +2,6 @@
 using NGODirectory.Helpers;
 using NGODirectory.Models;
 using NGODirectory.Services;
-using Plugin.Connectivity;
-using Plugin.Connectivity.Abstractions;
 using System;
 using System.Diagnostics;
 using System.Linq;

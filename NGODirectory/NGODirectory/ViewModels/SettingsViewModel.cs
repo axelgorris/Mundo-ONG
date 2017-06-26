@@ -1,12 +1,9 @@
 ﻿using NGODirectory.Abstractions;
 using NGODirectory.Helpers;
-using NGODirectory.Pages;
 using NGODirectory.Services;
 using Plugin.Share;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace NGODirectory.ViewModels

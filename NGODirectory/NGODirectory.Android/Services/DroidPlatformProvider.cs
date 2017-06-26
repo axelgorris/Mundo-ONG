@@ -1,18 +1,7 @@
-﻿using Android.App;
-using Android.Content;
-using Android.Util;
-using Gcm.Client;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
+﻿using Android.Content;
 using Microsoft.WindowsAzure.MobileServices;
-using Newtonsoft.Json.Linq;
 using NGODirectory.Abstractions;
 using NGODirectory.Droid.Services;
-using NGODirectory.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Auth;
 

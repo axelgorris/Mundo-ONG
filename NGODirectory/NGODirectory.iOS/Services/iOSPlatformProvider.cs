@@ -3,7 +3,6 @@ using NGODirectory.Abstractions;
 using NGODirectory.iOS.Services;
 using System.Threading.Tasks;
 using UIKit;
-using System;
 
 [assembly: Xamarin.Forms.Dependency(typeof(iOSPlatformProvider))]
 namespace NGODirectory.iOS.Services

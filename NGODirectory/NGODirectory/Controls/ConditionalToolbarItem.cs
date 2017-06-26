@@ -1,7 +1,4 @@
-﻿using System;
-using NGODirectory.Abstractions;
-using NGODirectory.Helpers;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace NGODirectory.Controls
 {

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage;
-using Plugin.Media.Abstractions;
-using Microsoft.WindowsAzure.Storage.Auth;
-using Microsoft.WindowsAzure.MobileServices;
+﻿using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.Storage.Blob;
 using NGODirectory.Models;
+using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using NGODirectory.Abstractions;
 using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace NGODirectory.Services
 {

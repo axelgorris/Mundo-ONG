@@ -1,9 +1,6 @@
-﻿using NGODirectory.UWP.Services;
+﻿using NGODirectory.Abstractions;
+using NGODirectory.UWP.Services;
 using System;
-using NGODirectory.Abstractions;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 [assembly: Xamarin.Forms.Dependency(typeof(OpenAppService))]

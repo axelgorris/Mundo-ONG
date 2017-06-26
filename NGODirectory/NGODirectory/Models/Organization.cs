@@ -1,5 +1,4 @@
 ﻿using NGODirectory.Abstractions;
-using System.Collections.Generic;
 
 namespace NGODirectory.Models
 {

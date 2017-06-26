@@ -56,7 +56,6 @@
     <Compile Include="Helpers\Locations.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
     <Compile Include="Helpers\ServiceLocator.cs" />
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AppServiceIdentity.cs" />
     <Compile Include="Models\Organization.cs" />
@@ -64,7 +63,7 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PhotoService.cs" />
     <Compile Include="Services\StorageService.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="ViewModels\AnnouncementDisplayViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementEditViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />

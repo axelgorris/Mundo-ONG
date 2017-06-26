@@ -1,10 +1,10 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
-using NGODirectory.Abstractions;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System;
 using Microsoft.WindowsAzure.MobileServices.Sync;
+using NGODirectory.Abstractions;
+using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace NGODirectory.Services
 {

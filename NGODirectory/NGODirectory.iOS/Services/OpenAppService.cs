@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Foundation;
-using UIKit;
+﻿using Foundation;
 using NGODirectory.Abstractions;
 using System.Threading.Tasks;
-using System.Diagnostics;
+using UIKit;
 
 namespace NGODirectory.iOS.Services
 {

@@ -1,14 +1,10 @@
-﻿using System.Threading.Tasks;
-using Microsoft.WindowsAzure.MobileServices;
+﻿using Microsoft.WindowsAzure.MobileServices;
 using NGODirectory.Abstractions;
 using NGODirectory.UWP.Services;
 using System;
-using NGODirectory.Helpers;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Newtonsoft.Json.Linq;
-using System.Linq;
-using Windows.Security.Credentials;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Windows.Security.Credentials;
 
 [assembly: Xamarin.Forms.Dependency(typeof(UWPPlatformProvider))]
 namespace NGODirectory.UWP.Services
