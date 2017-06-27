@@ -6,6 +6,7 @@ using Plugin.Messaging;
 using Plugin.Share;
 using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,7 +16,7 @@ namespace NGODirectory.ViewModels
     {
         public OrganizationDisplayViewModel(Organization item)
         {
-            //item.Description = Regex.Replace(item.Description, @"\r\n?|\n", Environment.NewLine);
+            item.Description = Regex.Replace(item.Description, @"\r\n?|\n", Environment.NewLine);
 
             Item = item;
             Title = item.Name;
