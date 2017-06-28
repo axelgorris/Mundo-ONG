@@ -1,4 +1,4 @@
-# Mundo ONG
+# Mundo ONG  ![mundo-ong-icon](Images/mundo-ong-icon.png) 
 
 Xamarin Forms application submitted to apps4good contest organized by Microsoft and CampusMVP (https://www.campusmvp.es/concurso-xamarin.htm).
 
