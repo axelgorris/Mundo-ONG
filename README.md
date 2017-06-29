@@ -4,7 +4,7 @@ Xamarin Forms application submitted to apps4good contest (organized by Microsoft
 
 CampusMVP Xamarin online course has been my first approach to Mobile development and Xamarin in particular.
 
-"Mundo ONG" (NGO World) provides a way for people to access information about NGOs (contact info, website, social media) and its announcements (news, statements, events, campaigns).
+Mundo ONG (NGO World) provides a way for people to access information about NGOs (contact info, website, social media) and its announcements (news, statements, events, campaigns).
 NGO responsibles may ask for a user account in order to manage all the information and announcements about their organization.
 Only registered users are able to create and edit content.
 Anonymous users can read all the information supplied by the NGO responsibles.
@@ -26,19 +26,6 @@ The application uses:
   - Xamarin.FFImageLoading.Forms
   - ThriveGmbH.BottomNavigationBar.XF
 
-
-## Android
-![android-announcements-list](Images/android2-screenshot.png "Android - announcements list") 
-![android-display-organization](Images/android1-screenshot.png "Android - display organization")</br></br>
-## iOS
-![ios-filter-organizations-list](Images/ios-screenshot.png "iOS filter organizations list")</br></br>
-## UWP
-![uwp-edit-announcement](Images/uwp-screenshot.PNG "UWP - edit announcement")
-
-I've been inspired mainly by:
-  - ThriveGmbH.BottomNavigationBar.XF
-
-
 ## Android
 ![android-announcements-list](Images/android2-screenshot.png "Android - announcements list") 
 ![android-display-organization](Images/android1-screenshot.png "Android - display organization")</br></br>
@@ -54,7 +41,7 @@ I've been inspired mainly by:
 
 
 ## What's next?
-- Add organization-announcement vinculation and navigation - I'm half way there
+- Add organization-announcement vinculation and navigation - (halfway there)
 - Bindable picker to select available organizations for a user when creating an announcement
 - Add Date field for announcements (events) and possibility to add to calendar
 - Add location field for announcements and organizations and open with default maps application
