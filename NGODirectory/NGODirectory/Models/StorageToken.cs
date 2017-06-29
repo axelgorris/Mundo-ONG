@@ -2,7 +2,7 @@
 
 namespace NGODirectory.Models
 {
-    public class StorageTokenViewModel
+    public class StorageToken
     {
         public string Name { get; set; }
         public Uri Uri { get; set; }

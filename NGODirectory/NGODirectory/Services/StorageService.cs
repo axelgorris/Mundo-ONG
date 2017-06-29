@@ -27,11 +27,11 @@ namespace NGODirectory.Services
         }
 
 
-        private async Task<StorageTokenViewModel> GetSasTokenAsync(MobileServiceClient client, string directoryName)
+        private async Task<StorageToken> GetSasTokenAsync(MobileServiceClient client, string directoryName)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("directoryName", directoryName);
-            var storageToken = await client.InvokeApiAsync<StorageTokenViewModel>("GetStorageToken", HttpMethod.Get, parameters);
+            var storageToken = await client.InvokeApiAsync<StorageToken>("GetStorageToken", HttpMethod.Get, parameters);
             return storageToken;
         }
 

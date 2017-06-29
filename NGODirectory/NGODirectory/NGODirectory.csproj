@@ -59,7 +59,7 @@
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AppServiceIdentity.cs" />
     <Compile Include="Models\Organization.cs" />
-    <Compile Include="Models\StorageTokenViewModel.cs" />
+    <Compile Include="Models\StorageToken.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PhotoService.cs" />
     <Compile Include="Services\StorageService.cs" />
