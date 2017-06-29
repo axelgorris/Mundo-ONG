@@ -41,9 +41,8 @@ I've been inspired mainly by:
 
 
 ## What's next?
-- Add organization-announcement vinculation and navigation - (halfway there)
+- Add organization-announcement vinculation and navigate between them - (already started)
 - Bindable picker to select available organizations for a user when creating an announcement
-- Add Date field for announcements (events) and possibility to add to calendar
+- Add Date field for announcements (events) and possibility to add to calendar default application
 - Add location field for announcements and organizations and open with default maps application
-- Add Azure B2C so all users can register
-- Manage permissions by using Azure AD groups
+- Add Azure B2C so all users can register and then manage permissions by using Azure AD groups
