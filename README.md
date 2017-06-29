@@ -1,13 +1,13 @@
 # Mundo ONG  ![mundo-ong-icon](Images/mundo-ong-icon.png) 
 
-Xamarin Forms application submitted to apps4good contest organized by Microsoft and CampusMVP (https://www.campusmvp.es/concurso-xamarin.htm).
+Xamarin Forms application submitted to apps4good contest (organized by Microsoft and CampusMVP) (https://www.campusmvp.es/concurso-xamarin.htm).
 
-CampusMVP Xamarin online course (january to june 2017) has been my first approach to Mobile development and Xamarin in particular and I've fallen in love with it.
+CampusMVP Xamarin online course has been my first approach to Mobile development and Xamarin in particular.
 
 "Mundo ONG" (NGO World) provides a way for people to access information about NGOs (contact info, website, social media) and its announcements (news, statements, events, campaigns).
-NGO responsibles may ask for a user in order to manage all the information and announcements about their organization.
+NGO responsibles may ask for a user account in order to manage all the information and announcements about their organization.
 Only registered users are able to create and edit content.
-Anonymous users can read all the information supplied by the NGO registered users.
+Anonymous users can read all the information supplied by the NGO responsibles.
 The application UI is only in spanish language for now.
 
 The application uses:
@@ -24,6 +24,18 @@ The application uses:
   - Plugin.Permissions
   - Plugin.Share
   - Xamarin.FFImageLoading.Forms
+  - ThriveGmbH.BottomNavigationBar.XF
+
+
+## Android
+![android-announcements-list](Images/android2-screenshot.png "Android - announcements list") 
+![android-display-organization](Images/android1-screenshot.png "Android - display organization")</br></br>
+## iOS
+![ios-filter-organizations-list](Images/ios-screenshot.png "iOS filter organizations list")</br></br>
+## UWP
+![uwp-edit-announcement](Images/uwp-screenshot.PNG "UWP - edit announcement")
+
+I've been inspired mainly by:
   - ThriveGmbH.BottomNavigationBar.XF
 
 
